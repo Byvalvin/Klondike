@@ -1,0 +1,152 @@
+comment Sample game
+load Game1-start.txt
+board
+cheat
+move stock 6
+board
+move stock suit
+board
+move 1 4
+board
+move 6 4
+board
+move 7 3
+board
+move 5 3
+board
+move 6 suit
+board
+move 6 suit
+board
+move 6 4
+board
+move 6 1
+board
+move 2 1
+board
+move stock 1
+board
+move 3 4
+board
+move 3 7
+board
+move 3 1
+board
+move 4 1
+board
+move stock 7
+board
+move 5 7
+board
+move 7 5
+board
+move 7 3
+board
+move 2 3
+board
+discard
+cheat
+discard
+board
+move stock suit
+board
+move stock suit
+board
+move stock 4
+board
+move 5 4
+board
+move 1 suit
+move 1 suit
+board
+move 5 1
+board
+move 5 suit
+board
+move stock 1
+board
+move stock 3
+board
+move 4 3
+board
+discard
+board
+move stock 7
+board
+move stock 1
+board
+move stock 2
+board
+move stock suit
+board
+move stock suit
+board
+move 1 suit
+move 1 suit
+move 1 suit
+move 3 1
+move 3 suit
+move 7 suit
+move 4 suit
+move 1 suit
+board
+discard
+board
+reset
+board
+discard
+board
+move stock suit
+board
+move stock suit
+board
+move stock 2
+move 4 2
+move 3 suit
+move 7 suit
+move 7 suit
+move 7 suit
+move 1 suit
+move 1 suit
+move 7 suit
+move 1 suit
+move 1 suit
+move 3 suit
+move 3 suit
+move 1 suit
+move 1 suit
+move stock 1
+board
+move 3 suit
+move 3 suit
+move 2 suit
+move 1 3
+move 1 suit
+move stock suit
+board
+move stock 7
+board
+move stock suit
+board
+reset
+board
+move stock suit
+board
+move 6 suit
+move stock 3
+board
+move stock suit
+board
+move 3 suit
+move 3 suit
+move 4 suit
+move 3 suit
+move 3 suit
+move 1 suit
+move 2 suit
+move 1 suit
+move 2 suit
+move 3 suit
+move 7 suit
+board
+done
