@@ -17,8 +17,8 @@ H)done
 I)move
 
 See these commands, their function and how to use them in "commands.pdf"
-"Game1-input.txt" exhaustively showcases all the possible commands needed to play the game in action, as it solves the configuration in "Game1-start.txt".
+"Game1-input.txt" exhaustively showcases most commands(only save command not shown) needed to play the game in action, as it solves the configuration in "Game1-start.txt".
 
-A close examination of the process the file goes through to initialize and solve the "Game1-start.txt" configuration should kickstart your klondike-al adventure!
+A close examination of the process the file goes through to initialize and ultimately solve the "Game1-start.txt" card configuration should kickstart your klondike-al adventure!
 
 
