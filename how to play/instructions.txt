@@ -1,4 +1,5 @@
 The rules of the game are the same. Stack the cards according to their suit and rank given an initially chaotic configuration of cards.
+In this case, take the cards in PILES 1-7 and put them in the correcting rank order and suit(Spades, Hearts, Diamonds, Clubs). Use the Discard deck to temporarily hold cards. All the PILE decks and Discard deck must be empty to complete the game. 
 
 To get a good sense of how to use the character-based interface, first see the "Game1-start.txt" file. 
 To start any game, a textfile containing the initial configuration of cards must be provided as shown in this file. 
