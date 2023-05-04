@@ -1,0 +1,9 @@
+The rules of the game are the same. Stack the cards according to their suit and rank given an initially chaotic configuration of cards.
+
+To get a good sense of how to use the character-based interface, first see the "Game1-start.txt" file. 
+To start any game, a textfile containing the initial configuration of cards must be provided as shown in this file. 
+
+Next, open and see the "Game-input.txt" file. This file contains a list of commands that solves the configuration of cards provided by "Game1-start.txt".
+This file also exhaustively showcases all the possible commands needed to play the game.
+
+A close examination of the process the file goes through to initialize and solve the "Game1-start.txt" configuration should kickstart your klondike-al adventure!
