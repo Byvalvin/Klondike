@@ -7,3 +7,5 @@ Next, open and see the "Game-input.txt" file. This file contains a list of comma
 This file also exhaustively showcases all the possible commands needed to play the game.
 
 A close examination of the process the file goes through to initialize and solve the "Game1-start.txt" configuration should kickstart your klondike-al adventure!
+
+
