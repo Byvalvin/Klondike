@@ -3,8 +3,20 @@ The rules of the game are the same. Stack the cards according to their suit and 
 To get a good sense of how to use the character-based interface, first see the "Game1-start.txt" file. 
 To start any game, a textfile containing the initial configuration of cards must be provided as shown in this file. 
 
-Next, open and see the "Game-input.txt" file. This file contains a list of commands that solves the configuration of cards provided by "Game1-start.txt".
-This file also exhaustively showcases all the possible commands needed to play the game.
+Next, open and see the "Game-input.txt" file. This file contains a sequence of commands that solves the configuration of cards provided by "Game1-start.txt".
+There are 9 commands in total that can be used in the game;
+A)load
+B)board
+C)cheat
+D)comment
+E)reset
+F)discard
+G)save
+H)done
+I)move
+
+See these commands, their function and how to use them in "commands.pdf"
+"Game1-input.txt" exhaustively showcases all the possible commands needed to play the game in action, as it solves the configuration in "Game1-start.txt".
 
 A close examination of the process the file goes through to initialize and solve the "Game1-start.txt" configuration should kickstart your klondike-al adventure!
 
