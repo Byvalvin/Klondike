@@ -311,26 +311,29 @@ class Game {
 
     handleDeckClick(deck) {
         if (this.selectedCard === null) {
-            // Select card from the clicked deck
+            // Attempt to select a card from the clicked deck
             if (!deck.isEmpty()) {
-                this.selectedCard = deck.popDeck();
+                // Assume the top card is to be selected
+                this.selectedCard = deck.popDeck(); 
+                this.selectedCard.originalDeck = deck; // Store original deck for move back if needed
                 this.updateBoard(); // Update board to reflect changes
             }
         } else {
-            // Move the selected card to the clicked deck
+            // Attempt to move the selected card to the clicked deck
             try {
-                this.move(this.selectedCard.deckName, deck.nameDeck());
-                this.selectedCard = null;
-                this.updateBoard(); // Update board to reflect changes
+                // Move card to target deck
+                this.move(this.selectedCard.originalDeck.nameDeck(), deck.nameDeck()); 
+                this.selectedCard = null; // Deselect card after successful move
             } catch (error) {
                 console.error(error.message);
-                // Return the card to its original deck if the move fails
-                deck.pushDeck(this.selectedCard);
-                this.selectedCard = null;
-                this.updateBoard(); // Update board to reflect changes
+                // If the move is invalid, push the card back to the original deck
+                this.selectedCard.originalDeck.pushDeck(this.selectedCard);
+                this.selectedCard = null; // Deselect card
             }
+            this.updateBoard(); // Update board to reflect changes
         }
     }
+
 
     handleDragStart(event, deck) {
         if (!deck.isEmpty()) {
