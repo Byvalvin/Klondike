@@ -5,26 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Game</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .deck { margin: 10px; }
-        .deck-container { display: flex; }
+        .deck {
+            margin: 10px;
+            padding: 5px;
+            border: 1px solid #000;
+            display: inline-block;
+        }
+        #stock, #discard {
+            font-weight: bold;
+        }
+        #suits, #piles {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <h1>Card Game</h1>
-    <div class="deck-container">
-        <div id="stock" class="deck"></div>
-        <div id="discard" class="deck"></div>
+    <div class="deck" id="stock">Stock: </div>
+    <div class="deck" id="discard">Discard: </div>
+    <div id="suits">
+        <h2>Suits</h2>
     </div>
-    <div id="suits" class="deck-container"></div>
-    <div id="piles" class="deck-container"></div>
-
-    <button onclick="resetGame()">Reset</button>
-    <button onclick="discardCards()">Discard</button>
-    <button onclick="displayBoard()">Display Board</button>
-    <button onclick="cheat()">Cheat</button>
-    <button onclick="endGame()">End Game</button>
-
+    <div id="piles">
+        <h2>Piles</h2>
+    </div>
     <script src="scripts/klondike.js"></script>
 </body>
 </html>
