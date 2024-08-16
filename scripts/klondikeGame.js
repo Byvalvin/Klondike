@@ -5,21 +5,8 @@ class Game {
         this.gameOn = true;
         this.Stock = new Deck('Stock');
         this.Discard = new Deck('Discard');
-        this.SUITS = [
-            new Deck('Spades'),
-            new Deck('Hearts'),
-            new Deck('Diamonds'),
-            new Deck('Clubs')
-        ];
-        this.PILES = [
-            new Deck('Pile 1'),
-            new Deck('Pile 2'),
-            new Deck('Pile 3'),
-            new Deck('Pile 4'),
-            new Deck('Pile 5'),
-            new Deck('Pile 6'),
-            new Deck('Pile 7')
-        ];
+        this.SUITS = ['Spades', 'Hearts', 'Diamonds', 'Clubs'].map(name => new Deck(name));
+        this.PILES = Array.from({ length: 7 }, (_, i) => new Deck(`Pile ${i + 1}`));
         this.selectedCard = null; // Track the currently selected card
         this.initializeGame();
     }
@@ -34,13 +21,13 @@ class Game {
         }
 
         // Deal cards to piles
-        for (let i = 0; i < this.PILES.length; i++) {
+        this.PILES.forEach((pile, i) => {
             for (let j = 0; j <= i; j++) {
                 const card = this.Stock.popDeck();
                 card.faceupCard(j === i);
-                this.PILES[i].pushDeck(card);
+                pile.pushDeck(card);
             }
-        }
+        });
 
         // Deal a few cards to discard pile
         for (let i = 0; i < 3 && !this.Stock.isEmpty(); i++) {
@@ -59,11 +46,11 @@ class Game {
         const suits = ['s', 'h', 'd', 'c'];
         const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
         const deck = new Deck('Full Deck');
-        for (let suit of suits) {
-            for (let rank of ranks) {
+        suits.forEach(suit => {
+            ranks.forEach(rank => {
                 deck.pushDeck(new Card(suit, rank));
-            }
-        }
+            });
+        });
         return deck;
     }
 
@@ -89,8 +76,7 @@ class Game {
             throw new Error('Stock Empty');
         }
         const relay = new Deck("relay_deck");
-        const max = 3;
-        const moves = Math.min(max, this.Stock.sizeDeck());
+        const moves = Math.min(3, this.Stock.sizeDeck());
         for (let n = 0; n < moves; n++) {
             this.Stock.peekDeck().faceupCard(false);
             relay.pushDeck(this.Stock.popDeck());
@@ -102,7 +88,7 @@ class Game {
     }
 
     board() {
-        if (!this.Stock || !this.Discard || this.SUITS.length === 0 || this.PILES.length === 0) {
+        if (!this.isValidState()) {
             console.log('No Cards');
         } else {
             console.log(`${this.Stock.nameDeck()}: ${this.Stock}`);
@@ -113,7 +99,7 @@ class Game {
     }
 
     cheat() {
-        if (!this.Stock || !this.Discard || this.SUITS.length === 0 || this.PILES.length === 0) {
+        if (!this.isValidState()) {
             console.log('No Cards');
         } else {
             console.log(`${this.Stock.nameDeck()}: ${JSON.stringify(this.Stock)}`);
@@ -121,6 +107,10 @@ class Game {
             this.SUITS.forEach(deck => console.log(`${deck.nameDeck()}: ${JSON.stringify(deck)}`));
             this.PILES.forEach(deck => console.log(`${deck.nameDeck()}: ${JSON.stringify(deck)}`));
         }
+    }
+
+    isValidState() {
+        return this.Stock && this.Discard && this.SUITS.length > 0 && this.PILES.length > 0;
     }
 
     done(message) {
@@ -131,8 +121,7 @@ class Game {
     load(data) {
         try {
             const lines = data.split('\n').filter(line => line.trim() !== '');
-            const Decks = [];
-            lines.forEach(line => {
+            const Decks = lines.map(line => {
                 const [deckName, ...cardStrings] = line.split(' ');
                 const deck = new Deck(deckName);
                 cardStrings.forEach(cardString => {
@@ -143,9 +132,9 @@ class Game {
                     card.faceupCard(cardState === '+');
                     deck.pushDeck(card);
                 });
-                Decks.push(deck);
+                return deck;
             });
-            // Assign decks to game properties (example):
+            // Assign decks to game properties
             this.Stock = Decks.find(deck => deck.nameDeck() === 'Stock');
             this.Discard = Decks.find(deck => deck.nameDeck() === 'Discard');
             this.SUITS = Decks.filter(deck => ['Spades', 'Hearts', 'Diamonds', 'Clubs'].includes(deck.nameDeck()));
@@ -158,10 +147,7 @@ class Game {
     save() {
         try {
             const Decks = [this.Stock, this.Discard, ...this.SUITS, ...this.PILES];
-            const data = Decks.map(deck => {
-                return `${deck.nameDeck()} ${deck.toJSON()}`;
-            }).join('\n');
-            // Save to localStorage
+            const data = Decks.map(deck => `${deck.nameDeck()} ${deck.toJSON()}`).join('\n');
             localStorage.setItem('savedGame', data);
             console.log('Game saved');
         } catch (err) {
@@ -171,97 +157,60 @@ class Game {
 
     move(fromDeckName, toDeckName) {
         const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === fromDeckName);
-        const toDeck = [this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
+        const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
         if (!fromDeck || !toDeck) {
             throw new Error('Invalid deck names');
         }
-        const relay = new Deck("relay_deck");
-        const stockName = 'Stock';
-        const suitNames = ['Spades', 'Hearts', 'Diamonds', 'Clubs'];
-        const pileNames = Array.from({ length: 7 }, (_, i) => `Pile ${i + 1}`);
-
-        if (fromDeck.nameDeck() === stockName && suitNames.includes(toDeck.nameDeck())) {
-            // Logic for Stock to Suit
-            const rankStockTop = fromDeck.peekDeck().rankCard();
-            const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-            const isAce = rankStockTop === 1;
-            const canMove = rankStockTop === rankSuitTop + 1;
-            if (isAce || canMove) {
-                const card = fromDeck.popDeck();
-                card.faceupCard(true);
-                toDeck.pushDeck(card);
-                if (!fromDeck.isEmpty()) {
-                    fromDeck.peekDeck().faceupCard(true);
-                }
-            } else {
-                throw new Error('Invalid move');
-            }
-        } else if (fromDeck.nameDeck() === stockName && pileNames.includes(toDeck.nameDeck())) {
-            // Logic for Stock to Pile
-            const rankStockTop = fromDeck.peekDeck().rankCard();
-            const rankPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-            const isKing = rankStockTop === 13;
-            const canMove = rankPileTop === rankStockTop + 1;
-            if (isKing || canMove) {
-                const card = fromDeck.popDeck();
-                card.faceupCard(true);
-                toDeck.pushDeck(card);
-                if (!fromDeck.isEmpty()) {
-                    fromDeck.peekDeck().faceupCard(true);
-                }
-            } else {
-                throw new Error('Invalid move');
-            }
-        } else if (pileNames.includes(fromDeck.nameDeck()) && suitNames.includes(toDeck.nameDeck())) {
-            // Logic for Pile to Suit
-            const rankPileTop = fromDeck.peekDeck().rankCard();
-            const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-            const isAce = rankPileTop === 1;
-            const canMove = rankPileTop === rankSuitTop + 1;
-            if (isAce || canMove) {
-                const card = fromDeck.popDeck();
-                card.faceupCard(true);
-                toDeck.pushDeck(card);
-                if (!fromDeck.isEmpty()) {
-                    fromDeck.peekDeck().faceupCard(true);
-                }
-            } else {
-                throw new Error('Invalid move');
-            }
-        } else if (pileNames.includes(fromDeck.nameDeck()) && pileNames.includes(toDeck.nameDeck())) {
-            // Logic for Pile to Pile
-            const rankPileTop = fromDeck.peekDeck().rankCard();
-            const rankTargetPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-            const canMove = rankPileTop === rankTargetPileTop + 1;
-            if (canMove) {
-                const card = fromDeck.popDeck();
-                card.faceupCard(true);
-                toDeck.pushDeck(card);
-                if (!fromDeck.isEmpty()) {
-                    fromDeck.peekDeck().faceupCard(true);
-                }
-            } else {
-                throw new Error('Invalid move');
-            }
-        } else if (suitNames.includes(fromDeck.nameDeck()) && pileNames.includes(toDeck.nameDeck())) {
-            // Logic for Suit to Pile
-            const rankSuitTop = fromDeck.peekDeck().rankCard();
-            const rankPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-            const isKing = rankSuitTop === 13;
-            const canMove = rankPileTop === rankSuitTop + 1;
-            if (isKing || canMove) {
-                const card = fromDeck.popDeck();
-                card.faceupCard(true);
-                toDeck.pushDeck(card);
-                if (!fromDeck.isEmpty()) {
-                    fromDeck.peekDeck().faceupCard(true);
-                }
-            } else {
-                throw new Error('Invalid move');
-            }
+        const card = fromDeck.popDeck();
+        if (!card) {
+            throw new Error('No card to move');
+        }
+        card.faceupCard(true);
+        if (this.canMove(fromDeck, toDeck, card)) {
+            toDeck.pushDeck(card);
         } else {
+            fromDeck.pushDeck(card); // Return card if move is invalid
             throw new Error('Invalid move');
         }
+        if (!fromDeck.isEmpty()) {
+            fromDeck.peekDeck().faceupCard(true);
+        }
+    }
+
+    canMove(fromDeck, toDeck, card) {
+        const fromName = fromDeck.nameDeck();
+        const toName = toDeck.nameDeck();
+        const rankCard = card.rankCard();
+
+        if (fromName === 'Stock' && this.SUITS.map(d => d.nameDeck()).includes(toName)) {
+            // Stock to Suit
+            const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+            return rankCard === rankSuitTop + 1 || rankCard === 1; // Ace or can move to suit
+        } 
+        if (fromName === 'Stock' && this.PILES.map(d => d.nameDeck()).includes(toName)) {
+            // Stock to Pile
+            const rankPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+            return rankCard === rankPileTop + 1 || rankCard === 13; // King or can move to pile
+        }
+        if (this.PILES.map(d => d.nameDeck()).includes(fromName) && this.SUITS.map(d => d.nameDeck()).includes(toName)) {
+            // Pile to Suit
+            const rankPileTop = fromDeck.peekDeck().rankCard();
+            const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+            return rankPileTop === rankSuitTop + 1 || rankPileTop === 1; // Ace or can move to suit
+        }
+        if (this.PILES.map(d => d.nameDeck()).includes(fromName) && this.PILES.map(d => d.nameDeck()).includes(toName)) {
+            // Pile to Pile
+            const rankPileTop = fromDeck.peekDeck().rankCard();
+            const rankTargetPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+            return rankPileTop === rankTargetPileTop + 1;
+        }
+        if (this.SUITS.map(d => d.nameDeck()).includes(fromName) && this.PILES.map(d => d.nameDeck()).includes(toName)) {
+            // Suit to Pile
+            const rankSuitTop = fromDeck.peekDeck().rankCard();
+            const rankPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+            return rankSuitTop === rankPileTop + 1 || rankSuitTop === 13; // King or can move to pile
+        }
+        return false;
     }
 
     updateBoard() {
@@ -364,7 +313,6 @@ document.getElementById('discard-button').addEventListener('click', () => {
 
 document.getElementById('board-button').addEventListener('click', () => {
     game.board();
-    game.updateBoard();
     document.getElementById('status').innerText = 'Board updated';
 });
 
