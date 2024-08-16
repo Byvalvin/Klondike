@@ -82,6 +82,22 @@ button:focus {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+
+
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.suit-container, .pile-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
 .deck-group {
     display: flex;
     flex-direction: column;
