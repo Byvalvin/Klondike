@@ -56,9 +56,10 @@ button:hover {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    width: 120px;
+    text-align: left;
 }
 
 .deck:hover {
     background-color: #f9f9f9;
 }
-
