@@ -262,20 +262,37 @@ class Game {
             throw new Error('Invalid move');
         }
     }
+updateBoard() {
+    const gameBoard = document.getElementById('game-board');
+    gameBoard.innerHTML = ''; // Clear previous board
 
-    updateBoard() {
-        const gameBoard = document.getElementById('game-board');
-        gameBoard.innerHTML = ''; // Clear previous board
-        const decks = [this.Stock, this.Discard, ...this.SUITS, ...this.PILES];
-        decks.forEach(deck => {
-            const div = document.createElement('div');
-            div.className = 'deck';
-            div.id = deck.nameDeck();
-            div.innerHTML = deck.toString();
-            div.addEventListener('click', () => this.handleDeckClick(deck));
-            gameBoard.appendChild(div);
-        });
-    }
+    const decks = [this.Stock, this.Discard, ...this.SUITS, ...this.PILES];
+
+    decks.forEach(deck => {
+        const deckDiv = document.createElement('div');
+        deckDiv.className = 'deck';
+        deckDiv.id = deck.nameDeck();
+
+        // Create and add the label
+        const label = document.createElement('div');
+        label.className = 'deck-label';
+        label.innerText = deck.nameDeck();
+        deckDiv.appendChild(label);
+
+        // Add the deck content
+        const content = document.createElement('div');
+        content.className = 'deck-content';
+        content.innerHTML = deck.toString();
+        deckDiv.appendChild(content);
+
+        // Add click event listener
+        deckDiv.addEventListener('click', () => this.handleDeckClick(deck));
+
+        // Append the deckDiv to the gameBoard
+        gameBoard.appendChild(deckDiv);
+    });
+}
+
 
     handleDeckClick(deck) {
         console.log(`Deck clicked: ${deck.nameDeck()}`);
