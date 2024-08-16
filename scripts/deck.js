@@ -42,7 +42,8 @@ class Deck {
     }
 
     toJSON() {
-        return ` [ ${this.cards.map(card => card.toJSON()).reverse().join(' ')} ]`;
+        // return ` [ ${this.cards.map(card => card.toJSON()).reverse().join(' ')} ]`
+        return this.cards.map(card => `${card.rank}${card.suit}${card.faceUp ? '+' : '-'}`).join(' ');
     }
 
     shuffle() {
