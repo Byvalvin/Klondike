@@ -43,18 +43,29 @@ button:hover {
     background-color: #45a049;
 }
 
-.game-board {
+/* Game Board Layout */
+#game-board {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin: 20px;
 }
 
-#game-board {
+#stock-discard-container,
+#foundations-container,
+#piles-container {
     display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#foundations-container {
+    gap: 10px;
+}
+
+#piles-container {
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: center; /* Center the game board */
 }
 
 /* Deck Styles */
@@ -66,19 +77,18 @@ button:hover {
     display: inline-block;
     vertical-align: top;
     position: relative;
-    width: 120px; /* Adjust width as needed */
-    height: 180px; /* Adjust height as needed */
+    width: 140px; /* Adjust width for better visibility */
+    height: 190px; /* Adjust height for better visibility */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
     border-radius: 5px; /* Rounded corners */
     transition: background-color 0.3s ease; /* Smooth background color change */
 }
 
-
 .deck-label {
     font-weight: bold;
     text-align: center;
     margin-bottom: 5px;
-    font-size: 1.1em; /* Slightly larger font size */
+    font-size: 1.2em; /* Slightly larger font size */
     background-color: #f1f1f1;
     padding: 2px;
 }
@@ -102,15 +112,15 @@ button:hover {
 /* Card Styles */
 .deck-content .card {
     display: inline-block;
-    width: 70px;
-    height: 100px;
-    line-height: 100px;
+    width: 80px; /* Adjust width for better visibility */
+    height: 110px; /* Adjust height for better visibility */
+    line-height: 110px;
     border: 1px solid #ccc;
     border-radius: 3px;
     background-color: #fff;
     text-align: center;
-    margin: 2px;
-    font-size: 1.1em;
+    margin: 5px;
+    font-size: 1.2em;
     transition: transform 0.3s ease; /* Smooth transition for card movement */
 }
 
@@ -124,23 +134,21 @@ button:hover {
     color: #fff;
 }
 
-.deck-content .card.ace {
-    font-size: 1.5em; /* Larger font size for Aces */
-}
-
+/* Larger font size for special cards */
+.deck-content .card.ace,
 .deck-content .card.king {
-    font-size: 1.5em; /* Larger font size for Kings */
+    font-size: 1.5em; /* Larger font size for Aces and Kings */
 }
 
 /* Responsive Design */
 @media (max-width: 600px) {
     .deck {
-        width: 100px;
-        height: 150px;
+        width: 120px;
+        height: 160px;
     }
     .deck-content .card {
-        width: 40px;
-        height: 60px;
+        width: 60px;
+        height: 80px;
     }
 }
 
@@ -148,5 +156,13 @@ button:hover {
     button {
         padding: 8px 16px;
         font-size: 0.9em;
+    }
+    .deck {
+        width: 100px;
+        height: 140px;
+    }
+    .deck-content .card {
+        width: 50px;
+        height: 70px;
     }
 }
