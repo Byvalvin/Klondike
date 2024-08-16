@@ -188,41 +188,60 @@ class Game {
         this.updateBoard();
     }
 
-    canMove(fromDeck, toDeck, card) {
-        const fromName = fromDeck.nameDeck();
-        const toName = toDeck.nameDeck();
-        const rankCard = card.rankCard();
+canMove(fromDeck, toDeck, card) {
+    const fromName = fromDeck.nameDeck();
+    const toName = toDeck.nameDeck();
+    const rankCard = card.rankCard();
 
-        if (fromName === 'Stock' && this.SUITS.map(d => d.nameDeck()).includes(toName)) {
-            // Stock to Suit
-            const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-            return rankCard === rankSuitTop + 1 || rankCard === 1; // Ace or can move to suit
-        } 
-        if (fromName === 'Stock' && this.PILES.map(d => d.nameDeck()).includes(toName)) {
-            // Stock to Pile
-            const rankPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-            return rankCard === rankPileTop + 1 || rankCard === 13; // King or can move to pile
+    if (fromName === 'Stock') {
+        if (this.SUITS.map(d => d.nameDeck()).includes(toName)) {
+            return this.canMoveStockToSuit(toDeck, card);
         }
-        if (this.PILES.map(d => d.nameDeck()).includes(fromName) && this.SUITS.map(d => d.nameDeck()).includes(toName)) {
-            // Pile to Suit
-            const rankPileTop = fromDeck.peekDeck().rankCard();
-            const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-            return rankPileTop === rankSuitTop + 1 || rankPileTop === 1; // Ace or can move to suit
+        if (this.PILES.map(d => d.nameDeck()).includes(toName)) {
+            return this.canMoveStockToPile(toDeck, card);
         }
-        if (this.PILES.map(d => d.nameDeck()).includes(fromName) && this.PILES.map(d => d.nameDeck()).includes(toName)) {
-            // Pile to Pile
-            const rankPileTop = fromDeck.peekDeck().rankCard();
-            const rankTargetPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-            return rankPileTop === rankTargetPileTop + 1;
-        }
-        if (this.SUITS.map(d => d.nameDeck()).includes(fromName) && this.PILES.map(d => d.nameDeck()).includes(toName)) {
-            // Suit to Pile
-            const rankSuitTop = fromDeck.peekDeck().rankCard();
-            const rankPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-            return rankSuitTop === rankPileTop + 1 || rankSuitTop === 13; // King or can move to pile
-        }
-        return false;
     }
+    if (this.PILES.map(d => d.nameDeck()).includes(fromName)) {
+        if (this.SUITS.map(d => d.nameDeck()).includes(toName)) {
+            return this.canMovePileToSuit(fromDeck, toDeck);
+        }
+        if (this.PILES.map(d => d.nameDeck()).includes(toName)) {
+            return this.canMovePileToPile(fromDeck, toDeck);
+        }
+    }
+    if (this.SUITS.map(d => d.nameDeck()).includes(fromName) && this.PILES.map(d => d.nameDeck()).includes(toName)) {
+        return this.canMoveSuitToPile(fromDeck, toDeck);
+    }
+    return false;
+}
+
+canMoveStockToSuit(toDeck, card) {
+    const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+    return card.rankCard() === rankSuitTop + 1 || card.rankCard() === 1;
+}
+
+canMoveStockToPile(toDeck, card) {
+    const rankPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+    return card.rankCard() === rankPileTop + 1 || card.rankCard() === 13;
+}
+
+canMovePileToSuit(fromDeck, toDeck) {
+    const rankPileTop = fromDeck.peekDeck().rankCard();
+    const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+    return rankPileTop === rankSuitTop + 1 || rankPileTop === 1;
+}
+
+canMovePileToPile(fromDeck, toDeck) {
+    const rankPileTop = fromDeck.peekDeck().rankCard();
+    const rankTargetPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+    return rankPileTop === rankTargetPileTop + 1;
+}
+
+canMoveSuitToPile(fromDeck, toDeck) {
+    const rankSuitTop = fromDeck.peekDeck().rankCard();
+    const rankPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+    return rankSuitTop === rankPileTop + 1 || rankSuitTop === 13;
+}
 
     updateBoard() {
         const gameBoard = document.getElementById('game-board');
