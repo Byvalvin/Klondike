@@ -63,10 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('status').innerText = 'Game over';
     });
     
-    // Initialize the board on document load
-    document.addEventListener('DOMContentLoaded', () => {
-        game.updateBoard();
-    });
+    // Initialize the board on document load.
+    game.updateBoard();
+
     
 });
 
