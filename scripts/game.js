@@ -1,5 +1,3 @@
-//game.js
-
 class Game {
     constructor() {
         this.startMessage = 'Welcome to Klondike!';
@@ -165,7 +163,7 @@ class Game {
         const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === fromDeckName);
         const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
 
-            // Debugging: log the deck names and if they are found
+        // Debugging: log the deck names and if they are found
         console.log('Available decks:', [this.Stock, ...this.SUITS, ...this.PILES].map(deck => deck.nameDeck()));
         console.log('Source deck:', fromDeck ? fromDeck.nameDeck() : 'Not found');
         console.log('Target deck:', toDeck ? toDeck.nameDeck() : 'Not found');
@@ -249,35 +247,51 @@ class Game {
         const gameBoard = document.getElementById('game-board');
         gameBoard.innerHTML = ''; // Clear previous board
 
-        const decks = [this.Stock, this.Discard, ...this.SUITS, ...this.PILES];
+        const stockDiv = this.createDeckDiv(this.Stock);
+        const discardDiv = this.createDeckDiv(this.Discard);
 
-        decks.forEach(deck => {
-            const deckDiv = document.createElement('div');
-            deckDiv.className = 'deck';
-            deckDiv.id = deck.nameDeck();
-            deckDiv.draggable = false; // Disable default drag behavior
+        // Append stock and discard to board
+        gameBoard.appendChild(stockDiv);
+        gameBoard.appendChild(discardDiv);
 
-            // Create and add the label
-            const label = document.createElement('div');
-            label.className = 'deck-label';
-            label.innerText = deck.nameDeck();
-            deckDiv.appendChild(label);
-
-            // Add the deck content
-            const content = document.createElement('div');
-            content.className = 'deck-content';
-            content.innerHTML = deck.toString();
-            deckDiv.appendChild(content);
-
-            // Add event listeners
-            deckDiv.addEventListener('click', () => this.handleDeckClick(deck));
-            deckDiv.addEventListener('dragstart', (event) => this.handleDragStart(event, deck));
-            deckDiv.addEventListener('dragover', (event) => this.handleDragOver(event));
-            deckDiv.addEventListener('drop', (event) => this.handleDrop(event, deck));
-
-            // Append the deckDiv to the gameBoard
-            gameBoard.appendChild(deckDiv);
+        // Append suits
+        this.SUITS.forEach(suitDeck => {
+            const suitDiv = this.createDeckDiv(suitDeck);
+            gameBoard.appendChild(suitDiv);
         });
+
+        // Append piles
+        this.PILES.forEach(pileDeck => {
+            const pileDiv = this.createDeckDiv(pileDeck);
+            gameBoard.appendChild(pileDiv);
+        });
+    }
+
+    createDeckDiv(deck) {
+        const deckDiv = document.createElement('div');
+        deckDiv.className = 'deck';
+        deckDiv.id = deck.nameDeck();
+        deckDiv.draggable = false; // Disable default drag behavior
+
+        // Create and add the label
+        const label = document.createElement('div');
+        label.className = 'deck-label';
+        label.innerText = deck.nameDeck();
+        deckDiv.appendChild(label);
+
+        // Add the deck content
+        const content = document.createElement('div');
+        content.className = 'deck-content';
+        content.innerHTML = deck.toString();
+        deckDiv.appendChild(content);
+
+        // Add event listeners
+        deckDiv.addEventListener('click', () => this.handleDeckClick(deck));
+        deckDiv.addEventListener('dragstart', (event) => this.handleDragStart(event, deck));
+        deckDiv.addEventListener('dragover', (event) => this.handleDragOver(event));
+        deckDiv.addEventListener('drop', (event) => this.handleDrop(event, deck));
+
+        return deckDiv;
     }
 
     handleDeckClick(deck) {
@@ -326,3 +340,4 @@ class Game {
         }
     }
 }
+
