@@ -75,8 +75,9 @@ button:focus {
 .game-board {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center; /*  align-items: flex-start;*/    
     justify-content: space-around;
-    align-items: flex-start;
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
