@@ -1,4 +1,5 @@
 /* styles.css */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -35,6 +36,7 @@ button {
     font-size: 1em;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -55,6 +57,7 @@ button:hover {
     justify-content: center; /* Center the game board */
 }
 
+/* Deck Styles */
 .deck {
     border: 1px solid #000;
     padding: 10px;
@@ -64,6 +67,7 @@ button:hover {
     height: 180px; /* Adjust height as needed */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
     border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth background color change */
 }
 
 .deck-label {
@@ -75,14 +79,15 @@ button:hover {
 
 .deck-content {
     text-align: center;
-    /* Add more styles here to format card display */
     font-size: 1.2em; /* Larger font size for card content */
 }
 
+/* Hover effect for deck */
 .deck:hover {
     background-color: #f9f9f9;
 }
 
+/* Card Styles */
 .deck-content .card {
     display: inline-block;
     width: 50px; /* Adjust card width as needed */
@@ -94,16 +99,15 @@ button:hover {
     text-align: center;
     margin: 2px;
     font-size: 1.1em;
+    transition: transform 0.3s ease; /* Smooth transition for card movement */
 }
 
 .deck-content .card.face-up {
-    /* Styles for face-up cards */
     background-color: #fff;
     color: #000;
 }
 
 .deck-content .card.face-down {
-    /* Styles for face-down cards */
     background-color: #333;
     color: #fff;
 }
@@ -114,4 +118,23 @@ button:hover {
 
 .deck-content .card.king {
     font-size: 1.5em; /* Larger font size for Kings */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .deck {
+        width: 100px;
+        height: 150px;
+    }
+    .deck-content .card {
+        width: 40px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 400px) {
+    button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
 }
