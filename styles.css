@@ -52,34 +52,66 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    justify-content: center; /* Center the game board */
 }
-
 
 .deck {
     border: 1px solid #000;
     padding: 10px;
     background-color: #fff;
     position: relative;
-    width: 100px; /* Adjust width as needed */
-    height: 150px; /* Adjust height as needed */
+    width: 120px; /* Adjust width as needed */
+    height: 180px; /* Adjust height as needed */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+    border-radius: 5px; /* Rounded corners */
 }
 
 .deck-label {
     font-weight: bold;
     text-align: center;
     margin-bottom: 5px;
+    font-size: 1.1em; /* Slightly larger font size */
 }
 
 .deck-content {
     text-align: center;
     /* Add more styles here to format card display */
+    font-size: 1.2em; /* Larger font size for card content */
 }
 
 .deck:hover {
     background-color: #f9f9f9;
 }
 
+.deck-content .card {
+    display: inline-block;
+    width: 50px; /* Adjust card width as needed */
+    height: 70px; /* Adjust card height as needed */
+    line-height: 70px; /* Align text vertically */
+    border: 1px solid #000;
+    border-radius: 3px;
+    background-color: #fff;
+    text-align: center;
+    margin: 2px;
+    font-size: 1.1em;
+}
 
+.deck-content .card.face-up {
+    /* Styles for face-up cards */
+    background-color: #fff;
+    color: #000;
+}
 
+.deck-content .card.face-down {
+    /* Styles for face-down cards */
+    background-color: #333;
+    color: #fff;
+}
 
+.deck-content .card.ace {
+    font-size: 1.5em; /* Larger font size for Aces */
+}
 
+.deck-content .card.king {
+    font-size: 1.5em; /* Larger font size for Kings */
+}
