@@ -11,55 +11,58 @@ body {
 header {
     background-color: #4CAF50;
     color: white;
-    padding: 15px 20px; /* Increased padding for better appearance */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added subtle shadow */
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #status {
     font-size: 1.2em;
     margin: 10px 0;
-    color: #333; /* Ensure status text is clearly visible */
+    color: #333;
 }
 
 h1 {
     margin: 0;
 }
 
-
 #controls {
     margin: 20px 0;
 }
 
-/*Buttons*/
+/* Buttons */
 button {
     background-color: #4CAF50;
     color: white;
     border: none;
-    padding: 12px 24px; /* Slightly larger padding for better touch targets */
+    padding: 12px 24px;
     margin: 5px;
     font-size: 1em;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Added smooth transform transition */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
     background-color: #45a049;
-    transform: scale(1.05); /* Slight zoom effect on hover */
+    transform: scale(1.05);
 }
 
 button:active {
-    transform: scale(0.95); /* Slight shrink effect on click */
+    transform: scale(0.95);
 }
 
+button:focus {
+    outline: 2px solid #333; /* Focus style for accessibility */
+    outline-offset: 2px;
+}
 
-/*Game board*/
+/* Game board */
 #game-board {
     display: flex;
-    flex-wrap: wrap; /* Allows for better wrapping on smaller screens */
-    justify-content: center; /* Center the content horizontally */
-    padding: 20px; /* Increased padding for better spacing */
-    gap: 15px; /* Added gap between items */
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 15px;
 }
 
 .deck-group {
@@ -72,21 +75,20 @@ button:active {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: center; /* Center content horizontally */
+    justify-content: center;
 }
 
 #pile-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px; /* Added gap between piles */
+    gap: 10px;
 }
-
 
 /* Deck Styles */
 .deck {
     border: 1px solid #000;
-    padding: 15px; /* Increased padding for a more spacious look */
+    padding: 15px;
     background-color: #fff;
     margin: 5px;
     display: inline-block;
@@ -94,50 +96,52 @@ button:active {
     position: relative;
     width: 120px;
     height: 180px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
-    border-radius: 8px; /* Slightly larger border-radius */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added transition for box-shadow */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    will-change: background-color, box-shadow; /* Optimize transitions */
 }
 
 .deck:hover {
     background-color: #f9f9f9;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .deck-label {
     font-weight: bold;
     text-align: center;
-    margin-bottom: 8px; /* Increased margin for better spacing */
-    font-size: 1.2em; /* Slightly larger font size */
+    margin-bottom: 8px;
+    font-size: 1.2em;
     background-color: #f1f1f1;
     padding: 4px;
-    border-radius: 4px; /* Rounded corners for the label */
+    border-radius: 4px;
 }
 
 .deck-content {
     text-align: center;
     font-size: 1.2em;
     position: absolute;
-    top: 40px; /* Adjusted positioning */
+    top: 40px;
     left: 10px;
     right: 10px;
     bottom: 10px;
     overflow: hidden;
 }
 
-/*Card Styles*/
+/* Card Styles */
 .deck-content .card {
     display: inline-block;
     width: 70px;
     height: 100px;
     line-height: 100px;
     border: 1px solid #ccc;
-    border-radius: 5px; /* Larger border-radius for a smoother look */
+    border-radius: 5px;
     background-color: #fff;
     text-align: center;
     margin: 4px;
     font-size: 1.2em;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for box-shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform, box-shadow; /* Optimize transitions */
 }
 
 .deck-content .card.face-up {
@@ -152,14 +156,13 @@ button:active {
 
 .deck-content .card.ace, 
 .deck-content .card.king {
-    font-size: 1.6em; /* Larger font size for Aces and Kings */
+    font-size: 1.6em;
 }
 
 .deck-content .card:hover {
-    transform: translateY(-5px); /* Slight lift effect on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
-
 
 /* Responsive Design */
 @media (max-width: 600px) {
@@ -175,8 +178,7 @@ button:active {
 
 @media (max-width: 400px) {
     button {
-        padding: 10px 18px; /* Adjusted padding for smaller screens */
+        padding: 10px 18px;
         font-size: 0.9em;
     }
 }
-
