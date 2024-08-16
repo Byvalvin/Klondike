@@ -69,6 +69,7 @@ class Game {
         } else {
             throw new Error('Stock Not Empty');
         }
+        this.updateBoard();
     }
 
     discard() {
@@ -85,6 +86,7 @@ class Game {
         if (!this.Stock.isEmpty()) {
             this.Stock.peekDeck().faceupCard(true);
         }
+        this.updateBoard();
     }
 
     board() {
@@ -142,6 +144,7 @@ class Game {
         } catch (err) {
             console.error('Error loading game:', err);
         }
+        this.updateBoard();
     }
 
     save() {
@@ -175,6 +178,7 @@ class Game {
         if (!fromDeck.isEmpty()) {
             fromDeck.peekDeck().faceupCard(true);
         }
+        this.updateBoard();
     }
 
     canMove(fromDeck, toDeck, card) {
@@ -300,15 +304,23 @@ const game = new Game();
 
 // Handle user interactions
 document.getElementById('reset-button').addEventListener('click', () => {
-    game.reset();
-    game.updateBoard();
-    document.getElementById('status').innerText = 'Game reset';
+    try {
+        game.reset();
+        document.getElementById('status').innerText = 'Game reset';
+    } catch (error) {
+        console.error(error.message);
+        document.getElementById('status').innerText = 'Error resetting game';
+    }
 });
 
 document.getElementById('discard-button').addEventListener('click', () => {
-    game.discard();
-    game.updateBoard();
-    document.getElementById('status').innerText = 'Discarded cards from stock';
+    try {
+        game.discard();
+        document.getElementById('status').innerText = 'Discarded cards from stock';
+    } catch (error) {
+        console.error(error.message);
+        document.getElementById('status').innerText = 'Error discarding cards';
+    }
 });
 
 document.getElementById('board-button').addEventListener('click', () => {
@@ -322,16 +334,25 @@ document.getElementById('cheat-button').addEventListener('click', () => {
 });
 
 document.getElementById('save-button').addEventListener('click', () => {
-    game.save();
-    document.getElementById('status').innerText = 'Game saved';
+    try {
+        game.save();
+        document.getElementById('status').innerText = 'Game saved';
+    } catch (error) {
+        console.error(error.message);
+        document.getElementById('status').innerText = 'Error saving game';
+    }
 });
 
 document.getElementById('load-button').addEventListener('click', () => {
     const data = localStorage.getItem('savedGame');
     if (data) {
-        game.load(data);
-        game.updateBoard();
-        document.getElementById('status').innerText = 'Game loaded';
+        try {
+            game.load(data);
+            document.getElementById('status').innerText = 'Game loaded';
+        } catch (error) {
+            console.error(error.message);
+            document.getElementById('status').innerText = 'Error loading game';
+        }
     } else {
         document.getElementById('status').innerText = 'No saved game found';
     }
