@@ -47,6 +47,12 @@ class Deck {
     toString() {
         return this.cards.map(card => card.toString()).join(' ');
     }
+    shuffle() {
+        for (let i = this.cards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+        }
+    }
 }
 
 let stock = new Deck("Stock");
@@ -110,9 +116,72 @@ function endGame() {
     console.log("Game Over");
 }
 
+// Create a new deck and shuffle it
+function createDeck() {
+    const suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs'];
+    const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+    const deck = new Deck('Full Deck');
+    for (let suit of suits) {
+        for (let rank of ranks) {
+            deck.pushDeck(new Card(suit, rank));
+        }
+    }
+    deck.shuffle();
+    return deck;
+}
+
+// Initialize the game state
+function initializeGame() {
+    let fullDeck = createDeck();
+
+    // Initialize game components
+    let stock = new Deck("Stock");
+    let discard = new Deck("Discard");
+    let suits = [new Deck("Spades"), new Deck("Hearts"), new Deck("Diamonds"), new Deck("Clubs")];
+    let piles = Array.from({ length: 7 }, (_, i) => new Deck(`Pile ${i + 1}`));
+
+    // Deal cards to the stock
+    while (!fullDeck.isemptyDeck()) {
+        stock.pushDeck(fullDeck.popDeck());
+    }
+
+    // Deal cards to piles
+    for (let i = 0; i < piles.length; i++) {
+        for (let j = 0; j <= i; j++) {
+            let card = stock.popDeck();
+            card.setFaceUp(j === i); // Only the last card is face up
+            piles[i].pushDeck(card);
+        }
+    }
+
+    // Deal a few cards to discard pile
+    for (let i = 0; i < 3 && !stock.isemptyDeck(); i++) {
+        discard.pushDeck(stock.popDeck());
+    }
+
+    // Face up top card in stock if any
+    if (!stock.isemptyDeck()) {
+        stock.peekDeck().setFaceUp(true);
+    }
+
+    // Display the initial state
+    displayBoard(stock, discard, suits, piles);
+}
+
+// Display the current game state
+function displayBoard(stock, discard, suits, piles) {
+    document.getElementById('stock').innerText = stock.toString();
+    document.getElementById('discard').innerText = discard.toString();
+    
+    let suitsHtml = suits.map(suit => `<div>${suit.nameDeck()}: ${suit.toString()}</div>`).join('');
+    document.getElementById('suits').innerHTML = suitsHtml;
+
+    let pilesHtml = piles.map(pile => `<div>${pile.nameDeck()}: ${pile.toString()}</div>`).join('');
+    document.getElementById('piles').innerHTML = pilesHtml;
+}
+
+// Call initializeGame on page load
 window.onload = () => {
-    // Initialize the game or load a saved game state
-    // Example:
-  stock.pushDeck(new Card('Spades', 'A'));
-  displayBoard();
+    initializeGame();
 };
+
