@@ -1,5 +1,5 @@
 # Klondike
 
-This is Klondike(Soltaire) with a text and character based interface.
+This is Klondike(Soltaire) with a GUI.
 
-See instructions to play in the "how to play" folder.
+
