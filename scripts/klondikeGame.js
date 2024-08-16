@@ -20,6 +20,7 @@ class Game {
             new Deck('Pile 6'),
             new Deck('Pile 7')
         ];
+        this.selectedCard = null; // Track the currently selected card
         this.initializeGame();
     }
 
@@ -227,76 +228,121 @@ class Game {
             } else {
                 throw new Error('Invalid move');
             }
-        } else if (pileNames.includes(fromDeck.nameDeck())) {
+        } else if (pileNames.includes(fromDeck.nameDeck()) && pileNames.includes(toDeck.nameDeck())) {
             // Logic for Pile to Pile
-            const hidden = "??";
-            const isKing = 13;
-            const relay = new Deck("relay_deck");
-            while (!fromDeck.isEmpty() && fromDeck.peekDeck().toString() !== hidden) {
-                relay.pushDeck(fromDeck.popDeck());
-            }
-            const isKingsThrone = relay.peekDeck().rankCard() === isKing && toDeck.isEmpty();
-            const rankToPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-            let legal = false;
-            while (!legal && !relay.isEmpty()) {
-                const rankFromPileTop = relay.peekDeck().rankCard();
-                legal = rankFromPileTop + 1 === rankToPileTop;
-                if (!legal) {
-                    fromDeck.pushDeck(relay.popDeck());
-                }
-            }
-            if (isKingsThrone || legal) {
-                while (!relay.isEmpty()) {
-                    toDeck.pushDeck(relay.popDeck());
-                }
+            const rankPileTop = fromDeck.peekDeck().rankCard();
+            const rankTargetPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+            const canMove = rankPileTop === rankTargetPileTop + 1;
+            if (canMove) {
+                const card = fromDeck.popDeck();
+                card.faceupCard(true);
+                toDeck.pushDeck(card);
                 if (!fromDeck.isEmpty()) {
                     fromDeck.peekDeck().faceupCard(true);
                 }
             } else {
-                while (!relay.isEmpty()) {
-                    fromDeck.pushDeck(relay.popDeck());
+                throw new Error('Invalid move');
+            }
+        } else if (suitNames.includes(fromDeck.nameDeck()) && pileNames.includes(toDeck.nameDeck())) {
+            // Logic for Suit to Pile
+            const rankSuitTop = fromDeck.peekDeck().rankCard();
+            const rankPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+            const isKing = rankSuitTop === 13;
+            const canMove = rankPileTop === rankSuitTop + 1;
+            if (isKing || canMove) {
+                const card = fromDeck.popDeck();
+                card.faceupCard(true);
+                toDeck.pushDeck(card);
+                if (!fromDeck.isEmpty()) {
+                    fromDeck.peekDeck().faceupCard(true);
                 }
+            } else {
                 throw new Error('Invalid move');
             }
         } else {
             throw new Error('Invalid move');
         }
     }
-updateBoard() {
-    const gameBoard = document.getElementById('game-board');
-    gameBoard.innerHTML = ''; // Clear previous board
 
-    const decks = [this.Stock, this.Discard, ...this.SUITS, ...this.PILES];
+    updateBoard() {
+        const gameBoard = document.getElementById('game-board');
+        gameBoard.innerHTML = ''; // Clear previous board
 
-    decks.forEach(deck => {
-        const deckDiv = document.createElement('div');
-        deckDiv.className = 'deck';
-        deckDiv.id = deck.nameDeck();
+        const decks = [this.Stock, this.Discard, ...this.SUITS, ...this.PILES];
 
-        // Create and add the label
-        const label = document.createElement('div');
-        label.className = 'deck-label';
-        label.innerText = deck.nameDeck();
-        deckDiv.appendChild(label);
+        decks.forEach(deck => {
+            const deckDiv = document.createElement('div');
+            deckDiv.className = 'deck';
+            deckDiv.id = deck.nameDeck();
+            deckDiv.draggable = false; // Disable default drag behavior
 
-        // Add the deck content
-        const content = document.createElement('div');
-        content.className = 'deck-content';
-        content.innerHTML = deck.toString();
-        deckDiv.appendChild(content);
+            // Create and add the label
+            const label = document.createElement('div');
+            label.className = 'deck-label';
+            label.innerText = deck.nameDeck();
+            deckDiv.appendChild(label);
 
-        // Add click event listener
-        deckDiv.addEventListener('click', () => this.handleDeckClick(deck));
+            // Add the deck content
+            const content = document.createElement('div');
+            content.className = 'deck-content';
+            content.innerHTML = deck.toString();
+            deckDiv.appendChild(content);
 
-        // Append the deckDiv to the gameBoard
-        gameBoard.appendChild(deckDiv);
-    });
-}
+            // Add event listeners
+            deckDiv.addEventListener('click', () => this.handleDeckClick(deck));
+            deckDiv.addEventListener('dragstart', (event) => this.handleDragStart(event, deck));
+            deckDiv.addEventListener('dragover', (event) => this.handleDragOver(event));
+            deckDiv.addEventListener('drop', (event) => this.handleDrop(event, deck));
 
+            // Append the deckDiv to the gameBoard
+            gameBoard.appendChild(deckDiv);
+        });
+    }
 
     handleDeckClick(deck) {
-        console.log(`Deck clicked: ${deck.nameDeck()}`);
-        // Implement logic for handling clicks on deck elements
+        if (this.selectedCard === null) {
+            // Select card from the clicked deck
+            if (!deck.isEmpty()) {
+                this.selectedCard = deck.popDeck();
+                this.updateBoard(); // Update board to reflect changes
+            }
+        } else {
+            // Move the selected card to the clicked deck
+            try {
+                this.move(this.selectedCard.deckName, deck.nameDeck());
+                this.selectedCard = null;
+                this.updateBoard(); // Update board to reflect changes
+            } catch (error) {
+                console.error(error.message);
+                // Return the card to its original deck if the move fails
+                deck.pushDeck(this.selectedCard);
+                this.selectedCard = null;
+                this.updateBoard(); // Update board to reflect changes
+            }
+        }
+    }
+
+    handleDragStart(event, deck) {
+        if (!deck.isEmpty()) {
+            event.dataTransfer.setData('text/plain', deck.nameDeck());
+            event.dataTransfer.effectAllowed = 'move';
+        }
+    }
+
+    handleDragOver(event) {
+        event.preventDefault(); // Allow drop
+        event.dataTransfer.dropEffect = 'move';
+    }
+
+    handleDrop(event, targetDeck) {
+        event.preventDefault();
+        const sourceDeckName = event.dataTransfer.getData('text/plain');
+        try {
+            this.move(sourceDeckName, targetDeck.nameDeck());
+            this.updateBoard(); // Update board to reflect changes
+        } catch (error) {
+            console.error(error.message);
+        }
     }
 }
 
