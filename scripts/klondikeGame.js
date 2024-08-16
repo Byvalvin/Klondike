@@ -159,8 +159,15 @@ class Game {
     }
 
     move(fromDeckName, toDeckName) {
+        console.log(`Attempting to move from ${fromDeckName} to ${toDeckName}`);
         const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === fromDeckName);
         const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
+
+            // Debugging: log the deck names and if they are found
+        console.log('Available decks:', [this.Stock, ...this.SUITS, ...this.PILES].map(deck => deck.nameDeck()));
+        console.log('Source deck:', fromDeck ? fromDeck.nameDeck() : 'Not found');
+        console.log('Target deck:', toDeck ? toDeck.nameDeck() : 'Not found');
+        
         if (!fromDeck || !toDeck) {
             throw new Error('Invalid deck names');
         }
