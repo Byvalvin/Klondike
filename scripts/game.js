@@ -247,24 +247,39 @@ class Game {
         const gameBoard = document.getElementById('game-board');
         gameBoard.innerHTML = ''; // Clear previous board
 
+        // Create a container for stock and discard
+        const topContainer = document.createElement('div');
+        topContainer.className = 'top-container';
+
         const stockDiv = this.createDeckDiv(this.Stock);
         const discardDiv = this.createDeckDiv(this.Discard);
 
-        // Append stock and discard to board
-        gameBoard.appendChild(stockDiv);
-        gameBoard.appendChild(discardDiv);
+        // Append stock and discard to top container
+        topContainer.appendChild(stockDiv);
+        topContainer.appendChild(discardDiv);
+        gameBoard.appendChild(topContainer);
+
+        // Create a container for suits
+        const suitContainer = document.createElement('div');
+        suitContainer.className = 'suit-container';
 
         // Append suits
         this.SUITS.forEach(suitDeck => {
             const suitDiv = this.createDeckDiv(suitDeck);
-            gameBoard.appendChild(suitDiv);
+            suitContainer.appendChild(suitDiv);
         });
+        gameBoard.appendChild(suitContainer);
+
+        // Create a container for piles
+        const pileContainer = document.createElement('div');
+        pileContainer.className = 'pile-container';
 
         // Append piles
         this.PILES.forEach(pileDeck => {
             const pileDiv = this.createDeckDiv(pileDeck);
-            gameBoard.appendChild(pileDiv);
+            pileContainer.appendChild(pileDiv);
         });
+        gameBoard.appendChild(pileContainer);
     }
 
     createDeckDiv(deck) {
@@ -340,4 +355,3 @@ class Game {
         }
     }
 }
-
