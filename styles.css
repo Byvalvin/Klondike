@@ -62,6 +62,9 @@ button:hover {
     border: 1px solid #000;
     padding: 10px;
     background-color: #fff;
+    margin: 5px;
+    display: inline-block;
+    vertical-align: top;
     position: relative;
     width: 120px; /* Adjust width as needed */
     height: 180px; /* Adjust height as needed */
@@ -70,16 +73,25 @@ button:hover {
     transition: background-color 0.3s ease; /* Smooth background color change */
 }
 
+
 .deck-label {
     font-weight: bold;
     text-align: center;
     margin-bottom: 5px;
     font-size: 1.1em; /* Slightly larger font size */
+    background-color: #f1f1f1;
+    padding: 2px;
 }
 
 .deck-content {
     text-align: center;
     font-size: 1.2em; /* Larger font size for card content */
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    overflow: hidden;
 }
 
 /* Hover effect for deck */
@@ -90,10 +102,10 @@ button:hover {
 /* Card Styles */
 .deck-content .card {
     display: inline-block;
-    width: 50px; /* Adjust card width as needed */
-    height: 70px; /* Adjust card height as needed */
-    line-height: 70px; /* Align text vertically */
-    border: 1px solid #000;
+    width: 70px;
+    height: 100px;
+    line-height: 100px;
+    border: 1px solid #ccc;
     border-radius: 3px;
     background-color: #fff;
     text-align: center;
