@@ -7,23 +7,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <header>
         <h1>Klondike Solitaire</h1>
-        <div id="controls">
-            <button onclick="resetGame()">Reset</button>
-            <button onclick="discardFromStock()">Discard</button>
-            <button onclick="showBoard()">Show Board</button>
-            <button onclick="cheat()">Cheat</button>
-            <button onclick="saveGame()">Save Game</button>
-            <button onclick="loadGame()">Load Game</button>
-            <button onclick="endGame()">End Game</button>
-        </div>
-        <div id="game-board">
-            <!-- The game board will be dynamically populated by JavaScript -->
-        </div>
-        <div id="status"></div>
-    </div>
+        <p id="status">Welcome to Klondike Solitaire!</p>
+    </header>
+    
+    <main>
+        <section id="controls">
+            <button id="reset-button">Reset Game</button>
+            <button id="discard-button">Discard Cards</button>
+            <button id="board-button">Show Board</button>
+            <button id="cheat-button">Cheat</button>
+            <button id="save-button">Save Game</button>
+            <button id="load-button">Load Game</button>
+            <button id="done-button">End Game</button>
+        </section>
 
+        <section id="game-board" class="game-board">
+            <!-- Game board will be dynamically updated by game.js -->
+        </section>
+    </main>
+    
     <script src="game.js"></script>
 </body>
 </html>
