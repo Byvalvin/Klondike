@@ -238,12 +238,10 @@ class Game {
         // the remaining cards in deckCards are returned to fromDeck
         if (!fromDeck.isEmpty() && deckCards.isEmpty()) {
             fromDeck.peekDeck().faceupCard(true);
-        }
-        /*
-        else{
+        }else{
             fromDeck.addDeck(deckCards);
         }
-        */
+    
         this.updateBoard();
     }
 
