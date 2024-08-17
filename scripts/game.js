@@ -386,6 +386,7 @@ class Game {
                         orderedCards.unshift(deck.popDeck());
                     }
                     this.selectedCards.setDeck(orderedCards);
+                    console.log("all the cards", orderedCards, this.selectedCards);
                 }else{
                     this.selectedCards.pushDeck(deck.popDeck());
                 }
@@ -405,6 +406,7 @@ class Game {
                 console.log("moving", this.selectedCards);
 
                 if(deck.nameDeck().split(" ")[0]==="Pile"){
+                    console.log("all again", this.selectedCards, deck);
                     this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
                 }else{
                     this.move(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
