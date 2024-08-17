@@ -225,7 +225,7 @@ class Game {
         // get the right amount of cards from the deckCards
         while(stopCard && !deckCards.isEmpty() && (stopCard.rankCard() >= deckCards.peekDeck().rankCard())){
             console.log("card to add to top",deckCards.peekDeck().rankCard(), deckCards);
-            moveableCards.unshift(deckCards.popDeck());
+            moveableCards.push(deckCards.popDeck());
             console.log("moveable",moveableCards);
         }
         // add the right amount of cards to the toDeck or bad move
