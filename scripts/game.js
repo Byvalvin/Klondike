@@ -370,6 +370,7 @@ class Game {
                 //this.selectedCard = deck.popDeck();
 
                 this.selectedCards = new Deck("Selected");
+                console.log(deck.nameDeck().split()[0]==="Pile", deck.nameDeck().split());
                 if(deck.nameDeck().split()[0]==="Pile"){
                     const orderedCards = [];
                     console.log(`${deck}`);
