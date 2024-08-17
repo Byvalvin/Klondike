@@ -385,6 +385,7 @@ class Game {
                     while( !deck.isEmpty() && deck.peekDeck().isFaceup() ){
                         console.log(`in loop ${deck}`);
                         orderedCards.unshift(deck.popDeck());
+                        console.log(orderedCards);
                     }
                     this.selectedCards.setDeck(orderedCards);
                     console.log("all the cards", orderedCards, this.selectedCards);
