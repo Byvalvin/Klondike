@@ -218,7 +218,7 @@ class Game {
     
     canMoveStockToSuit(toDeck, card) {
         const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-        return card.rankCard() === rankSuitTop + 1 || card.rankCard() === 1;
+        return card.rankCard() === rankSuitTop + 1 || card.rankCard() === 1 && card.suitCard()===toDeck.nameDeck();
     }
     
     canMoveStockToPile(toDeck, card) {
@@ -230,8 +230,8 @@ class Game {
         console.log("P to Su", fromDeck, toDeck);
         const rankPileTop = card.rankCard();
         const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-        console.log(rankPileTop, rankSuitTop, rankPileTop === rankSuitTop + 1 || rankPileTop === 1);
-        return rankPileTop === rankSuitTop + 1 || rankPileTop === 1;
+        console.log(rankPileTop, rankSuitTop, card.suitCard(), toDeck.nameDeck(), rankPileTop === rankSuitTop + 1 || rankPileTop === 1 && card.suitCard()===toDeck.nameDeck());
+        return rankPileTop === rankSuitTop + 1 || rankPileTop === 1 && card.suitCard()===toDeck.nameDeck();
     }
     
     canMovePileToPile(fromDeck, toDeck, card) {
