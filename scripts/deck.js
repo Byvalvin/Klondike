@@ -38,7 +38,7 @@ class Deck {
     }
 
     toString() {
-        return ` [ ${this.cards.map(card => card.toString()).reverse().join(' ')} ]`;
+        return ` [ ${this.cards.map(card => card.toString()).join(' ')} ]`;
     }
 
     toJSON() {
