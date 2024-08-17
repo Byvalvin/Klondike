@@ -355,9 +355,9 @@ class Game {
                 console.log("moving", this.selectedCards);
 
                 if(deck.nameDeck().split()[0]==="Pile"){
-                    this.pileMove(this.selectedCards.peepDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
+                    this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
                 }else{
-                    this.move(this.selectedCards.peepDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
+                    this.move(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
                 }
                 this.selectedCards = null;
             } catch (error) {
@@ -365,7 +365,7 @@ class Game {
                 // If the move is invalid, push the card back to the original deck
                 //this.selectedCard.originalDeck.pushDeck(this.selectedCard);
                 //this.selectedCard = null; // Deselect card
-                original = this.selectedCards.peepDeck().originalDeck;
+                original = this.selectedCards.peekDeck().originalDeck;
                 original.addDeck(this.selectedCards);
                 this.selectedCards = null;
             }
