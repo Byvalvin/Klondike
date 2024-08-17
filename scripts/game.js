@@ -177,7 +177,7 @@ class Game {
             throw new Error('No card(s) to move');
         }
         //card.faceupCard(true);
-        deckCards.allFaceUp();
+        deckCards.allFaceup();
         
         if (this.canMove(fromDeck, toDeck, deckCards.peekDeck())) { // moving only 1 card
             toDeck.pushDeck(deckCards.popDeck());
