@@ -71,7 +71,13 @@ class Deck {
     addDeck(deck){
         const currCards = this.cards;
         this.cards = this.cards.concat(deck.cards);
-        console.log(`${currCards} + ${deck.cards} = ${this.cards}`);
+        console.log(`add ${this.name} ${currCards} + ${deck.cards} = ${this.cards}`);
+    }
+
+    updateDeck(cards){
+        const currCards = this.cards;
+        this.cards = this.cards.concat(cards);
+        console.log(`update ${this.name} ${currCards} + ${deck.cards} = ${this.cards}`);
     }
 
     setDeck(cards){
