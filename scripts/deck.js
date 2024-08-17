@@ -77,4 +77,13 @@ class Deck {
     setDeck(cards){
         this.cards = cards;
     }
+
+    allFaceup(){
+        this.cards.forEach((card)=>{card.faceupCard(true);});
+    }
+
+    allFacedown(){
+        this.cards.forEach((card)=>{card.faceupCard(false);});
+    }
+    
 }
