@@ -24,6 +24,10 @@ class Card {
         this.visible = visible;
     }
 
+    isFaceup() {
+        return this.visible;
+    }
+
     toString() {
         return this.visible ? `${this.rank}${this.suit}` : '??';
     }
