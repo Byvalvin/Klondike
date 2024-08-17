@@ -184,7 +184,7 @@ class Game {
 
     move(fromDeckName, toDeckName, deckCards) { // move to non-pile
 
-        const [fromDeck, toDeck] = moveCheck(fromDeckName, toDeckName, deckCards);
+        const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
         
         if (this.canMove(fromDeck, toDeck, deckCards.peekDeck())) { // moving only 1 card
             toDeck.pushDeck(deckCards.popDeck());
@@ -202,14 +202,14 @@ class Game {
 
     pileMove(fromDeckName, toDeckName, deckCards){
         console.log("a piled mvoe");
-        const [fromDeck, toDeck] = moveCheck(fromDeckName, toDeckName, deckCards);
+        const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
         
         const moveableCards = [];
         const reverseDeck = deckCards.getReverseDeck(); // need to check innermost card(s) first
         let isStopCard = false;
         let stopCard = null;
         while(!isStopCard){
-            isStopCard = canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck());
+            isStopCard = this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck());
             if(!isStopCard){
                 reverseDeck.popDeck();
             }else{
