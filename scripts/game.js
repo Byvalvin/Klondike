@@ -380,7 +380,7 @@ class Game {
                 if(deck.nameDeck().split(" ")[0]==="Pile"){
                     const orderedCards = [];
                     console.log(`${deck} card is:${deck.peekDeck()} deck is:${deck}`);
-                    while(deck.peekDeck().isFaceup()){
+                    while( !deck.isEmpty() && deck.peekDeck().isFaceup() ){
                         orderedCards.unshift(deck.popDeck());
                     }
                     this.selectedCards.setDeck(orderedCards);
