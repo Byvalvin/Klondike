@@ -236,6 +236,7 @@ class Game {
         }
 
         // the remaining cards in deckCards are returned to fromDeck
+        console.log(!fromDeck.isEmpty(), deckCards.isEmpty());
         if (!fromDeck.isEmpty() && deckCards.isEmpty()) {
             fromDeck.peekDeck().faceupCard(true);
         }else{
