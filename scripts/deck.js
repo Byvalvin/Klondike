@@ -84,6 +84,12 @@ class Deck {
         this.cards = cards;
     }
 
+    getReverseDeck(){
+        const rev = new Deck(`reverse-${this.name}`);
+        rev.setDeck(this.cards.reverse());
+        return rev;
+    }
+
     allFaceup(){
         this.cards.forEach((card)=>{card.faceupCard(true);});
     }
