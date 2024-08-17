@@ -158,42 +158,36 @@ class Game {
         }
     }
 
-move(fromDeckName, toDeckName, cards) {
-    console.log(`Attempting to move cards from ${fromDeckName} to ${toDeckName}`);
-    const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === fromDeckName);
-    const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
+    move(fromDeckName, toDeckName, card) {
+        console.log(`Attempting to move card ${card} from ${fromDeckName} to ${toDeckName}`);
+        const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === fromDeckName);
+        const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
 
-    // Debugging: log the deck names and if they are found
-    console.log('Available decks:', [this.Stock, ...this.SUITS, ...this.PILES].map(deck => deck.nameDeck()));
-    console.log('Source deck:', fromDeck ? fromDeck.nameDeck() : 'Not found');
-    console.log('Target deck:', toDeck ? toDeck.nameDeck() : 'Not found');
-    
-    if (!fromDeck || !toDeck) {
-        throw new Error('Invalid deck names');
-    }
-
-    // Validate that the move is allowed
-    if (cards.length === 0) {
-        throw new Error('No cards to move');
-    }
-
-    if (!this.canMove(fromDeck, toDeck, cards[0])) {
-        throw new Error('Invalid move');
-    }
-
-    // Move each card to the target deck
-    cards.forEach(card => {
+        // Debugging: log the deck names and if they are found
+        console.log('Available decks:', [this.Stock, ...this.SUITS, ...this.PILES].map(deck => deck.nameDeck()));
+        console.log('Source deck:', fromDeck ? fromDeck.nameDeck() : 'Not found');
+        console.log('Target deck:', toDeck ? toDeck.nameDeck() : 'Not found');
+        
+        if (!fromDeck || !toDeck) {
+            throw new Error('Invalid deck names');
+        }
+        //const card = fromDeck.peekDeck();
+        // const card = selected;
+        if (!card) {
+            throw new Error('No card to move');
+        }
         card.faceupCard(true);
-        toDeck.pushDeck(card);
-    });
-
-    // Update visibility of the source deck
-    if (!fromDeck.isEmpty()) {
-        fromDeck.peekDeck().faceupCard(true);
+        if (this.canMove(fromDeck, toDeck, card)) {
+            toDeck.pushDeck(card);
+        } else {
+            //fromDeck.pushDeck(card); // Return card if move is invalid
+            throw new Error('Invalid move');
+        }
+        if (!fromDeck.isEmpty()) {
+            fromDeck.peekDeck().faceupCard(true);
+        }
+        this.updateBoard();
     }
-
-    this.updateBoard(); // Update board to reflect changes
-}
 
 
     canMove(fromDeck, toDeck, card) {
@@ -321,29 +315,27 @@ move(fromDeckName, toDeckName, cards) {
 
     handleDeckClick(deck) {
         if (this.selectedCard === null) {
-            // Attempt to select cards from the clicked deck
+            // Attempt to select a card from the clicked deck
+            
             if (!deck.isEmpty()) {
-                // Get all visible cards starting from the topmost visible card
-                const visibleCards = deck.getVisibleCards();
-                if (visibleCards.length > 0) {
-                    this.selectedCards = visibleCards; // Store the selected stack of cards
-                    this.selectedCards.forEach(card => card.originalDeck = deck); // Store original deck for move back if needed
-                    console.log("selected cards", this.selectedCards);
-                    this.updateBoard(); // Update board to reflect changes
-                }
+                // Assume the top card is to be selected
+                this.selectedCard = deck.popDeck(); 
+                this.selectedCard.originalDeck = deck; // Store original deck for move back if needed
+                console.log("selected",this.selectedCard);
+                this.updateBoard(); // Update board to reflect changes
             }
         } else {
-            // Attempt to move the selected stack of cards to the clicked deck
+            // Attempt to move the selected card to the clicked deck
             try {
-                // Move stack of cards to target deck
-                console.log("moved cards", this.selectedCards);
-                this.move(this.selectedCards[0].originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards); 
-                this.selectedCards = null; // Deselect cards after successful move
+                // Move card to target deck
+                console.log("moved",this.selectedCard);
+                this.move(this.selectedCard.originalDeck.nameDeck(), deck.nameDeck(), this.selectedCard); 
+                this.selectedCard = null; // Deselect card after successful move
             } catch (error) {
                 console.error(error.message);
-                // If the move is invalid, push the cards back to the original deck
-                this.selectedCards.forEach(card => this.selectedCards[0].originalDeck.pushDeck(card));
-                this.selectedCards = null; // Deselect cards
+                // If the move is invalid, push the card back to the original deck
+                this.selectedCard.originalDeck.pushDeck(this.selectedCard);
+                this.selectedCard = null; // Deselect card
             }
             this.updateBoard(); // Update board to reflect changes
         }
