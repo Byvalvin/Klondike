@@ -159,7 +159,7 @@ class Game {
     }
 
     move(fromDeckName, toDeckName, card) {
-        console.log(`Attempting to move from ${fromDeckName} to ${toDeckName}`);
+        console.log(`Attempting to move card ${card} from ${fromDeckName} to ${toDeckName}`);
         const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === fromDeckName);
         const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
 
@@ -315,16 +315,19 @@ class Game {
     handleDeckClick(deck) {
         if (this.selectedCard === null) {
             // Attempt to select a card from the clicked deck
+            
             if (!deck.isEmpty()) {
                 // Assume the top card is to be selected
                 this.selectedCard = deck.popDeck(); 
                 this.selectedCard.originalDeck = deck; // Store original deck for move back if needed
+                console.log("selected",this.selectedCard);
                 this.updateBoard(); // Update board to reflect changes
             }
         } else {
             // Attempt to move the selected card to the clicked deck
             try {
                 // Move card to target deck
+                console.log("moved",this.selectedCard);
                 this.move(this.selectedCard.originalDeck.nameDeck(), deck.nameDeck(), this.selectedCard); 
                 this.selectedCard = null; // Deselect card after successful move
             } catch (error) {
