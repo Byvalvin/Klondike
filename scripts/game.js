@@ -396,7 +396,7 @@ class Game {
 
                 console.log("moving", this.selectedCards);
 
-                if(deck.nameDeck().split()[0]==="Pile"){
+                if(deck.nameDeck().split(" ")[0]==="Pile"){
                     this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
                 }else{
                     this.move(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
