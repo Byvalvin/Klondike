@@ -158,7 +158,7 @@ class Game {
         }
     }
 
-    move(fromDeckName, toDeckName, deckCards) { // move to non-pile
+    moveCheck(fromDeckName, toDeckName, deckCards){
         console.log(`Attempting to move cards ${deckCards} from ${fromDeckName} to ${toDeckName}`);
         const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === fromDeckName);
         const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
@@ -178,6 +178,13 @@ class Game {
         }
         //card.faceupCard(true);
         deckCards.allFaceup();
+
+        return [fromDeck, toDeck];
+    }
+
+    move(fromDeckName, toDeckName, deckCards) { // move to non-pile
+
+        const [fromDeck, toDeck] = moveCheck(fromDeckName, toDeckName, deckCards);
         
         if (this.canMove(fromDeck, toDeck, deckCards.peekDeck())) { // moving only 1 card
             toDeck.pushDeck(deckCards.popDeck());
@@ -193,8 +200,30 @@ class Game {
         this.updateBoard();
     }
 
-    pileMove(fromDeck, toDeck, deckCards){
+    pileMove(fromDeckName, toDeckName, deckCards){
         console.log("a piled mvoe");
+        const [fromDeck, toDeck] = moveCheck(fromDeckName, toDeckName, deckCards);
+        
+        const moveableCards = [];
+        let isGettingCards = true;
+        while(isGettingCards){
+            isGettingCards = canMovePileToPile(fromDeck, toDeck, deckCards.peekDeck());
+            if(isGettingCards){
+                moveableCards.unshift(deckCards.popDeck());
+            }
+        }
+        if(moveableCards){
+             toDeck.updateDeck(moveableCards);
+        }else{
+            throw new Error('Invalid move');
+        }
+
+        if (!fromDeck.isEmpty() && deckCards.isEmpty()) {
+            fromDeck.peekDeck().faceupCard(true);
+        }else{
+            fromDeck.addDeck(deckCards);
+        }
+        this.updateBoard();
     }
 
 
@@ -293,6 +322,7 @@ class Game {
         });
         gameBoard.appendChild(pileContainer);
     }
+
 
     createDeckDiv(deck) {
         const deckDiv = document.createElement('div');
