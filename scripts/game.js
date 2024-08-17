@@ -205,19 +205,30 @@ class Game {
         const [fromDeck, toDeck] = moveCheck(fromDeckName, toDeckName, deckCards);
         
         const moveableCards = [];
-        let isGettingCards = true;
-        while(isGettingCards){
-            isGettingCards = canMovePileToPile(fromDeck, toDeck, deckCards.peekDeck());
-            if(isGettingCards){
-                moveableCards.unshift(deckCards.popDeck());
+        const reverseDeck = deckCards.getReverseDeck(); // need to check innermost card(s) first
+        let isStopCard = false;
+        let stopCard = null;
+        while(!isStopCard){
+            isStopCard = canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck());
+            if(!isStopCard){
+                reverseDeck.popDeck();
+            }else{
+                stopCard = reverseDeck.peekDeck();
             }
         }
+
+        // get the right amount of cards from the deckCards
+        while(stopCard.rankCard() >= deckCards.peekDeck().rankCard()){
+            moveableCards.unshift(deckCards.popDeck());
+        }
+        // add the right amount of cards to the toDeck or bad move
         if(moveableCards){
              toDeck.updateDeck(moveableCards);
         }else{
             throw new Error('Invalid move');
         }
 
+        // the remaining cards in deckCards are returned to fromDeck
         if (!fromDeck.isEmpty() && deckCards.isEmpty()) {
             fromDeck.peekDeck().faceupCard(true);
         }else{
