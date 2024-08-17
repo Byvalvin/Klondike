@@ -37,6 +37,21 @@ class Deck {
         return this.cards.pop();
     }
 
+    getVisibleCards() {
+        const visibleCards = [];
+        let currentCard = this.peekDeck();
+        while (currentCard) {
+            visibleCards.push(currentCard);
+            if (this.cards.length > 1) {
+                this.popDeck(); // Remove the card from the deck
+                currentCard = this.peekDeck(); // Peek the next card
+            } else {
+                break;
+            }
+        }
+        return visibleCards;
+    }
+    
     toString() {
         return ` [ ${this.cards.map(card => card.toString()).reverse().join(' ')} ]`;
     }
