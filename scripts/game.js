@@ -226,8 +226,10 @@ class Game {
     }
     
     canMovePileToSuit(fromDeck, toDeck) {
+        console.log("P to Su", fromDeck, toDeck);
         const rankPileTop = fromDeck.peekDeck().rankCard();
         const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
+        console.log(rankPileTop, rankSuitTop, rankPileTop === rankSuitTop + 1 || rankPileTop === 1);
         return rankPileTop === rankSuitTop + 1 || rankPileTop === 1;
     }
     
