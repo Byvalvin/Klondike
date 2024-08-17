@@ -206,11 +206,13 @@ class Game {
     pileMove(fromDeckName, toDeckName, deckCards){
         console.log("a piled mvoe");
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
-        
+        console.log("decks",fromDeck,toDeck);
         const moveableCards = [];
         const reverseDeck = deckCards.getReverseDeck(); // need to check innermost card(s) first
         let isStopCard = false;
         let stopCard = null;
+
+        console.log("while");
         while(!isStopCard && !reverseDeck.isEmpty()){
             isStopCard = this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck());
             if(!isStopCard){
