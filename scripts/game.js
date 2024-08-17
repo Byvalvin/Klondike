@@ -158,7 +158,7 @@ class Game {
         }
     }
 
-    move(fromDeckName, toDeckName) {
+    move(fromDeckName, toDeckName, card) {
         console.log(`Attempting to move from ${fromDeckName} to ${toDeckName}`);
         const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === fromDeckName);
         const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
@@ -171,13 +171,14 @@ class Game {
         if (!fromDeck || !toDeck) {
             throw new Error('Invalid deck names');
         }
-        const card = fromDeck.peekDeck();
+        //const card = fromDeck.peekDeck();
+        // const card = selected;
         if (!card) {
             throw new Error('No card to move');
         }
         card.faceupCard(true);
         if (this.canMove(fromDeck, toDeck, card)) {
-            toDeck.pushDeck(fromDeck.popDeck());
+            toDeck.pushDeck(card);
         } else {
             //fromDeck.pushDeck(card); // Return card if move is invalid
             throw new Error('Invalid move');
@@ -324,7 +325,7 @@ class Game {
             // Attempt to move the selected card to the clicked deck
             try {
                 // Move card to target deck
-                this.move(this.selectedCard.originalDeck.nameDeck(), deck.nameDeck()); 
+                this.move(this.selectedCard.originalDeck.nameDeck(), deck.nameDeck(), this.selectedCard); 
                 this.selectedCard = null; // Deselect card after successful move
             } catch (error) {
                 console.error(error.message);
