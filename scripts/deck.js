@@ -73,4 +73,8 @@ class Deck {
         this.cards = this.cards.concat(deck.cards);
         console.log(`$(currCards) + ${deck.cards} = ${this.cards}`);
     }
+
+    setDeck(cards){
+        this.cards = cards;
+    }
 }
