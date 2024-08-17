@@ -67,4 +67,10 @@ class Deck {
             [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
         }
     }
+
+    addDeck(deck){
+        currCards = this.cards;
+        this.cards = this.cards.concat(deck.cards);
+        console.log(`$(currCards) + ${deck.cards} = ${this.cards}`);
+    }
 }
