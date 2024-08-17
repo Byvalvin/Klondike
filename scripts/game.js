@@ -171,15 +171,15 @@ class Game {
         if (!fromDeck || !toDeck) {
             throw new Error('Invalid deck names');
         }
-        const card = fromDeck.popDeck();
+        const card = fromDeck.peekDeck();
         if (!card) {
             throw new Error('No card to move');
         }
         card.faceupCard(true);
         if (this.canMove(fromDeck, toDeck, card)) {
-            toDeck.pushDeck(card);
+            toDeck.pushDeck(fromDeck.popDeck());
         } else {
-            fromDeck.pushDeck(card); // Return card if move is invalid
+            //fromDeck.pushDeck(card); // Return card if move is invalid
             throw new Error('Invalid move');
         }
         if (!fromDeck.isEmpty()) {
