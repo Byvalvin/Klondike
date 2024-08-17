@@ -365,7 +365,6 @@ class Game {
     handleDeckClick(deck) {
         if (this.selectedCards === null) {
             // Attempt to select a card from the clicked deck
-            
             if (!deck.isEmpty()) {
                 // Assume the top card is to be selected
                 //this.selectedCard = deck.popDeck();
@@ -373,6 +372,7 @@ class Game {
                 this.selectedCards = new Deck("Selected");
                 if(deck.nameDeck().split()[0]==="Pile"){
                     const orderedCards = [];
+                    console.log(`${deck}`);
                     while(deck.peekDeck().isFaceup()){
                         orderedCards.unshift(deck.popDeck());
                     }
