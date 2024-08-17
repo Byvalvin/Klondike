@@ -221,7 +221,7 @@ class Game {
         }
 
         // get the right amount of cards from the deckCards
-        while(stopCard && (stopCard.rankCard() >= deckCards.peekDeck().rankCard())){
+        while(stopCard && !deckCards.isEmpty() && (stopCard.rankCard() >= deckCards.peekDeck().rankCard())){
             moveableCards.unshift(deckCards.popDeck());
         }
         // add the right amount of cards to the toDeck or bad move
