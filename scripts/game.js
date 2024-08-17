@@ -386,6 +386,7 @@ class Game {
                     console.log(`${deck} card is:${deck.peekDeck()} deck is:${deck}`);
                     while( !deck.isEmpty() && deck.peekDeck().isFaceup() ){
                         console.log(`in loop ${deck}`);
+                        console.log("card selecrted added", deck.peekDeck());
                         orderedCards.unshift(deck.popDeck());
                         console.log(orderedCards);
                     }
