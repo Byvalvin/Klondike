@@ -331,7 +331,7 @@ class Game {
 
                 this.selectedCards = new Deck("Selected");
                 if(deck.nameDeck().split()[0]==="Pile"){
-                    orderedCards = [];
+                    const orderedCards = [];
                     while(deck.peekDeck().isFaceup()){
                         orderedCards.unshift(deck.popDeck());
                     }
@@ -365,8 +365,7 @@ class Game {
                 // If the move is invalid, push the card back to the original deck
                 //this.selectedCard.originalDeck.pushDeck(this.selectedCard);
                 //this.selectedCard = null; // Deselect card
-                original = this.selectedCards.peekDeck().originalDeck;
-                original.addDeck(this.selectedCards);
+                this.selectedCards.peekDeck().originalDeck.addDeck(this.selectedCards); // add cards back to original
                 this.selectedCards = null;
             }
             this.updateBoard(); // Update board to reflect changes
