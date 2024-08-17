@@ -379,7 +379,7 @@ class Game {
                 console.log(deck.nameDeck().split(" ")[0]==="Pile", deck.nameDeck().split(" "));
                 if(deck.nameDeck().split(" ")[0]==="Pile"){
                     const orderedCards = [];
-                    console.log(`${deck} card is:${deck.peekDeck()}`);
+                    console.log(`${deck} card is:${deck.peekDeck()} deck is:${deck}`);
                     while(deck.peekDeck().isFaceup()){
                         orderedCards.unshift(deck.popDeck());
                     }
