@@ -74,14 +74,14 @@ class Deck {
         console.log(`add ${this.name} ${currCards} + ${deck.cards} = ${this.cards}`);
     }
 
-    updateDeck(cards){
+    updateDeck(cardsToAdd){
         const currCards = this.cards;
-        this.cards = this.cards.concat(cards);
-        console.log(`update ${this.name} ${currCards} + ${deck.cards} = ${this.cards}`);
+        this.cards = this.cards.concat(cardsToAdd);
+        console.log(`update ${this.name}: ${currCards} + ${cardsToAdd} = ${this.cards}`);
     }
 
-    setDeck(cards){
-        this.cards = cards;
+    setDeck(cardsToSet){
+        this.cards = cardsToSet;
     }
 
     getReverseDeck(){
