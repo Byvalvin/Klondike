@@ -194,9 +194,12 @@ class Game {
         }
         if (!fromDeck.isEmpty() && deckCards.isEmpty()) {
             fromDeck.peekDeck().faceupCard(true);
-        }else{
+        }
+        /*
+        else{
             fromDeck.addDeck(deckCards);
         }
+        */
         this.updateBoard();
     }
 
@@ -208,7 +211,7 @@ class Game {
         const reverseDeck = deckCards.getReverseDeck(); // need to check innermost card(s) first
         let isStopCard = false;
         let stopCard = null;
-        while(!isStopCard){
+        while(!isStopCard && !reverseDeck.isEmpty()){
             isStopCard = this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck());
             if(!isStopCard){
                 reverseDeck.popDeck();
@@ -218,7 +221,7 @@ class Game {
         }
 
         // get the right amount of cards from the deckCards
-        while(stopCard.rankCard() >= deckCards.peekDeck().rankCard()){
+        while(stopCard && (stopCard.rankCard() >= deckCards.peekDeck().rankCard())){
             moveableCards.unshift(deckCards.popDeck());
         }
         // add the right amount of cards to the toDeck or bad move
@@ -231,9 +234,12 @@ class Game {
         // the remaining cards in deckCards are returned to fromDeck
         if (!fromDeck.isEmpty() && deckCards.isEmpty()) {
             fromDeck.peekDeck().faceupCard(true);
-        }else{
+        }
+        /*
+        else{
             fromDeck.addDeck(deckCards);
         }
+        */
         this.updateBoard();
     }
 
