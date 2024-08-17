@@ -204,14 +204,14 @@ class Game {
         }
         if (this.PILES.map(d => d.nameDeck()).includes(fromName)) {
             if (this.SUITS.map(d => d.nameDeck()).includes(toName)) {
-                return this.canMovePileToSuit(fromDeck, toDeck);
+                return this.canMovePileToSuit(fromDeck, toDeck, card);
             }
             if (this.PILES.map(d => d.nameDeck()).includes(toName)) {
-                return this.canMovePileToPile(fromDeck, toDeck);
+                return this.canMovePileToPile(fromDeck, toDeck, card);
             }
         }
         if (this.SUITS.map(d => d.nameDeck()).includes(fromName) && this.PILES.map(d => d.nameDeck()).includes(toName)) {
-            return this.canMoveSuitToPile(fromDeck, toDeck);
+            return this.canMoveSuitToPile(fromDeck, toDeck, card);
         }
         return false;
     }
@@ -226,22 +226,22 @@ class Game {
         return card.rankCard() === rankPileTop + 1 || card.rankCard() === 13;
     }
     
-    canMovePileToSuit(fromDeck, toDeck) {
+    canMovePileToSuit(fromDeck, toDeck, card) {
         console.log("P to Su", fromDeck, toDeck);
-        const rankPileTop = fromDeck.peekDeck().rankCard();
+        const rankPileTop = card.rankCard();
         const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
         console.log(rankPileTop, rankSuitTop, rankPileTop === rankSuitTop + 1 || rankPileTop === 1);
         return rankPileTop === rankSuitTop + 1 || rankPileTop === 1;
     }
     
-    canMovePileToPile(fromDeck, toDeck) {
-        const rankPileTop = fromDeck.peekDeck().rankCard();
+    canMovePileToPile(fromDeck, toDeck, card) {
+        const rankPileTop = card.rankCard();
         const rankTargetPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
         return rankPileTop === rankTargetPileTop + 1;
     }
     
-    canMoveSuitToPile(fromDeck, toDeck) {
-        const rankSuitTop = fromDeck.peekDeck().rankCard();
+    canMoveSuitToPile(fromDeck, toDeck, card) {
+        const rankSuitTop = card.rankCard();
         const rankPileTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
         return rankSuitTop === rankPileTop + 1 || rankSuitTop === 13;
     }
