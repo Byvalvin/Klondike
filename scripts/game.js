@@ -383,6 +383,7 @@ class Game {
                     const orderedCards = [];
                     console.log(`${deck} card is:${deck.peekDeck()} deck is:${deck}`);
                     while( !deck.isEmpty() && deck.peekDeck().isFaceup() ){
+                        console.log(${deck});
                         orderedCards.unshift(deck.popDeck());
                     }
                     this.selectedCards.setDeck(orderedCards);
