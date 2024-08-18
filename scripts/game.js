@@ -209,10 +209,9 @@ class Game {
 
         // when to stop
         const reverseDeck = deckCards.getReverseDeck();
-        const reverseToDeck = toDeck.getReverseDeck();
         let stopValue = null;
         while(!reverseDeck.isEmpty() && stopValue===null){
-            if( this.canMovePileToPile(fromDeck, reverseToDeck, reverseDeck.peekDeck()) ){
+            if( this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck()) ){
                 stopValue = reverseDeck.peekDeck().rankCard();
             }else{
                 reverseDeck.popDeck();
