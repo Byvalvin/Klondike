@@ -219,8 +219,10 @@ class Game {
         }
 
         // get only the cards that can move, leave the rest in  deckCards
+        console.log("rev", reverseDeck);
         if(stopValue!==null){
-            const moveableCards = [];        
+            const moveableCards = [];     
+            console.log("in if", deckCards);
             while(!deckCards.isEmpty() && deckCards.peekDeck().rankCard()!==stopValue){
                 moveableCards.unshift(deckCards.popDeck());
                 console.log("status",deckCards, moveableCards);
