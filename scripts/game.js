@@ -223,7 +223,7 @@ class Game {
         if(stopValue!==null){
             const moveableCards = [];     
             console.log("in if", deckCards);
-            while(!deckCards.isEmpty() && deckCards.peekDeck().rankCard()<=stopValue){
+            while(!deckCards.isEmpty() && (deckCards.peekDeck().rankCard()<=stopValue)){
                 moveableCards.push(deckCards.popDeck());
                 console.log("status",deckCards, moveableCards);
             }
