@@ -403,7 +403,7 @@ class Game {
                 }
                 
                 this.selectedCards.peekDeck().originalDeck = deck; // Store original deck for move back if needed
-                //console.log("selected",this.selectedCards);
+                console.log("selected",this.selectedCards);
                 this.updateBoard(); // Update board to reflect changes
             }
         } else {
