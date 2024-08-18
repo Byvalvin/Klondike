@@ -226,7 +226,7 @@ class Game {
             console.log("in if", deckCards);
             while(!deckCards.isEmpty() && deckCards.peekDeck().rankCard()<=stopValue){
                 console.log(deckCards.peekDeck().rankCard(),stopValue);
-                moveableCards.push(deckCards.popDeck());
+                moveableCards.unshift(deckCards.popDeck());
                 console.log("status",deckCards, moveableCards);
             }
             // add the right amount of cards to the toDeck or bad move
