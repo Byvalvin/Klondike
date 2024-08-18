@@ -211,6 +211,7 @@ class Game {
         console.log("a piled mvoe");
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
 
+        // get only the cards that can move, leave the rest in  deckCards
         const maxCardValue = toDeck.isEmpty()? this.maxCardValue : toDeck.peekDeck().rankCard();
         const moveableCards = [];
         while(!deckCards.isEmpty() && 
@@ -226,14 +227,13 @@ class Game {
             throw new Error('Invalid move');
         }
 
-        // the remaining cards in deckCards are returned to fromDeck
+        // Show next hidden card or the remaining cards in deckCards are returned to fromDeck
         console.log(!fromDeck.isEmpty(), deckCards.isEmpty());
         if (!fromDeck.isEmpty() && deckCards.isEmpty()) {
             fromDeck.peekDeck().faceupCard(true);
         }else{
             fromDeck.addDeck(deckCards);
         }
-    
         this.updateBoard();
     }
 
