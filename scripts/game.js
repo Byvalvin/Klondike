@@ -383,13 +383,13 @@ class Game {
                         
                     }
                     this.selectedCards.setDeck(orderedCards);
-                    console.log("all the cards", orderedCards, this.selectedCards);
+                    //console.log("all the cards", orderedCards, this.selectedCards);
                 }else{
                     this.selectedCards.pushDeck(deck.popDeck());
                 }
                 
                 this.selectedCards.peekDeck().originalDeck = deck; // Store original deck for move back if needed
-                console.log("selected",this.selectedCards);
+                //console.log("selected",this.selectedCards);
                 this.updateBoard(); // Update board to reflect changes
             }
         } else {
