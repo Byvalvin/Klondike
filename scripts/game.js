@@ -224,7 +224,7 @@ class Game {
             const moveableCards = [];     
             console.log("in if", deckCards);
             while(!deckCards.isEmpty() && deckCards.peekDeck().rankCard()<=stopValue){
-                moveableCards.unshift(deckCards.popDeck());
+                moveableCards.push(deckCards.popDeck());
                 console.log("status",deckCards, moveableCards);
             }
             // add the right amount of cards to the toDeck or bad move
