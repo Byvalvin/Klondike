@@ -211,12 +211,22 @@ class Game {
         console.log("a piled mvoe");
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
 
+
+
+        // when to stop
+        const reverseDeck = deckCards.getReverseDeck();
+        let stopValue = null;
+        while(!reverseDeck.isEmpty() && stopValue!==null){
+            if( canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck().rankCard()) ){
+                stopValue = reverseDeck.peekDeck().rankCard();
+            }else{
+                reverseDeck.popDeck();
+            }
+        }
+
         // get only the cards that can move, leave the rest in  deckCards
-        const maxCardValue = toDeck.isEmpty()? this.maxCardValue : toDeck.peekDeck().rankCard();
-        const moveableCards = [];
-        while(!deckCards.isEmpty() && 
-              (deckCards.peekDeck().rankCard() < maxCardValue || deckCards.peekDeck().rankCard()===13 && toDeck.isEmpty())
-             ){
+        const moveableCards = [];        
+        while(stopValue && !deckCards.isEmpty() && deckCards.peekDeck().rankCard()!==stopValue){
             moveableCards.unshift(deckCards.popDeck());
         }
 
