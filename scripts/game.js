@@ -203,41 +203,51 @@ class Game {
         this.updateBoard();
     }
 
-    pileMove(fromDeckName, toDeckName, deckCards) {
-        console.log("Processing pile move");
+    pileMove(fromDeckName, toDeckName, deckCards){
+        console.log("a piled mvoe");
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
-        
+        console.log("decks",fromDeck,toDeck, deckCards);
         const moveableCards = [];
-        const reverseDeck = deckCards.getReverseDeck(); // Reverse deck to handle the innermost card first
+        const reverseDeck = deckCards.getReverseDeck(); // need to check innermost card(s) first
+        let isStopCard = false;
         let stopCard = null;
-    
-        console.log("Processing visible cards", reverseDeck);
-        while (!reverseDeck.isEmpty()) {
-            if (this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck())) {
-                moveableCards.push(reverseDeck.popDeck()); // Collect valid cards
-            } else {
-                stopCard = reverseDeck.peekDeck(); // Stop when the move is no longer valid
-                break;
+
+        console.log("while", reverseDeck);
+        while(!isStopCard && !reverseDeck.isEmpty()){
+            isStopCard = this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck());
+            console.log("losing cards", isStopCard, reverseDeck.peekDeck(),fromDeck, toDeck);
+            if(!isStopCard){
+                reverseDeck.popDeck();
+            }else{
+                stopCard = reverseDeck.peekDeck();
             }
+            console.log("stop",stopCard);
         }
-    
-        // Move the valid cards to the target pile
-        if (moveableCards.length > 0) {
-            toDeck.updateDeck(moveableCards);
-        } else {
+        
+
+        // get the right amount of cards from the deckCards
+        while(stopCard && !deckCards.isEmpty() && (stopCard.rankCard() >= deckCards.peekDeck().rankCard())){
+            console.log("card to add to top",deckCards.peekDeck().rankCard(), deckCards);
+            moveableCards.push(deckCards.popDeck());
+            console.log("moveable",moveableCards);
+        }
+        // add the right amount of cards to the toDeck or bad move
+        if(moveableCards){
+             toDeck.updateDeck(moveableCards);
+        }else{
             throw new Error('Invalid move');
         }
-    
-        // Return the remaining cards back to the original pile
+
+        // the remaining cards in deckCards are returned to fromDeck
+        console.log(!fromDeck.isEmpty(), deckCards.isEmpty());
         if (!fromDeck.isEmpty() && deckCards.isEmpty()) {
-            fromDeck.peekDeck().faceupCard(true); // Ensure the top card is face up
-        } else {
-            fromDeck.addDeck(deckCards); // Add back remaining cards
+            fromDeck.peekDeck().faceupCard(true);
+        }else{
+            fromDeck.addDeck(deckCards);
         }
     
         this.updateBoard();
     }
-
 
     canMove(fromDeck, toDeck, card) {
         const fromName = fromDeck.nameDeck();
@@ -365,38 +375,60 @@ class Game {
 
     handleDeckClick(deck) {
         if (this.selectedCards === null) {
+            // Attempt to select a card from the clicked deck
             if (!deck.isEmpty()) {
+                // Assume the top card is to be selected
+                //this.selectedCard = deck.popDeck();
+
                 this.selectedCards = new Deck("Selected");
-                if (deck.nameDeck().split(" ")[0] === "Pile") {
+                console.log(deck.nameDeck().split(" ")[0]==="Pile", deck.nameDeck().split(" "));
+                if(deck.nameDeck().split(" ")[0]==="Pile"){
                     const orderedCards = [];
-                    while (!deck.isEmpty() && deck.peekDeck().isFaceup()) {
+                    console.log(`${deck} card is:${deck.peekDeck()} deck is:${deck}`);
+                    while( !deck.isEmpty() && deck.peekDeck().isFaceup() ){
+                        console.log(`in loop ${deck}`);
+                        console.log("card selecrted added", deck.peekDeck());
                         orderedCards.unshift(deck.popDeck());
+                        console.log(orderedCards);
                     }
                     this.selectedCards.setDeck(orderedCards);
-                } else {
+                    console.log("all the cards", orderedCards, this.selectedCards);
+                }else{
                     this.selectedCards.pushDeck(deck.popDeck());
                 }
+                
                 this.selectedCards.peekDeck().originalDeck = deck; // Store original deck for move back if needed
-                console.log("Selected cards", this.selectedCards);
+                console.log("selected",this.selectedCards);
                 this.updateBoard(); // Update board to reflect changes
             }
         } else {
+            // Attempt to move the selected card to the clicked deck
             try {
-                if (deck.nameDeck().split(" ")[0] === "Pile") {
+                // Move card to target deck
+                //console.log("moved",this.selectedCard);
+                //this.move(this.selectedCard.originalDeck.nameDeck(), deck.nameDeck(), this.selectedCard); 
+                //this.selectedCard = null; // Deselect card after successful move
+
+                console.log("moving", this.selectedCards);
+
+                if(deck.nameDeck().split(" ")[0]==="Pile"){
+                    console.log("all again", this.selectedCards, deck);
                     this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
-                } else {
+                }else{
                     this.move(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
                 }
-                this.selectedCards = null; // Deselect cards after successful move
+                this.selectedCards = null;
             } catch (error) {
                 console.error(error.message);
-                this.selectedCards.peekDeck().originalDeck.addDeck(this.selectedCards); // Add cards back to original
-                this.selectedCards = null; // Deselect cards
+                // If the move is invalid, push the card back to the original deck
+                //this.selectedCard.originalDeck.pushDeck(this.selectedCard);
+                //this.selectedCard = null; // Deselect card
+                this.selectedCards.peekDeck().originalDeck.addDeck(this.selectedCards); // add cards back to original
+                this.selectedCards = null;
             }
             this.updateBoard(); // Update board to reflect changes
         }
     }
-
 
 
     handleDragStart(event, deck) {
