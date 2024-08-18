@@ -159,14 +159,16 @@ class Game {
     }
 
     moveCheck(fromDeckName, toDeckName, deckCards){
-        console.log(`Attempting to move cards ${deckCards} from ${fromDeckName} to ${toDeckName}`);
+        //console.log(`Attempting to move cards ${deckCards} from ${fromDeckName} to ${toDeckName}`);
         const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === fromDeckName);
         const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
 
         // Debugging: log the deck names and if they are found
+        /*
         console.log('Available decks:', [this.Stock, ...this.SUITS, ...this.PILES].map(deck => deck.nameDeck()));
         console.log('Source deck:', fromDeck ? fromDeck.nameDeck() : 'Not found');
         console.log('Target deck:', toDeck ? toDeck.nameDeck() : 'Not found');
+        */
         
         if (!fromDeck || !toDeck) {
             throw new Error('Invalid deck names');
@@ -206,22 +208,22 @@ class Game {
     pileMove(fromDeckName, toDeckName, deckCards){
         console.log("a piled mvoe");
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
-        console.log("decks",fromDeck,toDeck, deckCards);
+        //console.log("decks",fromDeck,toDeck, deckCards);
         const moveableCards = [];
         const reverseDeck = deckCards.getReverseDeck(); // need to check innermost card(s) first
         let isStopCard = false;
         let stopCard = null;
 
-        console.log("while", reverseDeck);
+        //console.log("while", reverseDeck);
         while(!isStopCard && !reverseDeck.isEmpty()){
             isStopCard = this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck());
-            console.log("losing cards", isStopCard, reverseDeck.peekDeck(),fromDeck, toDeck);
+            //console.log("losing cards", isStopCard, reverseDeck.peekDeck(),fromDeck, toDeck);
             if(!isStopCard){
                 reverseDeck.popDeck();
             }else{
                 stopCard = reverseDeck.peekDeck();
             }
-            console.log("stop",stopCard);
+            //console.log("stop",stopCard);
         }
         
 
@@ -287,10 +289,10 @@ class Game {
     }
     
     canMovePileToSuit(fromDeck, toDeck, card) {
-        console.log("P to Su", fromDeck, toDeck);
+        //console.log("P to Su", fromDeck, toDeck);
         const rankPileTop = card.rankCard();
         const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-        console.log(rankPileTop, rankSuitTop, card.suitCard(), toDeck.nameDeck(), (rankPileTop === rankSuitTop + 1 || rankPileTop === 1) && card.suitCard()===toDeck.nameDeck());
+        //console.log(rankPileTop, rankSuitTop, card.suitCard(), toDeck.nameDeck(), (rankPileTop === rankSuitTop + 1 || rankPileTop === 1) && card.suitCard()===toDeck.nameDeck());
         return (rankPileTop === rankSuitTop + 1 || rankPileTop === 1) && card.suitCard()===toDeck.nameDeck();
     }
     
@@ -381,15 +383,18 @@ class Game {
                 //this.selectedCard = deck.popDeck();
 
                 this.selectedCards = new Deck("Selected");
-                console.log(deck.nameDeck().split(" ")[0]==="Pile", deck.nameDeck().split(" "));
+                //console.log(deck.nameDeck().split(" ")[0]==="Pile", deck.nameDeck().split(" "));
                 if(deck.nameDeck().split(" ")[0]==="Pile"){
                     const orderedCards = [];
                     console.log(`${deck} card is:${deck.peekDeck()} deck is:${deck}`);
                     while( !deck.isEmpty() && deck.peekDeck().isFaceup() ){
+                        /*
                         console.log(`in loop ${deck}`);
                         console.log("card selecrted added", deck.peekDeck());
+                        */
                         orderedCards.unshift(deck.popDeck());
-                        console.log(orderedCards);
+                        //console.log(orderedCards);
+                        
                     }
                     this.selectedCards.setDeck(orderedCards);
                     console.log("all the cards", orderedCards, this.selectedCards);
@@ -398,7 +403,7 @@ class Game {
                 }
                 
                 this.selectedCards.peekDeck().originalDeck = deck; // Store original deck for move back if needed
-                console.log("selected",this.selectedCards);
+                //console.log("selected",this.selectedCards);
                 this.updateBoard(); // Update board to reflect changes
             }
         } else {
@@ -409,10 +414,10 @@ class Game {
                 //this.move(this.selectedCard.originalDeck.nameDeck(), deck.nameDeck(), this.selectedCard); 
                 //this.selectedCard = null; // Deselect card after successful move
 
-                console.log("moving", this.selectedCards);
+                //console.log("moving", this.selectedCards);
 
                 if(deck.nameDeck().split(" ")[0]==="Pile"){
-                    console.log("all again", this.selectedCards, deck);
+                    //console.log("all again", this.selectedCards, deck);
                     this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
                 }else{
                     this.move(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
