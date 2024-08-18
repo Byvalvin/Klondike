@@ -211,6 +211,7 @@ class Game {
         const reverseDeck = deckCards.getReverseDeck();
         let stopValue = null;
         while(!reverseDeck.isEmpty() && stopValue===null){
+            console.log(reverseDeck.peekDeck().rankCard());
             if( this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck()) ){
                 stopValue = reverseDeck.peekDeck().rankCard();
             }else{
