@@ -8,6 +8,7 @@ class Game {
         this.SUITS = ['Spades', 'Hearts', 'Diamonds', 'Clubs'].map(name => new Deck(name));
         this.PILES = Array.from({ length: 7 }, (_, i) => new Deck(`Pile ${i + 1}`));
         this.selectedCards = null; // Track the currently selected cards
+        this.maxCardValue = 13;
         this.initializeGame();
     }
 
@@ -208,31 +209,13 @@ class Game {
     pileMove(fromDeckName, toDeckName, deckCards){
         console.log("a piled mvoe");
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
-        //console.log("decks",fromDeck,toDeck, deckCards);
+
+        const maxCardValue = toDeck().isEmpty()?  this.maxCardValue-1 : toDeck.peekDeck().rankCard();
         const moveableCards = [];
-        const reverseDeck = deckCards.getReverseDeck(); // need to check innermost card(s) first
-        let isStopCard = false;
-        let stopCard = null;
-
-        //console.log("while", reverseDeck);
-        while(!isStopCard && !reverseDeck.isEmpty()){
-            isStopCard = this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck());
-            //console.log("losing cards", isStopCard, reverseDeck.peekDeck(),fromDeck, toDeck);
-            if(!isStopCard){
-                reverseDeck.popDeck();
-            }else{
-                stopCard = reverseDeck.peekDeck();
-            }
-            //console.log("stop",stopCard);
+        while(!deckCards.isEmpty() && (deckCards.peekDeck().rankCard() < maxCardValue)){
+            moveableCards.unshift(deckCards.popDeck());
         }
-        
 
-        // get the right amount of cards from the deckCards
-        while(stopCard && !deckCards.isEmpty() && (stopCard.rankCard() >= deckCards.peekDeck().rankCard())){
-            console.log("card to add to top",deckCards.peekDeck().rankCard(), deckCards);
-            moveableCards.push(deckCards.popDeck());
-            console.log("moveable",moveableCards);
-        }
         // add the right amount of cards to the toDeck or bad move
         if(moveableCards){
              toDeck.updateDeck(moveableCards);
