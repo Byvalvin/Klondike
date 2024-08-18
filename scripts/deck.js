@@ -86,7 +86,7 @@ class Deck {
 
     getReverseDeck(){
         const rev = new Deck(`reverse-${this.name}`);
-        rev.setDeck(this.cards.reverse());
+        rev.setDeck(this.cards.slice(0).reverse()); // create a copy with slice and reverse
         return rev;
     }
 
