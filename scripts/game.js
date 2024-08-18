@@ -210,7 +210,7 @@ class Game {
         console.log("a piled mvoe");
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
 
-        const maxCardValue = toDeck().isEmpty()?  this.maxCardValue-1 : toDeck.peekDeck().rankCard();
+        const maxCardValue = toDeck.isEmpty()?  this.maxCardValue-1 : toDeck.peekDeck().rankCard();
         const moveableCards = [];
         while(!deckCards.isEmpty() && (deckCards.peekDeck().rankCard() < maxCardValue)){
             moveableCards.unshift(deckCards.popDeck());
