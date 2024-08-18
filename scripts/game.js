@@ -191,18 +191,19 @@ class Game {
         
         if (this.canMove(fromDeck, toDeck, deckCards.peekDeck())) { // moving only 1 card
             toDeck.pushDeck(deckCards.popDeck());
+            // if from a pile, return whatever is left
+
         } else {
             //fromDeck.pushDeck(card); // Return card if move is invalid
             throw new Error('Invalid move');
         }
+
+        // flip next hidden card or return remaining cards if any exist
         if (!fromDeck.isEmpty() && deckCards.isEmpty()) {
             fromDeck.peekDeck().faceupCard(true);
-        }
-        /*
-        else{
+        }else{
             fromDeck.addDeck(deckCards);
         }
-        */
         this.updateBoard();
     }
 
