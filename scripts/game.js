@@ -225,17 +225,17 @@ class Game {
         }
 
         // get only the cards that can move, leave the rest in  deckCards
-        const moveableCards = [];        
-        while(stopValue && !deckCards.isEmpty() && deckCards.peekDeck().rankCard()!==stopValue){
-            moveableCards.unshift(deckCards.popDeck());
-        }
-
-        // add the right amount of cards to the toDeck or bad move
-        if(moveableCards){
-             toDeck.updateDeck(moveableCards);
+        if(stopCard!==null){
+            const moveableCards = [];        
+            while(!deckCards.isEmpty() && deckCards.peekDeck().rankCard()!==stopValue){
+                moveableCards.unshift(deckCards.popDeck());
+            }
+            // add the right amount of cards to the toDeck or bad move
+            toDeck.updateDeck(moveableCards);
         }else{
             throw new Error('Invalid move');
         }
+       
 
         // Show next hidden card or the remaining cards in deckCards are returned to fromDeck
         console.log(!fromDeck.isEmpty(), deckCards.isEmpty());
