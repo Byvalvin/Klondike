@@ -170,12 +170,9 @@ class Game {
         console.log('Source deck:', fromDeck ? fromDeck.nameDeck() : 'Not found');
         console.log('Target deck:', toDeck ? toDeck.nameDeck() : 'Not found');
         */
-        
         if (!fromDeck || !toDeck) {
             throw new Error('Invalid deck names');
         }
-        //const card = fromDeck.peekDeck();
-        // const card = selected;
         if (!deckCards) {
             throw new Error('No card(s) to move');
         }
@@ -186,7 +183,6 @@ class Game {
     }
 
     move(fromDeckName, toDeckName, deckCards) { // move to non-pile
-
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
         
         if (this.canMove(fromDeck, toDeck, deckCards.peekDeck())) { // moving only 1 card
@@ -211,8 +207,6 @@ class Game {
         console.log("a piled mvoe");
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
 
-
-
         // when to stop
         const reverseDeck = deckCards.getReverseDeck();
         let stopValue = null;
@@ -236,7 +230,6 @@ class Game {
             throw new Error('Invalid move');
         }
        
-
         // Show next hidden card or the remaining cards in deckCards are returned to fromDeck
         console.log(!fromDeck.isEmpty(), deckCards.isEmpty());
         if (!fromDeck.isEmpty() && deckCards.isEmpty()) {
