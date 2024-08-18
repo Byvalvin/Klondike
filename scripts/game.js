@@ -215,12 +215,15 @@ class Game {
         console.log("while", reverseDeck);
         while(!isStopCard && !reverseDeck.isEmpty()){
             isStopCard = this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck());
+            console.log("losing cards", isStopCard, reverseDeck.peekDeck(),fromDeck, toDeck);
             if(!isStopCard){
                 reverseDeck.popDeck();
             }else{
                 stopCard = reverseDeck.peekDeck();
             }
+            console.log("stop",stopCard);
         }
+        
 
         // get the right amount of cards from the deckCards
         while(stopCard && !deckCards.isEmpty() && (stopCard.rankCard() >= deckCards.peekDeck().rankCard())){
