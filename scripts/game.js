@@ -376,18 +376,11 @@ class Game {
             // Attempt to select a card from the clicked deck
             if (!deck.isEmpty()) {
                 // Assume the top card is to be selected
-                //this.selectedCard = deck.popDeck();
-
                 this.selectedCards = new Deck("Selected");
-                //console.log(deck.nameDeck().split(" ")[0]==="Pile", deck.nameDeck().split(" "));
                 if(deck.nameDeck().split(" ")[0]==="Pile"){
                     const orderedCards = [];
                     console.log(`${deck} card is:${deck.peekDeck()} deck is:${deck}`);
                     while( !deck.isEmpty() && deck.peekDeck().isFaceup() ){
-                        /*
-                        console.log(`in loop ${deck}`);
-                        console.log("card selecrted added", deck.peekDeck());
-                        */
                         orderedCards.unshift(deck.popDeck());
                         //console.log(orderedCards);
                         
@@ -406,14 +399,8 @@ class Game {
             // Attempt to move the selected card to the clicked deck
             try {
                 // Move card to target deck
-                //console.log("moved",this.selectedCard);
-                //this.move(this.selectedCard.originalDeck.nameDeck(), deck.nameDeck(), this.selectedCard); 
-                //this.selectedCard = null; // Deselect card after successful move
-
                 //console.log("moving", this.selectedCards);
-
                 if(deck.nameDeck().split(" ")[0]==="Pile"){
-                    //console.log("all again", this.selectedCards, deck);
                     this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
                 }else{
                     this.move(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
@@ -422,8 +409,6 @@ class Game {
             } catch (error) {
                 console.error(error.message);
                 // If the move is invalid, push the card back to the original deck
-                //this.selectedCard.originalDeck.pushDeck(this.selectedCard);
-                //this.selectedCard = null; // Deselect card
                 this.selectedCards.peekDeck().originalDeck.addDeck(this.selectedCards); // add cards back to original
                 this.selectedCards = null;
             }
