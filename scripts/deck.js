@@ -69,15 +69,15 @@ class Deck {
     }
 
     addDeck(deck){
-        const currCards = this.cards;
+        //const currCards = this.cards;
         this.cards = this.cards.concat(deck.cards);
-        console.log(`add ${this.name} ${currCards} + ${deck.cards} = ${this.cards}`);
+        //console.log(`add ${this.name} ${currCards} + ${deck.cards} = ${this.cards}`);
     }
 
     updateDeck(cardsToAdd){
-        const currCards = this.cards;
+        //const currCards = this.cards;
         this.cards = this.cards.concat(cardsToAdd);
-        console.log(`update ${this.name}: ${currCards} + ${cardsToAdd} = ${this.cards}`);
+        //console.log(`update ${this.name}: ${currCards} + ${cardsToAdd} = ${this.cards}`);
     }
 
     setDeck(cardsToSet){
