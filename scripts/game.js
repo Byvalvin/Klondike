@@ -209,9 +209,10 @@ class Game {
 
         // when to stop
         const reverseDeck = deckCards.getReverseDeck();
+        const reverseToDeck = toDeck.getReverseDeck();
         let stopValue = null;
         while(!reverseDeck.isEmpty() && stopValue===null){
-            if( this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck()) ){
+            if( this.canMovePileToPile(fromDeck, reverseToDeck, reverseDeck.peekDeck()) ){
                 stopValue = reverseDeck.peekDeck().rankCard();
             }else{
                 reverseDeck.popDeck();
@@ -223,7 +224,7 @@ class Game {
         if(stopValue!==null){
             const moveableCards = [];     
             console.log("in if", deckCards);
-            while(!deckCards.isEmpty() && deckCards.peekDeck().rankCard()<stopValue){
+            while(!deckCards.isEmpty() && deckCards.peekDeck().rankCard()<=stopValue){
                 moveableCards.push(deckCards.popDeck());
                 console.log("status",deckCards, moveableCards);
             }
