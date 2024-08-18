@@ -219,6 +219,7 @@ class Game {
         }
 
         // get only the cards that can move, leave the rest in  deckCards
+        console.log("stop",stopValue);
         if(stopValue!==null){
             const moveableCards = [];     
             console.log("in if", deckCards);
