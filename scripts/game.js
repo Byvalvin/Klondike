@@ -219,7 +219,6 @@ class Game {
         }
 
         // get only the cards that can move, leave the rest in  deckCards
-        console.log("rev", reverseDeck);
         if(stopValue!==null){
             const moveableCards = [];     
             console.log("in if", deckCards);
@@ -405,6 +404,7 @@ class Game {
             } catch (error) {
                 console.error(error.message);
                 // If the move is invalid, push the card back to the original deck
+                console.log("slectedCarsd",this.selectedCards);
                 this.selectedCards.peekDeck().originalDeck.addDeck(this.selectedCards); // add cards back to original
                 this.selectedCards = null;
             }
