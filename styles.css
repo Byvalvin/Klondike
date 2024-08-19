@@ -183,7 +183,11 @@ button:focus {
 
 .deck-content .card.face-down {
     background-color: #333;
-    color: #fff;
+    color: #333; /* Or a different color to represent the back of the card */
+    text-align: center;
+    line-height: 100px; /* Center text vertically */
+    font-size: 1.5em;
+    border: 1px solid #000; /* Distinguish face-down cards */
 }
 
 .deck-content .card.ace, 
