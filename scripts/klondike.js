@@ -26,11 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function createCardElement(card) {
         const cardElement = document.createElement('div');
         cardElement.className = 'card';
-        if (card.isFaceUp) {
-            cardElement.innerText = `${card.rank}\n${card.suit}`;
-        } else {
+        cardElement.innerText = card.isFaceup() ? `${card.rank}\n${card.suit}` : '';
+        if (!card.isFaceup()) {
             cardElement.classList.add('face-down');
-            cardElement.innerText = ''; // Face-down cards have no text
         }
         return cardElement;
     }
@@ -39,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateDeck() {
         const deckContainer = document.getElementById('deck-container');
         deckContainer.innerHTML = ''; // Clear the deck container
-        game.getDeck().forEach(card => {
+        game.Stock.cards.forEach(card => {
             const cardElement = createCardElement(card);
             deckContainer.appendChild(cardElement);
         });
@@ -49,21 +47,62 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateBoard() {
         const boardContainer = document.getElementById('board-container');
         boardContainer.innerHTML = ''; // Clear the board container
-        game.getBoard().forEach(pile => {
-            const pileContainer = document.createElement('div');
-            pileContainer.className = 'pile';
-            pile.forEach(card => {
-                const cardElement = createCardElement(card);
-                pileContainer.appendChild(cardElement);
-            });
-            boardContainer.appendChild(pileContainer);
+
+        // Create and append containers for stock and discard
+        const topContainer = document.createElement('div');
+        topContainer.className = 'top-container';
+        const stockDiv = createDeckDiv(game.Stock);
+        const discardDiv = createDeckDiv(game.Discard);
+        topContainer.appendChild(stockDiv);
+        topContainer.appendChild(discardDiv);
+        boardContainer.appendChild(topContainer);
+
+        // Create and append containers for suits and piles
+        const suitContainer = document.createElement('div');
+        suitContainer.className = 'suit-container';
+        game.SUITS.forEach(suitDeck => {
+            const suitDiv = createDeckDiv(suitDeck);
+            suitContainer.appendChild(suitDiv);
         });
+        boardContainer.appendChild(suitContainer);
+
+        const pileContainer = document.createElement('div');
+        pileContainer.className = 'pile-container';
+        game.PILES.forEach(pileDeck => {
+            const pileDiv = createDeckDiv(pileDeck);
+            pileContainer.appendChild(pileDiv);
+        });
+        boardContainer.appendChild(pileContainer);
     }
 
-    // Function to update all UI components
-    function updateUI() {
-        updateDeck();
-        updateBoard();
+    // Function to create a deck div
+    function createDeckDiv(deck) {
+        const deckDiv = document.createElement('div');
+        deckDiv.className = 'deck';
+        deckDiv.id = deck.nameDeck();
+        deckDiv.draggable = false; // Disable default drag behavior
+
+        // Create and add the label
+        const label = document.createElement('div');
+        label.className = 'deck-label';
+        label.innerText = deck.nameDeck();
+        deckDiv.appendChild(label);
+
+        // Add the deck content
+        const content = document.createElement('div');
+        content.className = 'deck-content';
+        deck.cards.forEach(card => {
+            content.appendChild(createCardElement(card));
+        });
+        deckDiv.appendChild(content);
+
+        // Add event listeners
+        deckDiv.addEventListener('click', () => game.handleDeckClick(deck));
+        deckDiv.addEventListener('dragstart', (event) => game.handleDragStart(event, deck));
+        deckDiv.addEventListener('dragover', (event) => game.handleDragOver(event));
+        deckDiv.addEventListener('drop', (event) => game.handleDrop(event, deck));
+
+        return deckDiv;
     }
 
     // Event Listeners
@@ -104,5 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the UI on document load
     updateUI();
 });
+
 
 
