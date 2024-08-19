@@ -45,6 +45,10 @@ class Deck {
         return visibleCards;
     }
 
+    getCardsList() {
+        return this.cards;
+    }
+
     toString() {
         return ` [ ${this.cards.map(card => card.toString()).reverse().join(' ')} ]`;
     }
