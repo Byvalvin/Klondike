@@ -280,71 +280,75 @@ class Game {
         return rankSuitTop + 1 === rankPileTop || rankSuitTop === 13 && toDeck.isEmpty();
     }
 
-    updateBoard() {
-        const gameBoard = document.getElementById('game-board');
-        gameBoard.innerHTML = ''; // Clear previous board
+updateBoard() {
+    const gameBoard = document.getElementById('game-board');
+    gameBoard.innerHTML = ''; // Clear previous board content
 
-        // Create a container for stock and discard
-        const topContainer = document.createElement('div');
-        topContainer.className = 'top-container';
+    // Create a container for stock and discard
+    const topContainer = document.createElement('div');
+    topContainer.className = 'top-container';
 
-        const stockDiv = this.createDeckDiv(this.Stock);
-        const discardDiv = this.createDeckDiv(this.Discard);
+    // Create and append stock and discard decks
+    const stockDiv = this.createDeckDiv(this.Stock);
+    const discardDiv = this.createDeckDiv(this.Discard);
 
-        // Append stock and discard to top container
-        topContainer.appendChild(stockDiv);
-        topContainer.appendChild(discardDiv);
-        gameBoard.appendChild(topContainer);
+    topContainer.appendChild(stockDiv);
+    topContainer.appendChild(discardDiv);
+    gameBoard.appendChild(topContainer);
 
-        // Create a container for suits
-        const suitContainer = document.createElement('div');
-        suitContainer.className = 'suit-container';
+    // Create and append suit decks
+    const suitContainer = document.createElement('div');
+    suitContainer.className = 'suit-container';
+    this.SUITS.forEach(suitDeck => {
+        const suitDiv = this.createDeckDiv(suitDeck);
+        suitContainer.appendChild(suitDiv);
+    });
+    gameBoard.appendChild(suitContainer);
 
-        // Append suits
-        this.SUITS.forEach(suitDeck => {
-            const suitDiv = this.createDeckDiv(suitDeck);
-            suitContainer.appendChild(suitDiv);
-        });
-        gameBoard.appendChild(suitContainer);
+    // Create and append pile decks
+    const pileContainer = document.createElement('div');
+    pileContainer.className = 'pile-container';
+    this.PILES.forEach(pileDeck => {
+        const pileDiv = this.createDeckDiv(pileDeck);
+        pileContainer.appendChild(pileDiv);
+    });
+    gameBoard.appendChild(pileContainer);
+}
 
-        // Create a container for piles
-        const pileContainer = document.createElement('div');
-        pileContainer.className = 'pile-container';
+createDeckDiv(deck) {
+    const deckDiv = document.createElement('div');
+    deckDiv.className = 'deck';
+    deckDiv.id = deck.nameDeck();
+    deckDiv.draggable = false; // Disable default drag behavior
 
-        // Append piles
-        this.PILES.forEach(pileDeck => {
-            const pileDiv = this.createDeckDiv(pileDeck);
-            pileContainer.appendChild(pileDiv);
-        });
-        gameBoard.appendChild(pileContainer);
-    }
+    // Create and add the label
+    const label = document.createElement('div');
+    label.className = 'deck-label';
+    label.innerText = deck.nameDeck();
+    deckDiv.appendChild(label);
 
-    createDeckDiv(deck) {
-        const deckDiv = document.createElement('div');
-        deckDiv.className = 'deck';
-        deckDiv.id = deck.nameDeck();
-        deckDiv.draggable = false; // Disable default drag behavior
+    // Add card elements to the deck
+    const content = document.createElement('div');
+    content.className = 'deck-content';
+    deck.cards.forEach(card => {
+        const cardDiv = document.createElement('div');
+        cardDiv.className = `card ${card.faceUp ? 'face-up' : 'face-down'}`;
+        if (card.faceUp) {
+            cardDiv.innerHTML = `<div class="card-content">${card.rank}${card.suit}</div>`;
+        }
+        content.appendChild(cardDiv);
+    });
+    deckDiv.appendChild(content);
 
-        // Create and add the label
-        const label = document.createElement('div');
-        label.className = 'deck-label';
-        label.innerText = deck.nameDeck();
-        deckDiv.appendChild(label);
+    // Add event listeners
+    deckDiv.addEventListener('click', () => this.handleDeckClick(deck));
+    deckDiv.addEventListener('dragstart', (event) => this.handleDragStart(event, deck));
+    deckDiv.addEventListener('dragover', (event) => this.handleDragOver(event));
+    deckDiv.addEventListener('drop', (event) => this.handleDrop(event, deck));
 
-        // Add the deck content
-        const content = document.createElement('div');
-        content.className = 'deck-content';
-        content.innerHTML = deck.toString();
-        deckDiv.appendChild(content);
+    return deckDiv;
+}
 
-        // Add event listeners
-        deckDiv.addEventListener('click', () => this.handleDeckClick(deck));
-        deckDiv.addEventListener('dragstart', (event) => this.handleDragStart(event, deck));
-        deckDiv.addEventListener('dragover', (event) => this.handleDragOver(event));
-        deckDiv.addEventListener('drop', (event) => this.handleDrop(event, deck));
-
-        return deckDiv;
-    }
 
     handleDeckClick(deck) {
         if (this.selectedCards === null) {
