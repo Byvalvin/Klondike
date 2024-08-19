@@ -318,33 +318,53 @@ class Game {
         });
         gameBoard.appendChild(pileContainer);
     }
-
+    createCardElement(card) {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'card';
+    
+        if (card.isFaceUp()) {
+            cardElement.innerText = `${card.rankCard()} ${card.suitCard()}`;
+        } else {
+            cardElement.classList.add('face-down');
+            cardElement.innerText = ''; // Face-down cards have no text
+        }
+    
+        return cardElement;
+    }
+    
     createDeckDiv(deck) {
         const deckDiv = document.createElement('div');
         deckDiv.className = 'deck';
         deckDiv.id = deck.nameDeck();
         deckDiv.draggable = false; // Disable default drag behavior
-
+    
         // Create and add the label
         const label = document.createElement('div');
         label.className = 'deck-label';
         label.innerText = deck.nameDeck();
         deckDiv.appendChild(label);
-
+    
         // Add the deck content
         const content = document.createElement('div');
         content.className = 'deck-content';
-        content.innerHTML = deck.toString();
+    
+        // Add card elements
+        deck.forEach(card => {
+            const cardElement = this.createCardElement(card);
+            content.appendChild(cardElement);
+        });
+    
         deckDiv.appendChild(content);
-
+    
         // Add event listeners
         deckDiv.addEventListener('click', () => this.handleDeckClick(deck));
         deckDiv.addEventListener('dragstart', (event) => this.handleDragStart(event, deck));
         deckDiv.addEventListener('dragover', (event) => this.handleDragOver(event));
         deckDiv.addEventListener('drop', (event) => this.handleDrop(event, deck));
-
+    
         return deckDiv;
     }
+
 
 
     handleDeckClick(deck) {
