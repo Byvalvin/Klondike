@@ -3,72 +3,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const game = new Game();
     const statusElement = document.getElementById('status');
 
-    // Function to update status
-    function updateStatus(message) {
+    // Function to update status and log errors
+    function updateStatus(message, isError = false) {
         statusElement.innerText = message;
+        if (isError) {
+            console.error(message);
+        }
     }
 
-    // Handle user interactions
-    document.getElementById('reset-button').addEventListener('click', () => {
+    // Function to handle button actions
+    function handleButtonAction(action, successMessage, errorMessage) {
         try {
-            game.reset();
-            updateStatus('Game reset');
+            action();
+            updateStatus(successMessage);
         } catch (error) {
-            console.error('Error resetting game:', error.message);
-            updateStatus('Error resetting game');
+            updateStatus(errorMessage, true);
         }
+    }
+
+    // Event Listeners
+    document.getElementById('reset-button').addEventListener('click', () => {
+        handleButtonAction(() => game.reset(), 'Game reset', 'Error resetting game');
     });
 
     document.getElementById('discard-button').addEventListener('click', () => {
-        try {
-            game.discard();
-            updateStatus('Discarded cards from stock');
-        } catch (error) {
-            console.error('Error discarding cards:', error.message);
-            updateStatus('Error discarding cards');
-        }
+        handleButtonAction(() => game.discard(), 'Discarded cards from stock', 'Error discarding cards');
     });
 
     document.getElementById('board-button').addEventListener('click', () => {
-        try {
-            game.board();
-            updateStatus('Board updated');
-        } catch (error) {
-            console.error('Error updating board:', error.message);
-            updateStatus('Error updating board');
-        }
+        handleButtonAction(() => game.board(), 'Board updated', 'Error updating board');
     });
 
     document.getElementById('cheat-button').addEventListener('click', () => {
-        try {
-            game.cheat();
-            updateStatus('Cheat mode activated');
-        } catch (error) {
-            console.error('Error activating cheat mode:', error.message);
-            updateStatus('Error activating cheat mode');
-        }
+        handleButtonAction(() => game.cheat(), 'Cheat mode activated', 'Error activating cheat mode');
     });
 
     document.getElementById('save-button').addEventListener('click', () => {
-        try {
-            game.save();
-            updateStatus('Game saved');
-        } catch (error) {
-            console.error('Error saving game:', error.message);
-            updateStatus('Error saving game');
-        }
+        handleButtonAction(() => game.save(), 'Game saved', 'Error saving game');
     });
 
     document.getElementById('load-button').addEventListener('click', () => {
         const data = localStorage.getItem('savedGame');
         if (data) {
-            try {
-                game.load(data);
-                updateStatus('Game loaded');
-            } catch (error) {
-                console.error('Error loading game:', error.message);
-                updateStatus('Error loading game');
-            }
+            handleButtonAction(() => game.load(data), 'Game loaded', 'Error loading game');
         } else {
             updateStatus('No saved game found');
         }
@@ -82,4 +59,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the board on document load
     game.updateBoard();
 });
+
 
