@@ -39,26 +39,18 @@ class Deck {
 
     getVisibleCards() {
         const visibleCards = [];
-        let currentCard = this.peekDeck();
-        while (currentCard) {
-            visibleCards.push(currentCard);
-            if (this.cards.length > 1) {
-                this.popDeck(); // Remove the card from the deck
-                currentCard = this.peekDeck(); // Peek the next card
-            } else {
-                break;
-            }
+        while (!this.isEmpty() && this.peekDeck().isFaceup()) {
+            visibleCards.push(this.popDeck());
         }
         return visibleCards;
     }
-    
+
     toString() {
         return ` [ ${this.cards.map(card => card.toString()).reverse().join(' ')} ]`;
     }
 
     toJSON() {
-        // return ` [ ${this.cards.map(card => card.toJSON()).reverse().join(' ')} ]`
-        return this.cards.map(card => `${card.rank}${card.suit}${card.faceUp ? '+' : '-'}`).join(' ');
+        return this.cards.map(card => card.toJSON()).join(' ');
     }
 
     shuffle() {
@@ -68,34 +60,39 @@ class Deck {
         }
     }
 
-    addDeck(deck){
-        //const currCards = this.cards;
+    addDeck(deck) {
+        if (!(deck instanceof Deck)) {
+            throw new TypeError('Argument must be an instance of Deck');
+        }
         this.cards = this.cards.concat(deck.cards);
-        //console.log(`add ${this.name} ${currCards} + ${deck.cards} = ${this.cards}`);
     }
 
-    updateDeck(cardsToAdd){
-        //const currCards = this.cards;
+    updateDeck(cardsToAdd) {
+        if (!Array.isArray(cardsToAdd) || !cardsToAdd.every(card => card instanceof Card)) {
+            throw new TypeError('cardsToAdd must be an array of Card instances');
+        }
         this.cards = this.cards.concat(cardsToAdd);
-        //console.log(`update ${this.name}: ${currCards} + ${cardsToAdd} = ${this.cards}`);
     }
 
-    setDeck(cardsToSet){
+    setDeck(cardsToSet) {
+        if (!Array.isArray(cardsToSet) || !cardsToSet.every(card => card instanceof Card)) {
+            throw new TypeError('cardsToSet must be an array of Card instances');
+        }
         this.cards = cardsToSet;
     }
 
-    getReverseDeck(){
+    getReverseDeck() {
         const rev = new Deck(`reverse-${this.name}`);
-        rev.setDeck(this.cards.slice(0).reverse()); // create a copy with slice and reverse
+        rev.setDeck(this.cards.slice().reverse()); // Create a copy and reverse it
         return rev;
     }
 
-    allFaceup(){
-        this.cards.forEach((card)=>{card.faceupCard(true);});
+    allFaceup() {
+        this.cards.forEach(card => card.faceupCard(true));
     }
 
-    allFacedown(){
-        this.cards.forEach((card)=>{card.faceupCard(false);});
+    allFacedown() {
+        this.cards.forEach(card => card.faceupCard(false));
     }
-    
 }
+
