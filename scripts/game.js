@@ -322,7 +322,7 @@ class Game {
         const cardElement = document.createElement('div');
         cardElement.className = 'card';
     
-        if (card.isFaceUp()) {
+        if (card.isFaceup()) {
             cardElement.innerText = `${card.rankCard()} ${card.suitCard()}`;
         } else {
             cardElement.classList.add('face-down');
