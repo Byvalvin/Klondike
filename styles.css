@@ -1,5 +1,4 @@
-/* styles.css */
-
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -32,11 +31,6 @@ h1 {
 }
 
 /* Buttons */
-#controls button {
-    margin: 0 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-}
 button {
     background-color: #4CAF50;
     color: white;
@@ -63,7 +57,7 @@ button:focus {
     outline-offset: 2px;
 }
 
-/* Game board */
+/* Game Board */
 #game-board {
     display: flex;
     flex-wrap: wrap;
@@ -76,14 +70,13 @@ button:focus {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    align-items: center; /*  align-items: flex-start;*/    
+    align-items: center;    
     justify-content: space-around;
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-
 
 .top-container {
     display: flex;
@@ -221,3 +214,4 @@ button:focus {
         font-size: 0.9em;
     }
 }
+
