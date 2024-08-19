@@ -159,87 +159,67 @@ class Game {
         }
     }
 
-    moveCheck(fromDeckName, toDeckName, deckCards){
-        //console.log(`Attempting to move cards ${deckCards} from ${fromDeckName} to ${toDeckName}`);
+    moveCheck(fromDeckName, toDeckName, deckCards) {
         const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === fromDeckName);
         const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
 
-        // Debugging: log the deck names and if they are found
-        /*
-        console.log('Available decks:', [this.Stock, ...this.SUITS, ...this.PILES].map(deck => deck.nameDeck()));
-        console.log('Source deck:', fromDeck ? fromDeck.nameDeck() : 'Not found');
-        console.log('Target deck:', toDeck ? toDeck.nameDeck() : 'Not found');
-        */
         if (!fromDeck || !toDeck) {
             throw new Error('Invalid deck names');
         }
         if (!deckCards) {
             throw new Error('No card(s) to move');
         }
-        //card.faceupCard(true);
-        deckCards.allFaceup();
+        deckCards.allFaceup(); // Ensure all cards in deckCards are face up
 
         return [fromDeck, toDeck];
     }
 
-    move(fromDeckName, toDeckName, deckCards) { // move to non-pile
+    move(fromDeckName, toDeckName, deckCards) { // Move to non-pile
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
-        
-        if (this.canMove(fromDeck, toDeck, deckCards.peekDeck())) { // moving only 1 card
-            toDeck.pushDeck(deckCards.popDeck());
-            // if from a pile, return whatever is left
 
+        if (this.canMove(fromDeck, toDeck, deckCards.peekDeck())) {
+            toDeck.pushDeck(deckCards.popDeck());
         } else {
-            //fromDeck.pushDeck(card); // Return card if move is invalid
             throw new Error('Invalid move');
         }
 
-        // flip next hidden card or return remaining cards if any exist
+        // Flip next hidden card or return remaining cards if any exist
         if (!fromDeck.isEmpty() && deckCards.isEmpty()) {
             fromDeck.peekDeck().faceupCard(true);
-        }else{
+        } else {
             fromDeck.addDeck(deckCards);
         }
         this.updateBoard();
     }
 
-    pileMove(fromDeckName, toDeckName, deckCards){
-        console.log("a piled mvoe");
+    pileMove(fromDeckName, toDeckName, deckCards) {
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
 
-        // when to stop
         const reverseDeck = deckCards.getReverseDeck();
         let stopValue = null;
-        while(!reverseDeck.isEmpty() && stopValue===null){
-            console.log(reverseDeck.peekDeck().rankCard());
-            if( this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck()) ){
+        while (!reverseDeck.isEmpty() && stopValue === null) {
+            if (this.canMovePileToPile(fromDeck, toDeck, reverseDeck.peekDeck())) {
                 stopValue = reverseDeck.peekDeck().rankCard();
-            }else{
+            } else {
                 reverseDeck.popDeck();
             }
         }
 
-        // get only the cards that can move, leave the rest in  deckCards
-        console.log("stop",stopValue);
-        if(stopValue!==null){
-            const moveableCards = [];     
-            console.log("in if", deckCards);
-            while(!deckCards.isEmpty() && deckCards.peekDeck().rankCard()<=stopValue){
-                console.log(deckCards.peekDeck().rankCard(),stopValue);
+        // Get only the cards that can move, leave the rest in deckCards
+        if (stopValue !== null) {
+            const moveableCards = [];
+            while (!deckCards.isEmpty() && deckCards.peekDeck().rankCard() <= stopValue) {
                 moveableCards.unshift(deckCards.popDeck());
-                console.log("status",deckCards, moveableCards);
             }
-            // add the right amount of cards to the toDeck or bad move
             toDeck.updateDeck(moveableCards);
-        }else{
+        } else {
             throw new Error('Invalid move');
         }
-       
-        // Show next hidden card or the remaining cards in deckCards are returned to fromDeck
-        console.log(!fromDeck.isEmpty(), deckCards.isEmpty());
+
+        // Show next hidden card or return remaining cards to fromDeck
         if (!fromDeck.isEmpty() && deckCards.isEmpty()) {
             fromDeck.peekDeck().faceupCard(true);
-        }else{
+        } else {
             fromDeck.addDeck(deckCards);
         }
         this.updateBoard();
@@ -249,7 +229,7 @@ class Game {
         const fromName = fromDeck.nameDeck();
         const toName = toDeck.nameDeck();
         const rankCard = card.rankCard();
-    
+
         if (fromName === 'Stock') {
             if (this.SUITS.map(d => d.nameDeck()).includes(toName)) {
                 return this.canMoveStockToSuit(toDeck, card);
@@ -271,31 +251,29 @@ class Game {
         }
         return false;
     }
-    
+
     canMoveStockToSuit(toDeck, card) {
         const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-        return (card.rankCard() === rankSuitTop + 1 || card.rankCard() === 1) && card.suitCard()===toDeck.nameDeck();
+        return (card.rankCard() === rankSuitTop + 1 || card.rankCard() === 1) && card.suitCard() === toDeck.nameDeck();
     }
-    
+
     canMoveStockToPile(toDeck, card) {
         const rankPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
         return card.rankCard() + 1 === rankPileTop || card.rankCard() === 13 && toDeck.isEmpty();
     }
-    
+
     canMovePileToSuit(fromDeck, toDeck, card) {
-        //console.log("P to Su", fromDeck, toDeck);
         const rankPileTop = card.rankCard();
         const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-        //console.log(rankPileTop, rankSuitTop, card.suitCard(), toDeck.nameDeck(), (rankPileTop === rankSuitTop + 1 || rankPileTop === 1) && card.suitCard()===toDeck.nameDeck());
-        return (rankPileTop === rankSuitTop + 1 || rankPileTop === 1) && card.suitCard()===toDeck.nameDeck();
+        return (rankPileTop === rankSuitTop + 1 || rankPileTop === 1) && card.suitCard() === toDeck.nameDeck();
     }
-    
+
     canMovePileToPile(fromDeck, toDeck, card) {
         const rankPileTop = card.rankCard();
         const rankTargetPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
-        return rankPileTop + 1 === rankTargetPileTop || rankPileTop===13 && toDeck.isEmpty();
+        return rankPileTop + 1 === rankTargetPileTop || rankPileTop === 13 && toDeck.isEmpty();
     }
-    
+
     canMoveSuitToPile(fromDeck, toDeck, card) {
         const rankSuitTop = card.rankCard();
         const rankPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
@@ -341,7 +319,6 @@ class Game {
         gameBoard.appendChild(pileContainer);
     }
 
-
     createDeckDiv(deck) {
         const deckDiv = document.createElement('div');
         deckDiv.className = 'deck';
@@ -371,50 +348,38 @@ class Game {
 
     handleDeckClick(deck) {
         if (this.selectedCards === null) {
-            // Attempt to select a card from the clicked deck
             if (!deck.isEmpty()) {
-                // Assume the top card is to be selected
                 this.selectedCards = new Deck("Selected");
-                if(deck.nameDeck().split(" ")[0]==="Pile"){
+                if (deck.nameDeck().split(" ")[0] === "Pile") {
                     const orderedCards = [];
-                    console.log(`${deck} card is:${deck.peekDeck()} deck is:${deck}`);
-                    while( !deck.isEmpty() && deck.peekDeck().isFaceup() ){
+                    while (!deck.isEmpty() && deck.peekDeck().isFaceup()) {
                         orderedCards.unshift(deck.popDeck());
-                        //console.log(orderedCards);
-                        
                     }
                     this.selectedCards.setDeck(orderedCards);
-                    //console.log("all the cards", orderedCards, this.selectedCards);
-                }else{
+                } else {
                     this.selectedCards.pushDeck(deck.popDeck());
                 }
-                
                 this.selectedCards.peekDeck().originalDeck = deck; // Store original deck for move back if needed
-                //console.log("selected",this.selectedCards);
                 this.updateBoard(); // Update board to reflect changes
             }
         } else {
-            // Attempt to move the selected card to the clicked deck
             try {
-                // Move card to target deck
-                //console.log("moving", this.selectedCards);
-                if(deck.nameDeck().split(" ")[0]==="Pile"){
+                if (deck.nameDeck().split(" ")[0] === "Pile") {
                     this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
-                }else{
+                } else {
                     this.move(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
                 }
                 this.selectedCards = null;
             } catch (error) {
                 console.error(error.message);
-                // If the move is invalid, push the card back to the original deck
-                console.log("slectedCarsd",this.selectedCards);
-                this.selectedCards.peekDeck().originalDeck.addDeck(this.selectedCards); // add cards back to original
-                this.selectedCards = null;
+                if (this.selectedCards) {
+                    this.selectedCards.peekDeck().originalDeck.addDeck(this.selectedCards); // Add cards back to original
+                    this.selectedCards = null;
+                }
             }
             this.updateBoard(); // Update board to reflect changes
         }
     }
-
 
     handleDragStart(event, deck) {
         if (!deck.isEmpty()) {
@@ -439,3 +404,4 @@ class Game {
         }
     }
 }
+
