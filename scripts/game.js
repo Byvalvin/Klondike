@@ -349,7 +349,8 @@ class Game {
         content.className = 'deck-content';
     
         // Add card elements
-        deck.forEach(card => {
+        const cards = deck.getCardsList();
+        cards.forEach(card => {
             const cardElement = this.createCardElement(card);
             content.appendChild(cardElement);
         });
