@@ -53,7 +53,7 @@ button:active {
 }
 
 button:focus {
-    outline: 2px solid #333; /* Focus style for accessibility */
+    outline: 3px solid #333; /* Enhanced focus style for accessibility */
     outline-offset: 2px;
 }
 
@@ -218,4 +218,5 @@ button:focus {
         font-size: 0.9em;
     }
 }
+
 
