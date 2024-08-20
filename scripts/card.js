@@ -8,19 +8,19 @@ class Card {
      * @param {string} rank - The rank of the card ('A', '2', '3', ..., 'K').
      */
 
-    static const ranking = {
+    static ranking = {
             'K': 13, 'Q': 12, 'J': 11, 'T': 10, '9': 9, '8': 8,
             '7': 7, '6': 6, '5': 5, '4': 4, '3': 3, '2': 2, 'A': 1
-        };    
-    static const suits = {
+    };    
+    static suits = {
             's': 'Spades', 'h': 'Hearts', 'd': 'Diamonds', 'c': 'Clubs'
-        };
-    static const symbols = {
+    };
+    static symbols = {
             's':'♠', // Spades
             'h':'♥', // Hearts
             'd':'♦', // Diamonds
             'c':'♣', // Clubs            
-        }
+    }
     
     constructor(suit, rank) {
         this.suit = suit.toLowerCase();
