@@ -1,23 +1,36 @@
 /* General Styles */
+:root {
+    --primary-color: #4CAF50;
+    --primary-dark: #45a049;
+    --background-color: #f0f0f0;
+    --text-color: #333;
+    --card-border-color: #ccc;
+    --card-face-down-color: #333;
+    --button-padding: 12px 24px;
+    --font-size-large: 1.2em;
+    --font-size-medium: 1em;
+    --font-size-small: 0.9em;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: var(--background-color);
     text-align: center;
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
     padding: 15px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #status {
-    font-size: 1.2em;
+    font-size: var(--font-size-large);
     margin: 10px 0;
-    color: #333;
+    color: var(--text-color);
 }
 
 h1 {
@@ -32,19 +45,19 @@ h1 {
 
 /* Buttons */
 button {
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: 12px 24px;
+    padding: var(--button-padding);
     margin: 5px;
-    font-size: 1em;
+    font-size: var(--font-size-medium);
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: var(--primary-dark);
     transform: scale(1.05);
 }
 
@@ -53,7 +66,7 @@ button:active {
 }
 
 button:focus {
-    outline: 3px solid #333; /* Enhanced focus style for accessibility */
+    outline: 3px solid var(--text-color);
     outline-offset: 2px;
 }
 
@@ -126,7 +139,7 @@ button:focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    will-change: background-color, box-shadow; /* Optimize transitions */
+    will-change: background-color, box-shadow;
 }
 
 .deck:hover {
@@ -138,7 +151,7 @@ button:focus {
     font-weight: bold;
     text-align: center;
     margin-bottom: 8px;
-    font-size: 1.2em;
+    font-size: var(--font-size-large);
     background-color: #f1f1f1;
     padding: 4px;
     border-radius: 4px;
@@ -146,7 +159,7 @@ button:focus {
 
 .deck-content {
     text-align: center;
-    font-size: 1.2em;
+    font-size: var(--font-size-large);
     position: absolute;
     top: 40px;
     left: 10px;
@@ -166,14 +179,14 @@ button:focus {
     width: 28px;
     height: 40px;
     line-height: 40px;
-    border: 4px solid #ccc;
+    border: 4px solid var(--card-border-color);
     border-radius: 5px;
     background-color: #fff;
     text-align: center;
     margin: 1px;
-    font-size: 1.2em;
+    font-size: var(--font-size-large);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    will-change: transform, box-shadow; /* Optimize transitions */
+    will-change: transform, box-shadow;
 }
 
 .deck-content .card.face-up {
@@ -182,12 +195,12 @@ button:focus {
 }
 
 .deck-content .card.face-down {
-    background-color: #333;
-    color: #333; /* Or a different color to represent the back of the card */
+    background-color: var(--card-face-down-color);
+    color: var(--card-face-down-color);
     text-align: center;
-    line-height: 100px; /* Center text vertically */
+    line-height: 100px;
     font-size: 1.5em;
-    border: 1px solid #000; /* Distinguish face-down cards */
+    border: 1px solid #000;
 }
 
 .deck-content .card.ace, 
@@ -219,8 +232,9 @@ button:focus {
 @media (max-width: 400px) {
     button {
         padding: 10px 18px;
-        font-size: 0.9em;
+        font-size: var(--font-size-small);
     }
 }
+
 
 
