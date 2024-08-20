@@ -504,21 +504,22 @@ createCardElement(card) {
         event.dataTransfer.dropEffect = 'move';
     }
 
+
     handleDrop(event) {
         event.preventDefault();
-        const { deckName, cardIndex } = JSON.parse(event.dataTransfer.getData('text/plain'));
+        const data = event.dataTransfer.getData('text/plain');
+        const { deckName, card } = JSON.parse(data);
         const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === deckName);
-
-        if (fromDeck && cardIndex != null) {
-            const card = fromDeck.getCard(cardIndex);
-            if (card) {
-                // Determine target deck and perform move
-                const toDeckName = event.target.dataset.deckName;
-                const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
-                
-                if (toDeck) {
-                    this.move(fromDeck.nameDeck(), toDeck.nameDeck(), new Deck('temp').pushDeck(card));
-                }
+        
+        if (fromDeck) {
+            const cardToMove = new Card(card[0], card[1]);
+            cardToMove.faceupCard(card[2] === '+'); // Set card visibility
+            
+            const toDeckName = event.target.id;
+            const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
+            
+            if (toDeck) {
+                this.move(fromDeck.nameDeck(), toDeck.nameDeck(), new Deck('temp').pushDeck(cardToMove));
             }
         }
     }
@@ -536,6 +537,7 @@ createCardElement(card) {
             this.startDrag(card, event); // Start dragging visual
         }
     }
+
 
     // Start dragging visual
     startDrag(card, event) {
