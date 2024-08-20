@@ -376,22 +376,23 @@ class Game {
         gameBoard.appendChild(pileContainer);
     }
 
-createCardElement(card) {
-    const cardElement = document.createElement('div');
-    cardElement.className = 'card';
-    
-    if (card.isFaceup()) {
-        const rankAndSuitSymbol = card.toStringSymbol(); // Use method to get suit symbol
-        cardElement.innerHTML = `
-            <div class="card-symbol">${rankAndSuitSymbol}</div>
-        `;
-    } else {
-        cardElement.classList.add('face-down');
-        cardElement.innerHTML = ''; // Face-down cards have no text
+    createCardElement(card) {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'card';
+        
+        if (card.isFaceup()) {
+            const rankAndSuitSymbol = card.toStringSymbol(); // Use method to get suit symbol
+            const className = `card-symbol ${card.suit}`;
+            cardElement.innerHTML = `
+                <div class=${className}>${rankAndSuitSymbol}</div>
+            `;
+        } else {
+            cardElement.classList.add('face-down');
+            cardElement.innerHTML = ''; // Face-down cards have no text
+        }
+        
+        return cardElement;
     }
-    
-    return cardElement;
-}
 
  
     /*
