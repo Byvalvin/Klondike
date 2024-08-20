@@ -6,7 +6,8 @@ class Game {
         this.Stock = new Deck('Stock');
         this.Discard = new Deck('Discard');
         this.SUITS = ['Spades', 'Hearts', 'Diamonds', 'Clubs'].map(name => new Deck(name));
-        this.PILES = Array.from({ length: 7 }, (_, i) => new Deck(`Pile ${i + 1}`));
+        this.Npiles = 4;
+        this.PILES = Array.from({ length: this.Npiles }, (_, i) => new Deck(`Pile ${i + 1}`));
         this.selectedCards = null; // Track the currently selected cards
         this.maxCardValue = 13;
         this.initializeGame();
