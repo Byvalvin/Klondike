@@ -376,23 +376,24 @@ class Game {
         gameBoard.appendChild(pileContainer);
     }
 
-    // Create card HTML element with suit symbol
-    createCardElement(card) {
-        const cardElement = document.createElement('div');
-        cardElement.className = 'card';
-        
-        // Add suit symbol and rank
+createCardElement(card) {
+    const cardElement = document.createElement('div');
+    cardElement.className = 'card';
+    
+    if (card.isFaceup()) {
+        const suitSymbol = card.getSuitSymbol(card.suit); // Use method to get suit symbol
         cardElement.innerHTML = `
-            <div class="card-symbol ${card.toStringSymbol()}</div>
+            <div class="card-rank">${card.rank}</div>
+            <div class="card-symbol">${suitSymbol}</div>
         `;
-        
-        if (!card.isFaceup()) {
-            cardElement.classList.add('face-down');
-            cardElement.innerHTML = '';
-        }
-        
-        return cardElement;
+    } else {
+        cardElement.classList.add('face-down');
+        cardElement.innerHTML = ''; // Face-down cards have no text
     }
+    
+    return cardElement;
+}
+
  
     /*
     createCardElement(card) {
