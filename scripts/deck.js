@@ -126,7 +126,7 @@ class Deck {
         if (!(deck instanceof Deck)) {
             throw new TypeError('Argument must be an instance of Deck');
         }
-        this.cards = this.cards.concat(deck.cards);
+        this.cards.push(...deck.cards);
     }
 
     /**
