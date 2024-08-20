@@ -502,10 +502,12 @@ class Game {
         }
     }
 
+    /*
     handleDragStart(event, deckName, cardIndex) {
         event.dataTransfer.setData('text/plain', JSON.stringify({ deckName, cardIndex }));
         event.dataTransfer.effectAllowed = 'move';
     }
+    */
 
     handleDragOver(event) {
         event.preventDefault();
@@ -530,6 +532,42 @@ class Game {
             }
         }
     }
+
+
+    // Handle drag start
+    handleDragStart(event, deck) {
+        if (!deck.isEmpty()) {
+            const card = deck.peekDeck();
+            event.dataTransfer.setData('text/plain', JSON.stringify({
+                deckName: deck.nameDeck(),
+                card: card.toJSON() // Serialize card for drag
+            }));
+            event.dataTransfer.effectAllowed = 'move';
+            this.startDrag(card, event); // Start dragging visual
+        }
+    }
+
+    // Start dragging visual
+    startDrag(card, event) {
+        const dragCardElement = this.createCardElement(card);
+        dragCardElement.style.position = 'absolute';
+        dragCardElement.style.zIndex = 1000;
+        dragCardElement.style.pointerEvents = 'none'; // Make it non-interactive during drag
+        document.body.appendChild(dragCardElement);
     
+        const moveCard = (e) => {
+            dragCardElement.style.left = e.pageX + 'px';
+            dragCardElement.style.top = e.pageY + 'px';
+        };
+    
+        const stopDrag = () => {
+            document.body.removeChild(dragCardElement);
+            document.removeEventListener('mousemove', moveCard);
+            document.removeEventListener('mouseup', stopDrag);
+        };
+    
+        document.addEventListener('mousemove', moveCard);
+        document.addEventListener('mouseup', stopDrag);
+    }    
 }
 
