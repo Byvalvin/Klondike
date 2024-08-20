@@ -349,7 +349,7 @@ class Game {
         content.className = 'deck-content';
     
         // Add card elements
-        const cards = deck.getCardsList();
+        const cards = deck.getCardsList().reverse();
         cards.forEach(card => {
             const cardElement = this.createCardElement(card);
             content.appendChild(cardElement);
