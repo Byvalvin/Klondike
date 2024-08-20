@@ -60,6 +60,10 @@ class Card {
         return this.visible ? `${this.rank}${this.suit}` : '??';
     }
 
+    toStringSymbol() {
+        return this.visible ? `${this.rank}${this.getSuitSymbol(this.suit)}` : '??';
+    }
+
     /**
      * Returns a JSON representation of the card.
      * @returns {string} - The JSON representation of the card.
@@ -67,4 +71,15 @@ class Card {
     toJSON() {
         return `${this.rank}${this.suit}${this.visible ? '+' : '-'}`;
     }
+    
+    // Return the appropriate suit symbol
+    getSuitSymbol(suit) {
+        switch (suit) {
+            case 's': return '♠'; // Spades
+            case 'h': return '♥'; // Hearts
+            case 'd': return '♦'; // Diamonds
+            case 'c': return '♣'; // Clubs
+            default: return '';
+        }
+    }      
 }
