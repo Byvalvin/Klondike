@@ -163,14 +163,14 @@ button:focus {
 /* Card Styles */
 .deck-content .card {
     display: inline-block;
-    width: 70px;
-    height: 100px;
-    line-height: 100px;
+    width: 7px;
+    height: 10px;
+    line-height: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 1px;
     background-color: #fff;
     text-align: center;
-    margin: 4px;
+    margin: 1px;
     font-size: 1.2em;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     will-change: transform, box-shadow; /* Optimize transitions */
