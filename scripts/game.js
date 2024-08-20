@@ -382,9 +382,9 @@ class Game {
         
         if (card.isFaceup()) {
             const rankAndSuitSymbol = card.toStringSymbol(); // Use method to get suit symbol
-            const className = `card-symbol ${card.suit}`;
+            ///const className = `card-symbol ${card.suit}`;
             cardElement.innerHTML = `
-                <div class=${className}>${rankAndSuitSymbol}</div>
+                <div class="card-symbol ${card.suit}">${rankAndSuitSymbol}</div>
             `;
         } else {
             cardElement.classList.add('face-down');
