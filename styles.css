@@ -163,9 +163,9 @@ button:focus {
 /* Card Styles */
 .deck-content .card {
     display: inline-block;
-    width: 7px;
-    height: 10px;
-    line-height: 10px;
+    width: 28px;
+    height: 40px;
+    line-height: 40px;
     border: 1px solid #ccc;
     border-radius: 1px;
     background-color: #fff;
