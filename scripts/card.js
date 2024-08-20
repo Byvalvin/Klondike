@@ -61,7 +61,13 @@ class Card {
     }
 
     toStringSymbol() {
-        return this.visible ? `${this.rank}${this.getSuitSymbol(this.suit)}` : '??';
+        const symbols = {
+            's':'♠', // Spades
+            'h':'♥', // Hearts
+            'd':'♦', // Diamonds
+            'c':'♣', // Clubs            
+        }
+        return this.visible ? `${this.rank}${symbols[this.suit]}` : '??';
     }
 
     /**
