@@ -198,8 +198,6 @@ button:focus {
     font-size: var(--font-size-large);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     will-change: transform, box-shadow;
-    position: absolute;
-    transform: translateY(-10px); /* Adjust this value as needed */
 }
 
 .deck-content .card.face-up {
