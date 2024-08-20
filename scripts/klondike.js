@@ -101,6 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the board on document load
     game.updateBoard();
 
+    // Add event listeners for drag-and-drop
+    document.querySelectorAll('.deck').forEach(deck => {
+        deck.addEventListener('dragstart', (e) => game.handleDragStart(e, deck));
+    });
 
 });
 
