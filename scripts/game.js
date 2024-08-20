@@ -383,9 +383,9 @@ class Game {
         
         // Add suit symbol and rank
         cardElement.innerHTML = `
-            <div class="card-symbol ${card.suitCard()}">${this.getSuitSymbol(card.suitCard())}</div>
-            <div class="card-rank">${card.rankCard()}</div>
+            <div class="card-symbol ${card.toStringSymbol()}</div>
         `;
+        
         
         if (!card.isFaceup()) {
             cardElement.classList.add('face-down');
@@ -394,17 +394,7 @@ class Game {
         
         return cardElement;
     }
-    
-    // Return the appropriate suit symbol
-    getSuitSymbol(suit) {
-        switch (suit) {
-            case 's': return '♠'; // Spades
-            case 'h': return '♥'; // Hearts
-            case 'd': return '♦'; // Diamonds
-            case 'c': return '♣'; // Clubs
-            default: return '';
-        }
-    }   
+ 
     /*
     createCardElement(card) {
         const cardElement = document.createElement('div');
