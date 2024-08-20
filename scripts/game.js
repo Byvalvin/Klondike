@@ -381,10 +381,9 @@ createCardElement(card) {
     cardElement.className = 'card';
     
     if (card.isFaceup()) {
-        const suitSymbol = card.getSuitSymbol(card.suit); // Use method to get suit symbol
+        const rankAndSuitSymbol = card.toStringSymbol(); // Use method to get suit symbol
         cardElement.innerHTML = `
-            <div class="card-rank">${card.rank}</div>
-            <div class="card-symbol">${suitSymbol}</div>
+            <div class="card-symbol">${rankAndSuitSymbol}</div>
         `;
     } else {
         cardElement.classList.add('face-down');
