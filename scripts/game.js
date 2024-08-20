@@ -1,4 +1,10 @@
+/**
+ * Represents a Klondike Solitaire game.
+ */
 class Game {
+    /**
+     * Creates an instance of Game.
+     */
     constructor() {
         this.startMessage = 'Welcome to Klondike!';
         this.endMessage = 'Thank you for playing';
@@ -13,6 +19,9 @@ class Game {
         this.initializeGame();
     }
 
+    /**
+     * Initializes the game by creating and shuffling the deck, and dealing cards.
+     */
     initializeGame() {
         const fullDeck = this.createDeck();
         fullDeck.shuffle();
@@ -44,6 +53,10 @@ class Game {
         this.updateBoard();
     }
 
+    /**
+     * Creates a standard deck of 52 cards.
+     * @returns {Deck} - The created deck.
+     */
     createDeck() {
         const suits = ['s', 'h', 'd', 'c'];
         const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
@@ -56,6 +69,10 @@ class Game {
         return deck;
     }
 
+    /**
+     * Resets the game by shuffling the discard pile back into the stock.
+     * @throws {Error} - Throws an error if the stock is not empty.
+     */
     reset() {
         if (this.Stock.isEmpty()) {
             const relay = new Deck("relay_deck");
@@ -74,6 +91,10 @@ class Game {
         this.updateBoard();
     }
 
+    /**
+     * Moves cards from the stock to the discard pile.
+     * @throws {Error} - Throws an error if the stock is empty.
+     */
     discard() {
         if (this.Stock.isEmpty()) {
             throw new Error('Stock Empty');
@@ -91,6 +112,9 @@ class Game {
         this.updateBoard();
     }
 
+    /**
+     * Displays the current state of the game board.
+     */
     board() {
         if (!this.isValidState()) {
             console.log('No Cards');
@@ -102,6 +126,9 @@ class Game {
         }
     }
 
+    /**
+     * Displays the current state of the game in JSON format.
+     */
     cheat() {
         if (!this.isValidState()) {
             console.log('No Cards');
@@ -113,15 +140,27 @@ class Game {
         }
     }
 
+    /**
+     * Checks if the game is in a valid state.
+     * @returns {boolean} - True if the game state is valid, false otherwise.
+     */
     isValidState() {
         return this.Stock && this.Discard && this.SUITS.length > 0 && this.PILES.length > 0;
     }
 
+    /**
+     * Ends the game with a message.
+     * @param {string} message - The message to display.
+     */
     done(message) {
         this.gameOn = false;
         console.log(message);
     }
 
+    /**
+     * Loads a saved game state from a string.
+     * @param {string} data - The string containing the saved game state.
+     */
     load(data) {
         try {
             const lines = data.split('\n').filter(line => line.trim() !== '');
@@ -149,6 +188,9 @@ class Game {
         this.updateBoard();
     }
 
+    /**
+     * Saves the current game state to local storage.
+     */
     save() {
         try {
             const Decks = [this.Stock, this.Discard, ...this.SUITS, ...this.PILES];
@@ -160,6 +202,14 @@ class Game {
         }
     }
 
+    /**
+     * Checks if a move between decks is valid.
+     * @param {string} fromDeckName - The name of the source deck.
+     * @param {string} toDeckName - The name of the target deck.
+     * @param {Deck} deckCards - The cards to move.
+     * @returns {[Deck, Deck]} - The source and target decks.
+     * @throws {Error} - Throws an error if the move is invalid.
+     */
     moveCheck(fromDeckName, toDeckName, deckCards) {
         const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === fromDeckName);
         const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
@@ -175,6 +225,13 @@ class Game {
         return [fromDeck, toDeck];
     }
 
+    /**
+     * Moves cards from one deck to another.
+     * @param {string} fromDeckName - The name of the source deck.
+     * @param {string} toDeckName - The name of the target deck.
+     * @param {Deck} deckCards - The cards to move.
+     * @throws {Error} - Throws an error if the move is invalid.
+     */
     move(fromDeckName, toDeckName, deckCards) { // Move to non-pile
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
 
@@ -193,6 +250,13 @@ class Game {
         this.updateBoard();
     }
 
+    /**
+     * Moves a pile of cards to another pile.
+     * @param {string} fromDeckName - The name of the source pile.
+     * @param {string} toDeckName - The name of the target pile.
+     * @param {Deck} deckCards - The cards to move.
+     * @throws {Error} - Throws an error if the move is invalid.
+     */
     pileMove(fromDeckName, toDeckName, deckCards) {
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
 
@@ -226,6 +290,13 @@ class Game {
         this.updateBoard();
     }
 
+    /**
+     * Checks if a move between decks is valid.
+     * @param {Deck} fromDeck - The source deck.
+     * @param {Deck} toDeck - The target deck.
+     * @param {Card} card - The card to move.
+     * @returns {boolean} - True if the move is valid, false otherwise.
+     */
     canMove(fromDeck, toDeck, card) {
         const fromName = fromDeck.nameDeck();
         const toName = toDeck.nameDeck();
@@ -281,42 +352,27 @@ class Game {
         return rankSuitTop + 1 === rankPileTop || rankSuitTop === 13 && toDeck.isEmpty();
     }
 
+    /**
+     * Updates the game board's display.
+     */
     updateBoard() {
         const gameBoard = document.getElementById('game-board');
         gameBoard.innerHTML = ''; // Clear previous board
 
-        // Create a container for stock and discard
-        const topContainer = document.createElement('div');
-        topContainer.className = 'top-container';
+        // Create containers
+        const topContainer = this.createContainer('top-container');
+        const suitContainer = this.createContainer('suit-container');
+        const pileContainer = this.createContainer('pile-container');
 
-        const stockDiv = this.createDeckDiv(this.Stock);
-        const discardDiv = this.createDeckDiv(this.Discard);
+        // Append decks to containers
+        topContainer.appendChild(this.createDeckDiv(this.Stock));
+        topContainer.appendChild(this.createDeckDiv(this.Discard));
+        this.SUITS.forEach(suitDeck => suitContainer.appendChild(this.createDeckDiv(suitDeck)));
+        this.PILES.forEach(pileDeck => pileContainer.appendChild(this.createDeckDiv(pileDeck)));
 
-        // Append stock and discard to top container
-        topContainer.appendChild(stockDiv);
-        topContainer.appendChild(discardDiv);
+        // Append containers to game board
         gameBoard.appendChild(topContainer);
-
-        // Create a container for suits
-        const suitContainer = document.createElement('div');
-        suitContainer.className = 'suit-container';
-
-        // Append suits
-        this.SUITS.forEach(suitDeck => {
-            const suitDiv = this.createDeckDiv(suitDeck);
-            suitContainer.appendChild(suitDiv);
-        });
         gameBoard.appendChild(suitContainer);
-
-        // Create a container for piles
-        const pileContainer = document.createElement('div');
-        pileContainer.className = 'pile-container';
-
-        // Append piles
-        this.PILES.forEach(pileDeck => {
-            const pileDiv = this.createDeckDiv(pileDeck);
-            pileContainer.appendChild(pileDiv);
-        });
         gameBoard.appendChild(pileContainer);
     }
     createCardElement(card) {
@@ -367,6 +423,16 @@ class Game {
         return deckDiv;
     }
 
+    /**
+     * Creates a container div with a specified class name.
+     * @param {string} className - The class name for the container.
+     * @returns {HTMLElement} - The created container div.
+     */
+    createContainer(className) {
+        const container = document.createElement('div');
+        container.className = className;
+        return container;
+    }
 
 
     handleDeckClick(deck) {
