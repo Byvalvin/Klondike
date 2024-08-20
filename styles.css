@@ -56,7 +56,7 @@ h1 {
 
 /* Buttons */
 button {
-    background-color: var(--primary-color);
+    background-color: #008CBA;
     color: white;
     border: none;
     padding: var(--button-padding);
@@ -68,7 +68,7 @@ button {
 }
 
 button:hover {
-    background-color: var(--primary-dark);
+    background-color: #005f6a;
     transform: scale(1.05);
 }
 
