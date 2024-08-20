@@ -46,7 +46,7 @@ class Deck {
     }
 
     getCardsList() {
-        return this.cards;
+        return this.cards.slice();
     }
 
     toString() {
