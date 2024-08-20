@@ -1,9 +1,16 @@
+/**
+ * Initializes the Klondike game and sets up event listeners for game controls.
+ */
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize game
     const game = new Game();
     const statusElement = document.getElementById('status');
 
-    // Function to update status and log errors
+    /**
+     * Updates the status element with a message.
+     * @param {string} message - The message to display.
+     * @param {boolean} [isError=false] - Indicates if the message is an error.
+     */
     function updateStatus(message, isError = false) {
         statusElement.innerText = message;
         if (isError) {
@@ -11,7 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Function to handle button actions
+    /**
+     * Handles button actions with error handling.
+     * @param {Function} action - The action to perform.
+     * @param {string} successMessage - The message to display on success.
+     * @param {string} errorMessage - The message to display on error.
+     */
     function handleButtonAction(action, successMessage, errorMessage) {
         try {
             action();
@@ -21,26 +33,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Event Listeners
-    document.getElementById('reset-button').addEventListener('click', () => {
-        handleButtonAction(() => game.reset(), 'Game reset', 'Error resetting game');
-    });
+    /**
+     * Adds an event listener to a button if it exists.
+     * @param {string} buttonId - The ID of the button.
+     * @param {Function} action - The action to perform when the button is clicked.
+     * @param {string} successMessage - The message to display on success.
+     * @param {string} errorMessage - The message to display on error.
+     */
+    function addButtonListener(buttonId, action, successMessage, errorMessage) {
+        const button = document.getElementById(buttonId);
+        if (button) {
+            button.addEventListener('click', () => handleButtonAction(action, successMessage, errorMessage));
+        } else {
+            console.warn(`Button with ID '${buttonId}' not found.`);
+        }
+    }
 
-    document.getElementById('discard-button').addEventListener('click', () => {
-        handleButtonAction(() => game.discard(), 'Discarded cards from stock', 'Error discarding cards');
-    });
-
-    document.getElementById('board-button').addEventListener('click', () => {
-        handleButtonAction(() => game.board(), 'Board updated', 'Error updating board');
-    });
-
-    document.getElementById('cheat-button').addEventListener('click', () => {
-        handleButtonAction(() => game.cheat(), 'Cheat mode activated', 'Error activating cheat mode');
-    });
-
-    document.getElementById('save-button').addEventListener('click', () => {
-        handleButtonAction(() => game.save(), 'Game saved', 'Error saving game');
-    });
+    // Add event listeners to buttons
+    addButtonListener('reset-button', () => game.reset(), 'Stock reset', 'Error resetting stock');
+    addButtonListener('discard-button', () => game.discard(), 'Discarded cards from stock', 'Error discarding cards');
+    addButtonListener('board-button', () => game.board(), 'Board updated', 'Error updating board');
+    addButtonListener('cheat-button', () => game.cheat(), 'Cheat mode activated', 'Error activating cheat mode');
+    addButtonListener('save-button', () => game.save(), 'Game saved', 'Error saving game');
 
     document.getElementById('load-button').addEventListener('click', () => {
         const data = localStorage.getItem('savedGame');
