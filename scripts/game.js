@@ -470,27 +470,34 @@ class Game {
         }
     }
 
-    handleDragStart(event, deck) {
-        if (!deck.isEmpty()) {
-            event.dataTransfer.setData('text/plain', deck.nameDeck());
-            event.dataTransfer.effectAllowed = 'move';
-        }
+    handleDragStart(event, deckName, cardIndex) {
+        event.dataTransfer.setData('text/plain', JSON.stringify({ deckName, cardIndex }));
+        event.dataTransfer.effectAllowed = 'move';
     }
 
     handleDragOver(event) {
-        event.preventDefault(); // Allow drop
+        event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
     }
 
-    handleDrop(event, targetDeck) {
+    handleDrop(event) {
         event.preventDefault();
-        const sourceDeckName = event.dataTransfer.getData('text/plain');
-        try {
-            this.move(sourceDeckName, targetDeck.nameDeck());
-            this.updateBoard(); // Update board to reflect changes
-        } catch (error) {
-            console.error(error.message);
+        const { deckName, cardIndex } = JSON.parse(event.dataTransfer.getData('text/plain'));
+        const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === deckName);
+
+        if (fromDeck && cardIndex != null) {
+            const card = fromDeck.getCard(cardIndex);
+            if (card) {
+                // Determine target deck and perform move
+                const toDeckName = event.target.dataset.deckName;
+                const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
+                
+                if (toDeck) {
+                    this.move(fromDeck.nameDeck(), toDeck.nameDeck(), new Deck('temp').pushDeck(card));
+                }
+            }
         }
     }
+    
 }
 
