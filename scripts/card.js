@@ -67,7 +67,7 @@ class Card {
             'd':'♦', // Diamonds
             'c':'♣', // Clubs            
         }
-        return this.visible ? `${this.rank}${symbols[this.suit]}` : '??';
+        return this.visible ? this.rank+symbols[this.suit] : '??';
     }
 
     /**
