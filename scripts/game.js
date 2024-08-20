@@ -323,7 +323,7 @@ class Game {
         cardElement.className = 'card';
     
         if (card.isFaceup()) {
-            cardElement.innerText = `${card.rankCard()} ${card.suitCard()}`;
+            cardElement.innerText = card.toString();
         } else {
             cardElement.classList.add('face-down');
             cardElement.innerText = ''; // Face-down cards have no text
