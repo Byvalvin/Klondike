@@ -386,7 +386,6 @@ class Game {
             <div class="card-symbol ${card.toStringSymbol()}</div>
         `;
         
-        
         if (!card.isFaceup()) {
             cardElement.classList.add('face-down');
             cardElement.innerHTML = '';
