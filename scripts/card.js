@@ -7,6 +7,21 @@ class Card {
      * @param {string} suit - The suit of the card ('s', 'h', 'd', 'c').
      * @param {string} rank - The rank of the card ('A', '2', '3', ..., 'K').
      */
+
+    static const ranking = {
+            'K': 13, 'Q': 12, 'J': 11, 'T': 10, '9': 9, '8': 8,
+            '7': 7, '6': 6, '5': 5, '4': 4, '3': 3, '2': 2, 'A': 1
+        };    
+    static const suits = {
+            's': 'Spades', 'h': 'Hearts', 'd': 'Diamonds', 'c': 'Clubs'
+        };
+    static const symbols = {
+            's':'♠', // Spades
+            'h':'♥', // Hearts
+            'd':'♦', // Diamonds
+            'c':'♣', // Clubs            
+        }
+    
     constructor(suit, rank) {
         this.suit = suit.toLowerCase();
         this.rank = rank;
@@ -18,11 +33,7 @@ class Card {
      * @returns {number} - The rank of the card.
      */
     rankCard() {
-        const ranking = {
-            'K': 13, 'Q': 12, 'J': 11, 'T': 10, '9': 9, '8': 8,
-            '7': 7, '6': 6, '5': 5, '4': 4, '3': 3, '2': 2, 'A': 1
-        };
-        return ranking[this.rank];
+        return Card.ranking[this.rank];
     }
 
     /**
@@ -30,10 +41,8 @@ class Card {
      * @returns {string} - The name of the suit.
      */
     suitCard() {
-        const suits = {
-            's': 'Spades', 'h': 'Hearts', 'd': 'Diamonds', 'c': 'Clubs'
-        };
-        return suits[this.suit] || 'Unknown Suit';
+
+        return Card.suits[this.suit] || 'Unknown Suit';
     }
 
     /**
@@ -61,13 +70,7 @@ class Card {
     }
 
     toStringSymbol() {
-        const symbols = {
-            's':'♠', // Spades
-            'h':'♥', // Hearts
-            'd':'♦', // Diamonds
-            'c':'♣', // Clubs            
-        }
-        return this.visible ? this.rank+symbols[this.suit] : '??';
+        return this.visible ? `${this.rank}${Card.symbols[this.suit]}` : '??';
     }
 
     /**
