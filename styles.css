@@ -64,6 +64,36 @@ header {
     margin-right: 15px;
 }
 
+.card-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Adjust as needed */
+    height: auto;
+    margin-right: 15px;
+}
+
+.card-logo .card {
+    width: 40px; /* Adjust as needed */
+    height: 60px; /* Adjust as needed */
+    border: 2px solid var(--card-border-color);
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+}
+
+.card-logo .card-symbol {
+    font-size: 1.5em;
+}
+
+.card-logo .card-content {
+    font-size: 1.5em;
+}
+
 #status {
     font-size: var(--font-size-large);
     margin: 10px 0;
