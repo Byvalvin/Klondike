@@ -168,6 +168,11 @@ button:focus {
     vertical-align: middle;
 }
 
+.icon-button .material-icons {
+    font-size: 24px;
+    color: #000; /* Change color as needed */
+}
+
 .icon-button:hover svg {
     fill: var(--primary-dark);
 }
