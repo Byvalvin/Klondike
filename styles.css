@@ -132,6 +132,16 @@ button:focus {
     height: auto;
 }
 
+.icon-button svg {
+    width: 30px; /* Adjust as needed */
+    height: auto;
+    vertical-align: middle;
+}
+
+.icon-button:hover svg {
+    fill: var(--primary-dark);
+}
+
 .icon-button:hover::after {
     content: attr(title);
     position: absolute;
