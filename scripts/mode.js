@@ -7,12 +7,12 @@ function applyThemeBasedOnTime() {
     console.log(`Current Hour: ${currentHour}`); // Debugging line
     if (currentHour >= 17) { // 17 represents 5 PM
         console.log('Setting dark theme'); // Debugging line
-        document.documentElement.setAttribute('data-theme', 'dark');
+        document.body.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
     } else {
         console.log('Setting light theme'); // Debugging line
         const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.body.setAttribute('data-theme', savedTheme);
     }
 }
 
@@ -23,11 +23,11 @@ applyThemeBasedOnTime();
 // Toggle theme manually
 if (themeToggleButton) {
     themeToggleButton.addEventListener('click', () => {
-        let currentTheme = document.documentElement.getAttribute('data-theme');
+        let currentTheme = document.body.getAttribute('data-theme');
         console.log(`Current Theme: ${currentTheme}`); // Debugging line
         let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         console.log(`New Theme: ${newTheme}`); // Debugging line
-        document.documentElement.setAttribute('data-theme', newTheme);
+        document.body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
     });
 } else {
