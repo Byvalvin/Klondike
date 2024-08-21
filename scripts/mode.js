@@ -1,6 +1,23 @@
+
 //mode.js
 
-const themeToggleButton = document.getElementById('theme-toggle');
+const themeButtonID = 'card-logo';
+//logo
+const logoContainer = document.getElementById(themeButtonID);
+
+// Create a card element
+const cardElement = document.createElement('div');
+cardElement.className = 'card'; // Use the same class as for cards
+
+// Set inner HTML for the card
+cardElement.innerHTML = `
+    <div class="card-symbol s">♠</div>
+    <div class="card-content">A</div>
+`;
+logoContainer.appendChild(cardElement); // Add the card element to the logo container
+
+
+const themeToggleButton = document.getElementById(themeButtonID);
 
 function applyThemeBasedOnTime() {
     const currentHour = new Date().getHours();
