@@ -1,38 +1,4 @@
 /* General Styles */
-
-/* Dark Theme */
-[data-theme='dark'] {
-    --background-color: #2C3E50;
-    --primary-color: #E74C3C;
-    --primary-dark: #C0392B;
-    --text-color: #ECF0F1;
-    --card-border-color: #34495E;
-    --card-face-down-color: #95A5A6;
-}
-
-/* Light Theme */
-[data-theme='light'] {
-    --background-color: #F5F5F5;
-    --primary-color: #3498DB;
-    --primary-dark: #2980B9;
-    --text-color: #2C3E50;
-    --card-border-color: #BDC3C7;
-    --card-face-down-color: #BDC3C7;
-}
-
-:root {
-    --primary-color: #3498DB;
-    --primary-dark: #2980B9;
-    --background-color: #F5F5F5;
-    --text-color: #2C3E50;
-    --card-border-color: #BDC3C7;
-    --card-face-down-color: #BDC3C7;
-    --button-padding: 12px 24px;
-    --font-size-large: 1.2em;
-    --font-size-medium: 1em;
-    --font-size-small: 0.9em;
-}
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -46,6 +12,21 @@ header {
     color: white;
     padding: 15px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#logo-container {
+    display: flex;
+    align-items: center;
+}
+
+#logo-container img {
+    width: 50px;
+    height: auto;
+    margin-right: 15px;
 }
 
 #status {
@@ -54,17 +35,24 @@ header {
     color: var(--text-color);
 }
 
-h1 {
-    margin: 0;
-}
-
 #controls {
     display: flex;
-    justify-content: center;
-    margin: 20px 0;
+    justify-content: space-between;
+    padding: 20px;
 }
 
-/* Buttons */
+#game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#state-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 button {
     background-color: var(--primary-color);
     color: white;
@@ -91,7 +79,38 @@ button:focus {
     outline-offset: 2px;
 }
 
-/* Game Board */
+/* Hidden class */
+.hidden {
+    display: none;
+}
+
+/* Icon Buttons */
+.icon-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.icon-button img {
+    width: 30px;
+    height: auto;
+}
+
+.icon-button:hover::after {
+    content: attr(title);
+    position: absolute;
+    background: var(--primary-dark);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: var(--font-size-small);
+    white-space: nowrap;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 #game-board {
     display: flex;
     flex-wrap: wrap;
@@ -112,41 +131,6 @@ button:focus {
     border-radius: 5px;
 }
 
-.top-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.suit-container, .pile-container {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    flex-wrap: wrap;
-}
-
-.deck-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.deck-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
-
-#pile-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-/* Deck Styles */
 .deck {
     border: 1px solid var(--card-border-color);
     padding: 20px;
@@ -194,7 +178,6 @@ button:focus {
     height: auto;
 }
 
-/* Card Styles */
 .deck-content .card {
     display: inline-block;
     width: 28px;
@@ -277,3 +260,4 @@ button:focus {
         font-size: var(--font-size-small);
     }
 }
+
