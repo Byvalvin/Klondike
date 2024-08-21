@@ -8,19 +8,30 @@
 </head>
 <body>
     <header>
-        <h1>Klondike Solitaire</h1>
+        <div id="logo-container">
+            <img src="images/card-logo.png" alt="Card Logo" id="theme-toggle">
+            <h1>Klondike Solitaire</h1>
+        </div>
         <p id="status">Welcome to Klondike Solitaire!</p>
     </header>
-    <button id="theme-toggle">Toggle Theme</button>
     <main>
         <section id="controls">
-            <button id="reset-button">Restock</button>
-            <button id="discard-button">Discard</button>
-            <button id="board-button">Show Board</button>
-            <button id="cheat-button">Cheat</button>
-            <button id="save-button">Save Game</button>
-            <button id="load-button">Load Game</button>
-            <button id="done-button">End Game</button>
+            <div id="game-controls">
+                <button id="reset-button">Restock</button>
+                <button id="discard-button">Discard</button>
+                <button id="cheat-button" class="hidden">Cheat</button>
+            </div>
+            <div id="state-controls">
+                <button id="save-button" class="icon-button" title="Save Game">
+                    <img src="images/save-icon.png" alt="Save">
+                </button>
+                <button id="load-button" class="icon-button" title="Load Game">
+                    <img src="images/load-icon.png" alt="Load">
+                </button>
+                <button id="done-button" class="icon-button" title="End Game">
+                    <img src="images/done-icon.png" alt="Done">
+                </button>
+            </div>
         </section>
 
         <section id="game-board" class="game-board">
@@ -31,7 +42,9 @@
     <script src="scripts/deck.js"></script>
     <script src="scripts/game.js"></script>
     <script src="scripts/klondike.js"></script>
+    <script src="scripts/mode.js"></script>
 </body>
 </html>
+
 
 
