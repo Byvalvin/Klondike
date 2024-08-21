@@ -39,6 +39,7 @@ body {
     padding: 0;
     background-color: var(--background-color);
     text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
