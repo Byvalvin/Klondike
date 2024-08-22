@@ -354,6 +354,14 @@ class Game {
     }
 
     /**
+     * Checks if the game has been won.
+     * @returns {boolean} - True if all suit decks have 13 cards, false otherwise.
+     */
+    checkWin() {
+        return this.SUITS.every(deck => deck.sizeDeck() === this.maxCardValue);
+    }
+    
+    /**
      * Updates the game board's display.
      */
     updateBoard() {
@@ -375,6 +383,12 @@ class Game {
         gameBoard.appendChild(topContainer);
         gameBoard.appendChild(suitContainer);
         gameBoard.appendChild(pileContainer);
+        
+        // Check for win condition
+        if (this.checkWin()) {
+            this.done('Congratulations! You won the game!');
+        }
+        
     }
 
     createCardElement(card) {
