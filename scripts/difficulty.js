@@ -41,10 +41,3 @@ function generateDifficultyScore() {
 function getDifficulty(score) {
     return difficulties.find(difficulty => score >= difficulty.minScore && score <= difficulty.maxScore) || { name: 'Unknown', minScore: 0, maxScore: 0 };
 }
-
-// Example of how to use the functions
-const score = generateDifficultyScore();
-console.log(`Generated Score: ${score}`);
-const difficulty = getDifficulty(score);
-console.log(`Difficulty Level: ${difficulty.name}`);
-
