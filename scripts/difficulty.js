@@ -26,37 +26,25 @@ function getRandomParamValue(params) {
 
 // Function to generate a difficulty score
 function generateDifficultyScore() {
-    const pileOrdering = parameterScores.pileOrdering[getRandomParamValue(parameterScores.pileOrdering)];
-    const numberOfPiles = parameterScores.numberOfPiles[getRandomParamValue(parameterScores.numberOfPiles)];
-    const suitOrdering = parameterScores.suitOrdering[getRandomParamValue(parameterScores.suitOrdering)];
-    const timed = parameterScores.timed[getRandomParamValue(parameterScores.timed)];
+    const pileOrdering = getRandomParamValue(parameterScores.pileOrdering);
+    const numberOfPiles = getRandomParamValue(parameterScores.numberOfPiles);
+    const suitOrdering = getRandomParamValue(parameterScores.suitOrdering);
+    const timed = getRandomParamValue(parameterScores.timed);
 
-    return pileOrdering + numberOfPiles + suitOrdering + timed;
+    return parameterScores.pileOrdering[pileOrdering] +
+           parameterScores.numberOfPiles[numberOfPiles] +
+           parameterScores.suitOrdering[suitOrdering] +
+           parameterScores.timed[timed];
 }
 
-// Function to select difficulty based on score
-function selectDifficulty(score) {
-    return difficulties.find(difficulty => score >= difficulty.minScore && score <= difficulty.maxScore);
+// Function to get difficulty based on score
+function getDifficulty(score) {
+    return difficulties.find(difficulty => score >= difficulty.minScore && score <= difficulty.maxScore) || { name: 'Unknown', minScore: 0, maxScore: 0 };
 }
 
-// Example usage
-function setupGame(difficultyName) {
-    // Generate game parameters
-    const difficulty = difficulties.find(d => d.name === difficultyName);
-    let gameScore;
+// Example of how to use the functions
+const score = generateDifficultyScore();
+console.log(`Generated Score: ${score}`);
+const difficulty = getDifficulty(score);
+console.log(`Difficulty Level: ${difficulty.name}`);
 
-    if (difficulty) {
-        gameScore = generateDifficultyScore();
-        if (gameScore < difficulty.minScore || gameScore > difficulty.maxScore) {
-            console.error('Generated score does not match the selected difficulty');
-            return;
-        }
-        // Setup game based on difficulty parameters
-        console.log(`Setting up game with difficulty: ${difficultyName}`);
-    } else {
-        console.error('Difficulty not found');
-    }
-}
-
-// Example function call
-setupGame("Royal Flush");
