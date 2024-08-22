@@ -528,15 +528,20 @@ class Game {
     // Handle drag start
     handleDragStart(event, deck) {
         if (!deck.isEmpty()) {
-            const card = deck.peekDeck();
-            event.dataTransfer.setData('text/plain', JSON.stringify({
+            const cardsToDrag = deck.getCardsList().map(card => ({
+                suit: card.suitCard(),
+                rank: card.rankCard(),
+                faceUp: card.isFaceup()
+            }));
+            event.dataTransfer.setData('application/json', JSON.stringify({
                 deckName: deck.nameDeck(),
-                card: card.toJSON() // Serialize card for drag
+                cards: cardsToDrag
             }));
             event.dataTransfer.effectAllowed = 'move';
-            this.startDrag(card, event); // Start dragging visual
+            this.startDrag(cardsToDrag, event); // Pass the cards to startDrag
         }
     }
+
 
 
     // Start dragging visual
