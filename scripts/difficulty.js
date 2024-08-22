@@ -8,11 +8,13 @@ const difficulties = [
 
 // Define parameter scores with weights for each value
 const parameterScores = {
-    pileOrdering: { none: { score: 1, weight: 1 }, altColor: { score: 13, weight: 3 }, sameColor: { score: 7, weight: 2 } },
-    numberOfPiles: { three: { score: 13, weight: 1 }, four: { score: 7, weight: 2 }, seven: { score: 1, weight: 3 } },
-    suitOrdering: { acesFirst: { score: 1, weight: 1 }, kingsFirst: { score: 7, weight: 2 } , random: { score: 11, weight: 3 }},
-    timed: { none: { score: 1, weight: 1 }, tenMins: { score: 5, weight: 2 }, fiveMins: { score: 10, weight: 3 }, threeMins: { score: 15, weight: 4 } }
+    pileOrdering: { none: { score: 1, weight: 1, value:0 }, altColor: { score: 13, weight: 3, value:2 }, sameColor: { score: 7, weight: 2, value:1 } },
+    numberOfPiles: { three: { score: 13, weight: 1, value:3 }, four: { score: 7, weight: 2, value:4 }, seven: { score: 1, weight: 3, value:7 } },
+    suitOrdering: { acesFirst: { score: 1, weight: 1, value:0 }, kingsFirst: { score: 7, weight: 2, value:1 } , random: { score: 11, weight: 3, value:2 }},
+    timed: { none: { score: 1, weight: 1, value:0 }, tenMins: { score: 5, weight: 2, value:5 }, fiveMins: { score: 10, weight: 3, value:5 }, threeMins: { score: 15, weight: 4, value:3 } }
 };
+
+
 
 function extractLists(data) {
     // Helper function to get score values from an object
