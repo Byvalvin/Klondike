@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function initializeGame(difficultyName) {
         // Get difficulty
-        const score = generateDifficultyScore();
-        console.log(`Generated Score: ${score}`);
-        const difficultyName = getDifficulty(score);
-        console.log(`Difficulty Level: ${difficulty.name}`);
+        //const score = generateDifficultyScore();
+        //console.log(`Generated Score: ${score}`);
+        //const difficultyName = getDifficulty(score);
+        //console.log(`Difficulty Level: ${difficulty.name}`);
             
         const difficultyParams = getDifficultyParams(difficultyName);
         if (difficultyParams) {
