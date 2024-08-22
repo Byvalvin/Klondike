@@ -3,6 +3,13 @@
  * Initializes the Klondike game and sets up event listeners for game controls.
  */
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Get difficulty
+    const score = generateDifficultyScore();
+    console.log(`Generated Score: ${score}`);
+    const difficulty = getDifficulty(score);
+    console.log(`Difficulty Level: ${difficulty.name}`);
+        
     // Initialize game
     const game = new Game();
     const statusElement = document.getElementById('status');
