@@ -1,4 +1,4 @@
-/* General Styles */
+/* Theme Definitions */
 
 /* Dark Theme */
 [data-theme='dark'] {
@@ -20,6 +20,7 @@
     --card-face-down-color: #BDC3C7;
 }
 
+/* Root Variables */
 :root {
     --primary-color: #3498DB;
     --primary-dark: #2980B9;
@@ -32,6 +33,7 @@
     --font-size-medium: 1em;
     --font-size-small: 0.9em;
 }
+
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
@@ -106,13 +108,7 @@ header {
     padding: 20px;
 }
 
-#game-controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-#state-controls {
+#game-controls, #state-controls {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -155,22 +151,17 @@ button:focus {
     border: none;
     padding: 0;
     cursor: pointer;
+    position: relative;
 }
 
-.icon-button img {
+.icon-button img, .icon-button svg {
     width: 30px;
     height: auto;
 }
 
-.icon-button svg {
-    width: 30px; /* Adjust as needed */
-    height: auto;
-    vertical-align: middle;
-}
-
 .icon-button .material-icons {
     font-size: 24px;
-    color: #000; /* Change color as needed */
+    color: #000;
 }
 
 .icon-button:hover svg {
@@ -191,6 +182,7 @@ button:focus {
     transform: translateX(-50%);
 }
 
+/* Game Board */
 #game-board {
     display: flex;
     flex-wrap: wrap;
@@ -224,7 +216,6 @@ button:focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    will-change: background-color, box-shadow;
 }
 
 .deck:hover {
@@ -270,7 +261,6 @@ button:focus {
     margin: 1px;
     font-size: var(--font-size-large);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    will-change: transform, box-shadow;
 }
 
 .deck-content .card.face-up {
@@ -310,11 +300,7 @@ button:focus {
     color: black;
 }
 
-.card-symbol.h {
-    color: red;
-}
-
-.card-symbol.d {
+.card-symbol.h, .card-symbol.d {
     color: red;
 }
 
@@ -340,4 +326,5 @@ button:focus {
         font-size: var(--font-size-small);
     }
 }
+
 
