@@ -6,7 +6,8 @@ class Game {
     /**
      * Creates an instance of Game.
      */
-    constructor() {
+    constructor(diff) {
+        console.log("got diff", diff);
         this.startMessage = 'Welcome to Klondike!';
         this.endMessage = 'Thank you for playing';
         this.gameOn = true;
