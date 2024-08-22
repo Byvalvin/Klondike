@@ -155,6 +155,7 @@ class Game {
      */
     done(message) {
         this.gameOn = false;
+        document.getElementById('status').statusElement.innerText = message;
         console.log(message);
     }
 
