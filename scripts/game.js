@@ -1,10 +1,3 @@
-// Define the stack of scripts
-const scriptStack = [
-    { src: 'scripts/difficulty.js', msg: 'Done loading difficulty.js' },
-    // Add more scripts here as needed
-];
-// Start loading scripts from the stack
-loadScripts(scriptStack);
 
 /**
  * Represents a Klondike Solitaire game.
