@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Optionally initialize with default or pre-selected difficulty if needed
-    const defaultGame = { pileOrdering:"none", numberOfPiles"four", suitOrdering"acesFirst", timed:"none" }
+    const defaultGame = { pileOrdering:"none", numberOfPiles:"four", suitOrdering:"acesFirst", timed:"none" }
     initializeGame(defaultGame);
 });
 
