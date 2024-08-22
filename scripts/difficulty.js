@@ -1,6 +1,6 @@
 // Define difficulties and their score ranges
 const difficulties = [
-    { name: "Jack", minScore: 4, maxScore: 12 },
+    { name: "Jack", minScore: 4, maxScore: 17 },
     { name: "King's Guard", minScore: 13, maxScore: 25 },
     { name: "Joker's Delight", minScore: 26, maxScore: 38 },
     { name: "Dead Man", minScore: 39, maxScore: 52 }
@@ -8,10 +8,10 @@ const difficulties = [
 
 // Define parameter scores with weights for each value
 const parameterScores = {
-    pileOrdering: { none: { score: 1, weight: 3 }, altColor: { score: 13, weight: 1 }, sameColor: { score: 7, weight: 2 } },
+    pileOrdering: { none: { score: 1, weight: 1 }, altColor: { score: 13, weight: 3 }, sameColor: { score: 7, weight: 2 } },
     numberOfPiles: { three: { score: 13, weight: 1 }, four: { score: 7, weight: 2 }, seven: { score: 1, weight: 3 } },
-    suitOrdering: { acesFirst: { score: 10, weight: 1 }, kingsFirst: { score: 13, weight: 2 } },
-    timed: { none: { score: 1, weight: 2 }, tenMins: { score: 5, weight: 1 }, fiveMins: { score: 10, weight: 2 }, threeMins: { score: 13, weight: 1 } }
+    suitOrdering: { acesFirst: { score: 1, weight: 1 }, kingsFirst: { score: 7, weight: 2 } , random: { score: 11, weight: 3 }},
+    timed: { none: { score: 1, weight: 1 }, tenMins: { score: 5, weight: 2 }, fiveMins: { score: 10, weight: 3 }, threeMins: { score: 15, weight: 4 } }
 };
 
 // Function to get a weighted random parameter value
