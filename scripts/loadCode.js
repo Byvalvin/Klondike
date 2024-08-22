@@ -9,7 +9,7 @@ const loadScripts = (stack) => {
 
   const script = document.createElement('script');
   script.src = src;
-  //script.defer = true;
+  script.defer = true;
   script.onload = () => {
     console.log(msg);
     loadScripts(stack); // Load the next script from the stack
