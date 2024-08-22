@@ -43,5 +43,5 @@ function getDifficulty(score) {
 }
 
 function getDifficultyParams(name){
-    return {name:name, pileOrder:"none", npile:"four", suitOrder:"acesFirst" timed:"none", status:"default working"};
+    return {name:name, pileOrder:"none", npile:"four", suitOrder:"acesFirst", timed:"none", status:"default working"};
 }
