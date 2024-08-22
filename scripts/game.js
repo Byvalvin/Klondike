@@ -14,7 +14,7 @@ class Game {
         this.Stock = new Deck('Stock');
         this.Discard = new Deck('Discard');
         this.SUITS = ['Spades', 'Hearts', 'Diamonds', 'Clubs'].map(name => new Deck(name));
-        this.Npiles = 4;
+        this.Npiles = parameterScores.numberOfPiles[diff.numberOfPiles].value;
         this.PILES = Array.from({ length: this.Npiles }, (_, i) => new Deck(`Pile ${i + 1}`));
         this.selectedCards = null; // Track the currently selected cards
         this.maxCardValue = 13;
