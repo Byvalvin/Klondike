@@ -1,7 +1,5 @@
 // klondike.js
 
-import { difficulties, getDifficultyParams } from './difficulty.js';
-
 document.addEventListener('DOMContentLoaded', () => {
     const statusElement = document.getElementById('status');
     const difficultySelect = document.getElementById('difficulty');
