@@ -33,12 +33,13 @@ function getWeightedRandomParamValue(params) {
 // Function to generate a difficulty score within a given range
 function generateDifficultyScore(minScore, maxScore) {
     let score;
+    let pileOrdering, numberOfPiles, suitOrdering, timed;
     let count = 1;
     do {
-        const pileOrdering = getWeightedRandomParamValue(parameterScores.pileOrdering);
-        const numberOfPiles = getWeightedRandomParamValue(parameterScores.numberOfPiles);
-        const suitOrdering = getWeightedRandomParamValue(parameterScores.suitOrdering);
-        const timed = getWeightedRandomParamValue(parameterScores.timed);
+        pileOrdering = getWeightedRandomParamValue(parameterScores.pileOrdering);
+        numberOfPiles = getWeightedRandomParamValue(parameterScores.numberOfPiles);
+        suitOrdering = getWeightedRandomParamValue(parameterScores.suitOrdering);
+        timed = getWeightedRandomParamValue(parameterScores.timed);
 
         score = pileOrdering + numberOfPiles + suitOrdering + timed;
         console.log(count, pileOrdering, numberOfPiles, suitOrdering, timed);
