@@ -17,24 +17,11 @@ const difficulties = [
     { name: "The Spade’s Test", minScore: 51, maxScore: 52 }
 ];
 
-// Function to get a random parameter value based on difficulty
+// Function to get a random parameter value
 function getRandomParamValue(params) {
     const keys = Object.keys(params);
     const key = keys[Math.floor(Math.random() * keys.length)];
     return key;
-}
-
-// Function to generate a difficulty score
-function generateDifficultyScore() {
-    const pileOrdering = getRandomParamValue(parameterScores.pileOrdering);
-    const numberOfPiles = getRandomParamValue(parameterScores.numberOfPiles);
-    const suitOrdering = getRandomParamValue(parameterScores.suitOrdering);
-    const timed = getRandomParamValue(parameterScores.timed);
-
-    return parameterScores.pileOrdering[pileOrdering] +
-           parameterScores.numberOfPiles[numberOfPiles] +
-           parameterScores.suitOrdering[suitOrdering] +
-           parameterScores.timed[timed];
 }
 
 // Function to get difficulty based on score
@@ -42,6 +29,31 @@ function getDifficulty(score) {
     return difficulties.find(difficulty => score >= difficulty.minScore && score <= difficulty.maxScore) || { name: 'Unknown', minScore: 0, maxScore: 0 };
 }
 
-function getDifficultyParams(name){
-    return {name:name, pileOrder:"none", npile:"four", suitOrder:"acesFirst", timed:"none", status:"default working"};
+// Function to generate a random difficulty score within a given range
+function generateDifficultyScore(minScore, maxScore) {
+    let score;
+    do {
+        const pileOrdering = getRandomParamValue(parameterScores.pileOrdering);
+        const numberOfPiles = getRandomParamValue(parameterScores.numberOfPiles);
+        const suitOrdering = getRandomParamValue(parameterScores.suitOrdering);
+        const timed = getRandomParamValue(parameterScores.timed);
+
+        score = parameterScores.pileOrdering[pileOrdering] +
+                parameterScores.numberOfPiles[numberOfPiles] +
+                parameterScores.suitOrdering[suitOrdering] +
+                parameterScores.timed[timed];
+    } while (score < minScore || score > maxScore);
+
+    return { score, params: { pileOrdering, numberOfPiles, suitOrdering, timed } };
 }
+
+// Function to get difficulty parameters based on the difficulty name
+function getDifficultyParams(name) {
+    const difficulty = difficulties.find(difficulty => difficulty.name === name);
+    if (difficulty) {
+        const { score, params } = generateDifficultyScore(difficulty.minScore, difficulty.maxScore);
+        return { ...params, difficulty: name, score };
+    }
+    return null;
+}
+
