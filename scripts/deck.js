@@ -76,11 +76,7 @@ class Deck {
      * @returns {Card[]} - An array of face-up cards.
      */
     getVisibleCards() {
-        const visibleCards = [];
-        while (!this.isEmpty() && this.peekDeck().isFaceup()) {
-            visibleCards.push(this.popDeck());
-        }
-        return visibleCards;
+        return this.cards.filter(card => card.isFaceup());
     }
 
     /**
@@ -159,7 +155,7 @@ class Deck {
      */
     getReverseDeck() {
         const rev = new Deck(`reverse-${this.name}`);
-        rev.setDeck(this.cards.slice().reverse()); // Create a copy and reverse it
+        rev.setDeck([...this.cards].reverse()); // Create a copy and reverse it
         return rev;
     }
 
@@ -177,5 +173,6 @@ class Deck {
         this.cards.forEach(card => card.faceupCard(false));
     }
 }
+
 
 
