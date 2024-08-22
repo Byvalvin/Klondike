@@ -22,7 +22,6 @@ const loadScripts = (stack) => {
 // Define the stack of scripts
 const scriptStack = [
   { src: 'scripts/mode.js', msg: 'Done loading mode.js' },
-  { src: 'scripts/difficulty.js', msg: 'Done loading difficulty.js' },
     // Add more scripts here as needed
 ];
 // Start loading scripts from the stack
