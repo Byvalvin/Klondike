@@ -8,10 +8,10 @@ const difficulties = [
 
 // Define parameter scores with weights for each value
 const parameterScores = {
-    pileOrdering: { none: { score: 1, weight: 3 }, altColor: { score: 5, weight: 1 }, sameColor: { score: 3, weight: 2 } },
-    numberOfPiles: { three: { score: 10, weight: 1 }, four: { score: 5, weight: 2 }, seven: { score: 1, weight: 3 } },
-    suitOrdering: { acesFirst: { score: 1, weight: 1 }, kingsFirst: { score: 2, weight: 2 } },
-    timed: { none: { score: 1, weight: 2 }, tenMins: { score: 3, weight: 1 }, fiveMins: { score: 5, weight: 2 }, threeMins: { score: 15, weight: 1 } }
+    pileOrdering: { none: { score: 1, weight: 3 }, altColor: { score: 13, weight: 1 }, sameColor: { score: 7, weight: 2 } },
+    numberOfPiles: { three: { score: 13, weight: 1 }, four: { score: 7, weight: 2 }, seven: { score: 1, weight: 3 } },
+    suitOrdering: { acesFirst: { score: 10, weight: 1 }, kingsFirst: { score: 13, weight: 2 } },
+    timed: { none: { score: 1, weight: 2 }, tenMins: { score: 5, weight: 1 }, fiveMins: { score: 10, weight: 2 }, threeMins: { score: 13, weight: 1 } }
 };
 
 // Function to get a weighted random parameter value
