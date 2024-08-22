@@ -1,13 +1,13 @@
 // klondike.js
 
+import { difficulties, getDifficultyParams } from './difficulty.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     const statusElement = document.getElementById('status');
     const difficultySelect = document.getElementById('difficulty');
     const startButton = document.getElementById('start-button');
 
-    /**
-     * Populates the difficulty selector with options.
-     */
+    // Populate the difficulty selector with options
     function populateDifficultySelector() {
         difficulties.forEach(difficulty => {
             const option = document.createElement('option');
@@ -17,33 +17,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /**
-     * Initializes the game with the selected difficulty.
-     * @param {string} difficultyName - The name of the selected difficulty level.
-     */
-    function initializeGame(difficultyName) {
-        // Get difficulty
-        //const score = generateDifficultyScore();
-        //console.log(`Generated Score: ${score}`);
-        //const difficultyName = getDifficulty(score);
-        //console.log(`Difficulty Level: ${difficulty.name}`);
-            
-        const difficultyParams = getDifficultyParams(difficultyName);
-        if (difficultyParams) {
-            console.log(`Initializing game with difficulty: ${difficultyName}`);
-            const game = new Game(difficultyParams);
-            setupEventListeners(game);
+    // Initialize the game with params
+    function initializeGame(params) {
+        if (params) {
+            console.log(`Initializing game with difficulty: ${difficultyName}`, params);
+            const game = new Game(params);
             game.updateBoard();
+            setupEventListeners(game);
         } else {
             updateStatus('Selected difficulty not found', true);
         }
     }
 
-    /**
-     * Updates the status element with a message.
-     * @param {string} message - The message to display.
-     * @param {boolean} [isError=false] - Indicates if the message is an error.
-     */
+    // Updates the status element with a message
     function updateStatus(message, isError = false) {
         statusElement.innerText = message;
         if (isError) {
@@ -51,12 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Handles button actions with error handling.
-     * @param {Function} action - The action to perform.
-     * @param {string} successMessage - The message to display on success.
-     * @param {string} errorMessage - The message to display on error.
-     */
+    // Handles button actions with error handling
     function handleButtonAction(action, successMessage, errorMessage) {
         try {
             action();
@@ -66,13 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Adds an event listener to a button if it exists.
-     * @param {string} buttonId - The ID of the button.
-     * @param {Function} action - The action to perform when the button is clicked.
-     * @param {string} successMessage - The message to display on success.
-     * @param {string} errorMessage - The message to display on error.
-     */
+    // Adds an event listener to a button if it exists
     function addButtonListener(buttonId, action, successMessage, errorMessage) {
         const button = document.getElementById(buttonId);
         if (button) {
@@ -82,10 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Sets up event listeners for game controls.
-     * @param {Game} game - The game instance.
-     */
+    // Sets up event listeners for game controls
     function setupEventListeners(game) {
         addButtonListener('reset-button', () => game.reset(), 'Stock reset', 'Error resetting stock');
         addButtonListener('discard-button', () => game.discard(), 'Discarded cards from stock', 'Error discarding cards');
@@ -118,14 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the game when the start button is clicked
     startButton.addEventListener('click', () => {
         const selectedDifficulty = difficultySelect.value;
-        initializeGame(selectedDifficulty);
+        const params = getDifficultyParams(selectedDifficulty);
+        initializeGame(params);
     });
 
     // Optionally initialize with default or pre-selected difficulty if needed
-    // initializeGame(difficultySelect.value || difficulties[0].name);
+    const defaultGame = { pileOrdering:"none", numberOfPiles"four", suitOrdering"acesFirst", timed:"none" }
+    initializeGame(defaultGame);
 });
-
-
 
 
 
