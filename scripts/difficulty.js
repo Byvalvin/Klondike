@@ -76,7 +76,7 @@ The unique sums are:
 */
 
 // Extract lists
-const { l1, l2, l3, l4 } = extractLists(data);
+const { l1, l2, l3, l4 } = extractLists(parameterScores);
 
 // Print the lists
 console.log('List 1:', l1); // Scores from pileOrdering
