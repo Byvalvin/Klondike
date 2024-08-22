@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         game.done('Game over');
         updateStatus('Game over');
     });
-
+/*
     // Define the stack of scripts
     const scriptStack = [
         { src: 'scripts/mode.js', msg: 'Done loading code.js' },
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     // Start loading scripts from the stack
     loadScripts(scriptStack);
-    
+    */
     // Initialize the board on document load
     game.updateBoard();
 
