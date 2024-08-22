@@ -32,11 +32,15 @@ function getDifficulty(score) {
 // Function to generate a random difficulty score within a given range
 function generateDifficultyScore(minScore, maxScore) {
     let score;
+    let count = 1;
     do {
         const pileOrdering = getRandomParamValue(parameterScores.pileOrdering);
         const numberOfPiles = getRandomParamValue(parameterScores.numberOfPiles);
         const suitOrdering = getRandomParamValue(parameterScores.suitOrdering);
         const timed = getRandomParamValue(parameterScores.timed);
+
+        console.log(count, pileOrdering, numberOfPiles, suitOrdering, timed);
+        count+=1;
 
         score = parameterScores.pileOrdering[pileOrdering] +
                 parameterScores.numberOfPiles[numberOfPiles] +
