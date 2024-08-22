@@ -1,9 +1,9 @@
 // Define difficulties and their score ranges
 const difficulties = [
-    { name: "Jack", minScore: 4, maxScore: 17 },
-    { name: "King's Guard", minScore: 18, maxScore: 30 },
-    { name: "Joker's Delight", minScore: 31, maxScore: 43 },
-    { name: "Dead Man", minScore: 40, maxScore: 52 }
+    { name: "Jack", minScore: 4, maxScore: 19 },
+    { name: "King's Guard", minScore: 20, maxScore: 29 },
+    { name: "Joker's Delight", minScore: 30, maxScore: 38 },
+    { name: "Dead Man", minScore: 39, maxScore: 52 }
 ];
 
 // Define parameter scores with weights for each value
