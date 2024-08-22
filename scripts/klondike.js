@@ -20,8 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (params) {
             console.log(`Initializing game with difficulty: ${difficultyName}`, params);
             const game = new Game(params);
-            game.updateBoard();
             setupEventListeners(game);
+            game.updateBoard();
+            
         } else {
             updateStatus('Selected difficulty not found', true);
         }
