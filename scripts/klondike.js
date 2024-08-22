@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize the game with params
-    function initializeGame(params) {
+    function initializeGame(difficultyName, params) {
         if (params) {
             console.log(`Initializing game with difficulty: ${difficultyName}`, params);
             const game = new Game(params);
@@ -90,12 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
     startButton.addEventListener('click', () => {
         const selectedDifficulty = difficultySelect.value;
         const params = getDifficultyParams(selectedDifficulty);
-        initializeGame(params);
+        initializeGame(selectedDifficulty, params);
     });
 
     // Optionally initialize with default or pre-selected difficulty if needed
-    const defaultGame = { pileOrdering:"none", numberOfPiles:"four", suitOrdering:"acesFirst", timed:"none" }
-    initializeGame(defaultGame);
+    const defaultGameName = "Default";
+    const defaultGame = { pileOrdering:"none", numberOfPiles:"four", suitOrdering:"acesFirst", timed:"none" };
+    initializeGame(defaultGameName, defaultGame);
 });
 
 
