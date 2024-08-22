@@ -41,3 +41,7 @@ function generateDifficultyScore() {
 function getDifficulty(score) {
     return difficulties.find(difficulty => score >= difficulty.minScore && score <= difficulty.maxScore) || { name: 'Unknown', minScore: 0, maxScore: 0 };
 }
+
+function getDifficultyParams(name){
+    return {name:name, pileOrder:"none", npile:"four", suitOrder:"acesFirst" timed:"none", status:"default working"};
+}
