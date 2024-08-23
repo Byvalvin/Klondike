@@ -391,9 +391,13 @@ class Game {
     }
     canMovePileToPile(fromDeck, toDeck, card) {
         const rankPileTop = card.rankCard();
-        const rankTargetPileTop = toDeck.isEmpty() ? this.maxCardValue : toDeck.peekDeck().rankCard();
-        return (rankPileTop + 1 === rankTargetPileTop || rankPileTop === this.maxCardValue && toDeck.isEmpty())
-            && this.satisfyPileOrder(card, toDeck);
+        const rankTargetPileTop = toDeck.isEmpty() ? (this.acesFirst ? this.maxCardValue : 0) : toDeck.peekDeck().rankCard();
+        return (
+            this.acesFirst ? 
+            (rankPileTop + 1 === rankTargetPileTop || rankPileTop === this.maxCardValue && toDeck.isEmpty()) 
+            : 
+            (rankPileTop - 1 === rankTargetPileTop || rankPileTop === 0 && toDeck.isEmpty())
+        ) && this.satisfyPileOrder(card, toDeck);
     }
     canMoveSuitToPile(fromDeck, toDeck, card) {
         const rankSuitTop = card.rankCard();
