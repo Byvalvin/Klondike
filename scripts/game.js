@@ -349,10 +349,10 @@ class Game {
         return sameColor[card1] === sameColor[card2];
     }
 
-    satisfyPileOrder(order, cardA, cardB){
-        switch(order){
-            case "altColor": return !areSameColor(cardA, cardB);
-            case "sameColor": return areSameColor(cardA, cardB);
+    satisfyPileOrder(card, toDeck){
+        switch(this.pileOrder){
+            case "altColor": return toDeck.isEmpty() ? true : !areSameColor(card, toDeck.peekDeck());
+            case "sameColor": return toDeck.isEmpty() ? true : areSameColor(card, toDeck.peekDeck());
             default: return true; // none
         }
     }
@@ -369,25 +369,30 @@ class Game {
 
     canMoveStockToPile(toDeck, card) {
         const rankPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
-        return card.rankCard() + 1 === rankPileTop || card.rankCard() === 13 && toDeck.isEmpty();
+        return (card.rankCard() + 1 === rankPileTop || card.rankCard() === 13) && toDeck.isEmpty()) && this.satisfyPileOrder(card, toDeck);
     }
 
     canMovePileToSuit(fromDeck, toDeck, card) {
         const rankPileTop = card.rankCard();
         const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-        return (rankPileTop === rankSuitTop + 1 || rankPileTop === 1) && card.suitCard() === toDeck.nameDeck();
+        return (
+            this.acesFirst ?
+                (rankPileTop === rankSuitTop + 1 || rankPileTop === 1)
+                :
+                (rankPileTop === rankSuitTop - 1 || rankPileTop === this.maxCardValue)
+        ) && card.suitCard() === toDeck.nameDeck();
     }
 
     canMovePileToPile(fromDeck, toDeck, card) {
         const rankPileTop = card.rankCard();
         const rankTargetPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
-        return rankPileTop + 1 === rankTargetPileTop || rankPileTop === 13 && toDeck.isEmpty();
+        return (rankPileTop + 1 === rankTargetPileTop || rankPileTop === 13 && toDeck.isEmpty()) && this.satisfyPileOrder(card, toDeck);
     }
 
     canMoveSuitToPile(fromDeck, toDeck, card) {
         const rankSuitTop = card.rankCard();
         const rankPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
-        return rankSuitTop + 1 === rankPileTop || rankSuitTop === 13 && toDeck.isEmpty();
+        return (rankSuitTop + 1 === rankPileTop || rankSuitTop === 13 && toDeck.isEmpty()) && this.satisfyPileOrder(card, toDeck);
     }
 
     /**
