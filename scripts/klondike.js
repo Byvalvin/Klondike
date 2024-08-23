@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedDifficulty = difficultySelect.value;
         const params = getDifficultyParams(selectedDifficulty);
         initializeGame(selectedDifficulty, params);
+        updateStatus(`Difficulty: ${selectedDifficulty}`);
     });
 
     
