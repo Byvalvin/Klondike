@@ -57,19 +57,25 @@ function extractLists(data) {
 function calculateSums(l1, l2, l3, l4) {
     const allSums = [];
 
+    // Generate all possible sums
     l1.forEach(a => {
         l2.forEach(b => {
             l3.forEach(c => {
                 l4.forEach(d => {
-                    allSums.push(a + b + c + d);
+                    const sum = a + b + c + d;
+                    allSums.push(sum);
                 });
             });
         });
     });
 
+    // Get unique sums by creating a Set from allSums
+    const uniqueSums = [...new Set(allSums)];
+
+    // Return both lists: one with duplicates and one with unique values
     return {
-        allSums: [...new Set(allSums)].sort((x, y) => x - y),
-        uniqueSums: [...new Set(allSums)].sort((x, y) => x - y)
+        allSums: allSums.sort((x, y) => x - y),
+        uniqueSums: uniqueSums.sort((x, y) => x - y)
     };
 }
 
