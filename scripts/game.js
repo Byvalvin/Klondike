@@ -346,7 +346,7 @@ class Game {
             'd': 'red'
         };
         // Check if both cards are of the same color
-        return sameColor[card1] === sameColor[card2];
+        return sameColor[card1.suit] === sameColor[card2.suit];
     }
 
     satisfyPileOrder(card, toDeck){
@@ -378,13 +378,13 @@ class Game {
     }
     
     canMoveStockToPile(toDeck, card) {
-        const rankPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
+        const rankPileTop = toDeck.isEmpty() ? this.maxCardValue : toDeck.peekDeck().rankCard();
         return (card.rankCard() + 1 === rankPileTop || card.rankCard() === this.maxCardValue && toDeck.isEmpty())
             && this.satisfyPileOrder(card, toDeck);
     }
     canMovePileToPile(fromDeck, toDeck, card) {
         const rankPileTop = card.rankCard();
-        const rankTargetPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
+        const rankTargetPileTop = toDeck.isEmpty() ? this.maxCardValue : toDeck.peekDeck().rankCard();
         return (rankPileTop + 1 === rankTargetPileTop || rankPileTop === this.maxCardValue && toDeck.isEmpty())
             && this.satisfyPileOrder(card, toDeck);
     }
