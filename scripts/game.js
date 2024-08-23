@@ -17,6 +17,9 @@ class Game {
         this.Npiles = parameterScores.numberOfPiles[diff.numberOfPiles].value;
         this.acesFirst = diff.suitOrdering==="random" ? flipCoin() : diff.suitOrdering==="acesFirst";
         this.timerCount = parameterScores.timed[diff.timed].value; //"none" is 0 which means will count up indefinitely
+
+        this.timer = 0;
+        this.timerInterval = null; // Store timer interval ID
         
         this.startMessage = 'Welcome to Klondike!';
         this.endMessage = 'Thank you for playing';
@@ -62,6 +65,10 @@ class Game {
             this.Stock.peekDeck().faceupCard(true);
         }
 
+        if (this.showTimer) {
+            this.startTimer();
+        }
+        
         this.updateBoard();
     }
 
@@ -349,7 +356,6 @@ class Game {
         // Check if both cards are of the same color
         return sameColor[card1.suit] === sameColor[card2.suit];
     }
-
     satisfyPileOrder(card, toDeck){
         switch(this.pileOrder){
             case "altColor": return toDeck.isEmpty() ? true : !this.areSameColor(card, toDeck.peekDeck());
@@ -396,6 +402,37 @@ class Game {
             && this.satisfyPileOrder(card, toDeck);
     }
 
+    startTimer() {
+        this.timer = 0;
+        this.timerInterval = setInterval(() => {
+            this.timer += 1;
+            this.updateTimerDisplay();
+        }, 1000); // Update every second
+    }
+
+    stopTimer() {
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+            this.timerInterval = null;
+        }
+    }
+
+    resetTimer() {
+        this.stopTimer();
+        if (this.showTimer) {
+            this.startTimer();
+        }
+    }
+
+    updateTimerDisplay() {
+        const timerElement = document.getElementById('timer');
+        if (timerElement) {
+            const minutes = Math.floor(this.timer / 60);
+            const seconds = this.timer % 60;
+            timerElement.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+    }
+    
     /**
      * Checks if the game has been won.
      * @returns {boolean} - True if all suit decks have 13 cards, false otherwise.
@@ -426,6 +463,11 @@ class Game {
         gameBoard.appendChild(topContainer);
         gameBoard.appendChild(suitContainer);
         gameBoard.appendChild(pileContainer);
+
+        // Update timer display if visible
+        if (this.timed) {
+            this.updateTimerDisplay();
+        }
         
         // Check for win condition
         if (this.checkWin()) {
@@ -452,23 +494,6 @@ class Game {
         return cardElement;
     }
 
- 
-    /*
-    createCardElement(card) {
-        const cardElement = document.createElement('div');
-        cardElement.className = 'card';
-    
-        if (card.isFaceup()) {
-            cardElement.innerText = card.toString();
-        } else {
-            cardElement.classList.add('face-down');
-            cardElement.innerText = ''; // Face-down cards have no text
-        }
-    
-        return cardElement;
-    }
-    */
-    
     createDeckDiv(deck) {
         const deckDiv = document.createElement('div');
         deckDiv.className = 'deck';
@@ -514,7 +539,6 @@ class Game {
         return container;
     }
 
-
     handleDeckClick(deck) {
         if (this.selectedCards === null) {
             if (!deck.isEmpty()) {
@@ -550,19 +574,11 @@ class Game {
         }
     }
 
-    /*
-    handleDragStart(event, deckName, cardIndex) {
-        event.dataTransfer.setData('text/plain', JSON.stringify({ deckName, cardIndex }));
-        event.dataTransfer.effectAllowed = 'move';
-    }
-    */
 
     handleDragOver(event) {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
     }
-
-
     handleDrop(event) {
         event.preventDefault();
         const data = event.dataTransfer.getData('text/plain');
@@ -581,8 +597,6 @@ class Game {
             }
         }
     }
-
-
     // Handle drag start
     handleDragStart(event, deck) {
         if (!deck.isEmpty()) {
@@ -599,9 +613,6 @@ class Game {
             this.startDrag(cardsToDrag, event); // Pass the cards to startDrag
         }
     }
-
-
-
     // Start dragging visual
     startDrag(card, event) {
         const dragCardElement = this.createCardElement(card);
