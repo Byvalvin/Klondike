@@ -78,8 +78,14 @@ document.addEventListener('DOMContentLoaded', () => {
             updateStatus('Game over');
         });
 
+        // drag and drop
         document.querySelectorAll('.deck').forEach(deck => {
             deck.addEventListener('dragstart', (e) => game.handleDragStart(e, deck));
+            deck.addEventListener('dragover', (e) => e.preventDefault());
+            deck.addEventListener('drop', (e) => {
+                e.preventDefault();
+                game.handleDrop(e);
+            });
         });
     }
 
