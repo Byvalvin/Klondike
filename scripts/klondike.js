@@ -5,6 +5,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const difficultySelect = document.getElementById('difficulty');
     const startButton = document.getElementById('start-button');
 
+    const difficultySelector = document.getElementById('difficulty-selector');
+    const gameControls = document.getElementById('game-controls');
+    const stateControls = document.getElementById('state-controls');
+
+    // Show difficulty selector and start button
+    function showDifficultySelector() {
+        difficultySelector.classList.remove('hidden');
+        gameControls.classList.add('hidden');
+        stateControls.classList.add('hidden');
+    }
+
+    // Hide difficulty selector and start button
+    function hideDifficultySelector() {
+        difficultySelector.classList.add('hidden');
+        gameControls.classList.remove('hidden');
+        stateControls.classList.remove('hidden');
+    }
+    
     // Populate the difficulty selector with options
     function populateDifficultySelector() {
         difficulties.forEach(difficulty => {
@@ -22,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const game = new Game(params);
             setupEventListeners(game);
             game.updateBoard();
+            hideDifficultySelector();
             
         } else {
             updateStatus('Selected difficulty not found', true);
@@ -75,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('done-button').addEventListener('click', () => {
             game.done('Game over');
+            showDifficultySelector();
             updateStatus('Game over');
         });
 
@@ -99,6 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeGame(selectedDifficulty, params);
     });
 
+    // Optionally initialize with default or pre-selected difficulty if needed
+    showDifficultySelector(); // Show the difficulty selector initially
+    
     // Optionally initialize with default or pre-selected difficulty if needed
     const defaultGameName = "Default";
     const defaultGame = { pileOrdering:"none", numberOfPiles:"four", suitOrdering:"acesFirst", timed:"none" };
