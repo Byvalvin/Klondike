@@ -83,6 +83,17 @@ document.addEventListener('DOMContentLoaded', () => {
         addButtonListener('cheat-button', () => game.cheat(), 'Cheat mode activated', 'Error activating cheat mode');
         addButtonListener('save-button', () => game.save(), 'Game saved', 'Error saving game');
 
+        document.getElementById('toggle-timer').addEventListener('click', () => {
+            const timerContainer = document.getElementById('timer-container');
+            if (timerContainer.style.display === 'none') {
+                timerContainer.style.display = 'flex';
+                this.innerText = 'Hide Timer';
+            } else {
+                timerContainer.style.display = 'none';
+                this.innerText = 'Show Timer';
+            }
+        });
+        
         document.getElementById('load-button').addEventListener('click', () => {
             const data = localStorage.getItem('savedGame');
             if (data) {
