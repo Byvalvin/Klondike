@@ -113,10 +113,25 @@ header {
     padding: var(--padding-medium);
 }
 
+
+/* Display the difficulty selector and start button when needed */
+#difficulty-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#difficulty-selector.hidden {
+    display: none;
+}
+
 #game-controls, #state-controls {
     display: flex;
     gap: var(--margin-small);
     align-items: center;
+    margin-bottom: 20px;
+    justify-content: center;
 }
 
 button {
@@ -148,6 +163,21 @@ button:focus {
 /* Hidden class */
 .hidden {
     display: none;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background-color: var(--primary-dark);
+    color: white;
+    border: none;
+    padding: var(--button-padding);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: var(--primary-color);
 }
 
 /* Icon Buttons */
@@ -287,9 +317,10 @@ button:focus {
     font-size: 1.6em;
 }
 
+/* Enhanced Card Hover Effect */
 .deck-content .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .card-content {
