@@ -20,6 +20,7 @@
     --card-face-down-color: #BDC3C7;
 }
 
+
 /* Root Variables */
 :root {
     --primary-color: #3498DB;
@@ -32,6 +33,10 @@
     --font-size-large: 1.2em;
     --font-size-medium: 1em;
     --font-size-small: 0.9em;
+    --margin-small: 5px;
+    --margin-medium: 10px;
+    --padding-small: 8px;
+    --padding-medium: 12px;
 }
 
 /* General Styles */
@@ -47,7 +52,7 @@ body {
 header {
     background-color: var(--primary-color);
     color: white;
-    padding: 15px 20px;
+    padding: var(--padding-medium);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
@@ -63,7 +68,7 @@ header {
 #logo-container img {
     width: 50px;
     height: auto;
-    margin-right: 15px;
+    margin-right: var(--margin-medium);
 }
 
 .card-logo {
@@ -98,19 +103,19 @@ header {
 
 #status {
     font-size: var(--font-size-large);
-    margin: 10px 0;
+    margin: var(--margin-medium) 0;
     color: var(--text-color);
 }
 
 #controls {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: var(--padding-medium);
 }
 
 #game-controls, #state-controls {
     display: flex;
-    gap: 10px;
+    gap: var(--margin-small);
     align-items: center;
 }
 
@@ -119,7 +124,7 @@ button {
     color: white;
     border: none;
     padding: var(--button-padding);
-    margin: 5px;
+    margin: var(--margin-small);
     font-size: var(--font-size-medium);
     cursor: pointer;
     border-radius: 5px;
@@ -173,7 +178,7 @@ button:focus {
     position: absolute;
     background: var(--primary-dark);
     color: white;
-    padding: 5px;
+    padding: var(--padding-small);
     border-radius: 5px;
     font-size: var(--font-size-small);
     white-space: nowrap;
@@ -187,8 +192,8 @@ button:focus {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 20px;
-    gap: 15px;
+    padding: var(--padding-medium);
+    gap: var(--margin-small);
 }
 
 .game-board {
@@ -197,7 +202,7 @@ button:focus {
     flex-direction: column;
     align-items: center;    
     justify-content: space-around;
-    padding: 20px;
+    padding: var(--padding-medium);
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -205,9 +210,9 @@ button:focus {
 
 .deck {
     border: 1px solid var(--card-border-color);
-    padding: 20px;
+    padding: var(--padding-medium);
     background-color: #fff;
-    margin: 5px;
+    margin: var(--margin-small);
     display: inline-block;
     vertical-align: top;
     position: relative;
@@ -226,10 +231,10 @@ button:focus {
 .deck-label {
     font-weight: bold;
     text-align: center;
-    margin-bottom: 8px;
+    margin-bottom: var(--margin-small);
     font-size: var(--font-size-large);
     background-color: #f1f1f1;
-    padding: 4px;
+    padding: var(--padding-small);
     border-radius: 4px;
 }
 
@@ -296,7 +301,7 @@ button:focus {
     font-size: 1em;
 }
 
-.card-symbol.s {
+.card-symbol.s, .card-symbol.c{
     color: black;
 }
 
@@ -304,9 +309,6 @@ button:focus {
     color: red;
 }
 
-.card-symbol.c {
-    color: black;
-}
 
 /* Responsive Design */
 @media (max-width: 600px) {
@@ -322,7 +324,7 @@ button:focus {
 
 @media (max-width: 400px) {
     button {
-        padding: 10px 18px;
+        padding: var(--padding-small) 18px;
         font-size: var(--font-size-small);
     }
 }
