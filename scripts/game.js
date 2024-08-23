@@ -379,7 +379,7 @@ class Game {
     
     canMoveStockToPile(toDeck, card) {
         const rankPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
-        return (card.rankCard() + 1 === rankPileTop || card.rankCard() === 13) && toDeck.isEmpty()) && this.satisfyPileOrder(card, toDeck);
+        return (card.rankCard() + 1 === rankPileTop || card.rankCard() === 13 && toDeck.isEmpty()) && this.satisfyPileOrder(card, toDeck);
     }
     canMovePileToPile(fromDeck, toDeck, card) {
         const rankPileTop = card.rankCard();
