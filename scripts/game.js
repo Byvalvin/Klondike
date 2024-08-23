@@ -27,6 +27,7 @@ class Game {
         this.PILES = Array.from({ length: this.Npiles }, (_, i) => new Deck(`Pile ${i + 1}`));
         this.selectedCards = null; // Track the currently selected cards
         this.maxCardValue = 13;
+        
         this.initializeGame();
     }
 
