@@ -1,3 +1,28 @@
+function flipCoin() {
+    // Generate a random number between 0 and 1
+    const result = Math.random() < 0.5 ? 'Heads' : 'Tails';
+    return result;
+}
+
+function areSameColor(card1, card2) {
+    // Define the color groups
+    const sameColor = {
+        's': 'black', 
+        'c': 'black', 
+        'h': 'red', 
+        'd': 'red'
+    };
+    // Check if both cards are of the same color
+    return sameColor[card1] === sameColor[card2];
+}
+
+function satisfyPileOrder(order, cardA, cardB){
+    switch(order){
+        case "altColor": return !areSameColor(cardA, cardB);
+        case "sameColor": return areSameColor(cardA, cardB);
+        default: return true; // none
+    }
+}
 
 /**
  * Represents a Klondike Solitaire game.
@@ -8,13 +33,17 @@ class Game {
      */
     constructor(diff) {
         console.log("got diff", diff);
+        this.pileOrder = diff.pileOrdering;
+        this.Npiles = parameterScores.numberOfPiles[diff.numberOfPiles].value;
+        this.acesFirst = diff.suitOrdering==="random" ? flipCoin() : diff.suitOrdering==="acesFirst";
+        this.timerCount = parameterScores.timed[diff.timed].value;
+        
         this.startMessage = 'Welcome to Klondike!';
         this.endMessage = 'Thank you for playing';
         this.gameOn = true;
         this.Stock = new Deck('Stock');
         this.Discard = new Deck('Discard');
         this.SUITS = ['Spades', 'Hearts', 'Diamonds', 'Clubs'].map(name => new Deck(name));
-        this.Npiles = parameterScores.numberOfPiles[diff.numberOfPiles].value;
         this.PILES = Array.from({ length: this.Npiles }, (_, i) => new Deck(`Pile ${i + 1}`));
         this.selectedCards = null; // Track the currently selected cards
         this.maxCardValue = 13;
@@ -157,6 +186,7 @@ class Game {
     done(message) {
         this.gameOn = false;
         document.getElementById('status').innerText = message;
+        initializeGame();
         console.log(message);
     }
 
