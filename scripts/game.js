@@ -385,25 +385,33 @@ class Game {
     }
     
     canMoveStockToPile(toDeck, card) {
-        const rankPileTop = toDeck.isEmpty() ? this.maxCardValue : toDeck.peekDeck().rankCard();
-        return (card.rankCard() + 1 === rankPileTop || card.rankCard() === this.maxCardValue && toDeck.isEmpty())
-            && this.satisfyPileOrder(card, toDeck);
+        const rankPileTop = toDeck.isEmpty() ? (this.acesFirst ? this.maxCardValue : 1) : toDeck.peekDeck().rankCard();
+        return (
+            this.acesFirst ?
+            (card.rankCard() + 1 === rankPileTop || card.rankCard() === this.maxCardValue && toDeck.isEmpty())
+            :
+            (card.rankCard() - 1 === rankPileTop || card.rankCard() === 1 && toDeck.isEmpty())
+        ) && this.satisfyPileOrder(card, toDeck);
     }
     canMovePileToPile(fromDeck, toDeck, card) {
         const rankPileTop = card.rankCard();
-        const rankTargetPileTop = toDeck.isEmpty() ? (this.acesFirst ? this.maxCardValue : 0) : toDeck.peekDeck().rankCard();
+        const rankTargetPileTop = toDeck.isEmpty() ? (this.acesFirst ? this.maxCardValue : 1) : toDeck.peekDeck().rankCard();
         return (
             this.acesFirst ? 
             (rankPileTop + 1 === rankTargetPileTop || rankPileTop === this.maxCardValue && toDeck.isEmpty()) 
             : 
-            (rankPileTop - 1 === rankTargetPileTop || rankPileTop === 0 && toDeck.isEmpty())
+            (rankPileTop - 1 === rankTargetPileTop || rankPileTop === 1 && toDeck.isEmpty())
         ) && this.satisfyPileOrder(card, toDeck);
     }
     canMoveSuitToPile(fromDeck, toDeck, card) {
         const rankSuitTop = card.rankCard();
-        const rankPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
-        return (rankSuitTop + 1 === rankPileTop || rankSuitTop === this.maxCardValue && toDeck.isEmpty())
-            && this.satisfyPileOrder(card, toDeck);
+        const rankPileTop = toDeck.isEmpty() ? (this.acesFirst ? this.maxCardValue : 1) : toDeck.peekDeck().rankCard();
+        return (
+            this.aceFirst ?
+            (rankSuitTop + 1 === rankPileTop || rankSuitTop === this.maxCardValue && toDeck.isEmpty())
+            :
+            (rankSuitTop - 1 === rankPileTop || rankSuitTop === 1 && toDeck.isEmpty())
+        ) && this.satisfyPileOrder(card, toDeck);
     }
 
     startTimer() {
