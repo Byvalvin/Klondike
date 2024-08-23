@@ -351,8 +351,8 @@ class Game {
 
     satisfyPileOrder(card, toDeck){
         switch(this.pileOrder){
-            case "altColor": return toDeck.isEmpty() ? true : !areSameColor(card, toDeck.peekDeck());
-            case "sameColor": return toDeck.isEmpty() ? true : areSameColor(card, toDeck.peekDeck());
+            case "altColor": return toDeck.isEmpty() ? true : !this.areSameColor(card, toDeck.peekDeck());
+            case "sameColor": return toDeck.isEmpty() ? true : this.areSameColor(card, toDeck.peekDeck());
             default: return true; // none
         }
     }
