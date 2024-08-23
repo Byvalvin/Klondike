@@ -465,7 +465,7 @@ class Game {
         gameBoard.appendChild(pileContainer);
 
         // Update timer display if visible
-        if (this.timed) {
+        if (this.timer) {
             this.updateTimerDisplay();
         }
         
