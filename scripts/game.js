@@ -379,17 +379,20 @@ class Game {
     
     canMoveStockToPile(toDeck, card) {
         const rankPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
-        return (card.rankCard() + 1 === rankPileTop || card.rankCard() === 13 && toDeck.isEmpty()) && this.satisfyPileOrder(card, toDeck);
+        return (card.rankCard() + 1 === rankPileTop || card.rankCard() === this.maxCardValue && toDeck.isEmpty())
+            && this.satisfyPileOrder(card, toDeck);
     }
     canMovePileToPile(fromDeck, toDeck, card) {
         const rankPileTop = card.rankCard();
         const rankTargetPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
-        return (rankPileTop + 1 === rankTargetPileTop || rankPileTop === 13 && toDeck.isEmpty()) && this.satisfyPileOrder(card, toDeck);
+        return (rankPileTop + 1 === rankTargetPileTop || rankPileTop === this.maxCardValue && toDeck.isEmpty())
+            && this.satisfyPileOrder(card, toDeck);
     }
     canMoveSuitToPile(fromDeck, toDeck, card) {
         const rankSuitTop = card.rankCard();
         const rankPileTop = toDeck.isEmpty() ? 13 : toDeck.peekDeck().rankCard();
-        return (rankSuitTop + 1 === rankPileTop || rankSuitTop === 13 && toDeck.isEmpty()) && this.satisfyPileOrder(card, toDeck);
+        return (rankSuitTop + 1 === rankPileTop || rankSuitTop === this.maxCardValue && toDeck.isEmpty())
+            && this.satisfyPileOrder(card, toDeck);
     }
 
     /**
