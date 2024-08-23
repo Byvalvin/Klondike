@@ -4,26 +4,6 @@ function flipCoin() {
     return result;
 }
 
-function areSameColor(card1, card2) {
-    // Define the color groups
-    const sameColor = {
-        's': 'black', 
-        'c': 'black', 
-        'h': 'red', 
-        'd': 'red'
-    };
-    // Check if both cards are of the same color
-    return sameColor[card1] === sameColor[card2];
-}
-
-function satisfyPileOrder(order, cardA, cardB){
-    switch(order){
-        case "altColor": return !areSameColor(cardA, cardB);
-        case "sameColor": return areSameColor(cardA, cardB);
-        default: return true; // none
-    }
-}
-
 /**
  * Represents a Klondike Solitaire game.
  */
@@ -357,9 +337,34 @@ class Game {
         return false;
     }
 
+    areSameColor(card1, card2) {
+        // Define the color groups
+        const sameColor = {
+            's': 'black', 
+            'c': 'black', 
+            'h': 'red', 
+            'd': 'red'
+        };
+        // Check if both cards are of the same color
+        return sameColor[card1] === sameColor[card2];
+    }
+
+    satisfyPileOrder(order, cardA, cardB){
+        switch(order){
+            case "altColor": return !areSameColor(cardA, cardB);
+            case "sameColor": return areSameColor(cardA, cardB);
+            default: return true; // none
+        }
+    }
+
     canMoveStockToSuit(toDeck, card) {
         const rankSuitTop = toDeck.isEmpty() ? 0 : toDeck.peekDeck().rankCard();
-        return (card.rankCard() === rankSuitTop + 1 || card.rankCard() === 1) && card.suitCard() === toDeck.nameDeck();
+        return (
+            this.acesFirst ? 
+                (card.rankCard() === rankSuitTop + 1 || card.rankCard() === 1) 
+                : 
+                (card.rankCard() === rankSuitTop - 1 || card.rankCard() === this.maxCardValue)
+        ) && card.suitCard() === toDeck.nameDeck();
     }
 
     canMoveStockToPile(toDeck, card) {
