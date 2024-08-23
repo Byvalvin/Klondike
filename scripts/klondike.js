@@ -119,13 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
         initializeGame(selectedDifficulty, params);
     });
 
-    // Optionally initialize with default or pre-selected difficulty if needed
-    showDifficultySelector(); // Show the difficulty selector initially
     
     // Optionally initialize with default or pre-selected difficulty if needed
     const defaultGameName = "Default";
     const defaultGame = { pileOrdering:"none", numberOfPiles:"four", suitOrdering:"acesFirst", timed:"none" };
     initializeGame(defaultGameName, defaultGame);
+
+    // Optionally initialize with default or pre-selected difficulty if needed
+    showDifficultySelector(); // Show the difficulty selector initially
 });
 
 
