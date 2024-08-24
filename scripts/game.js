@@ -423,6 +423,9 @@ class Game {
         ) && this.satisfyPileOrder(card, toDeck);
     }
 
+
+
+    
     startTimer() {
         // Ensure no previous timer is running
         this.stopTimer();
@@ -432,9 +435,6 @@ class Game {
             this.updateTimerDisplay();
         }, 1000); // Update every second
     }
-
-
-    
     startCountdownTimer() {
         // Ensure no previous timer is running
         this.stopTimer();
@@ -456,15 +456,12 @@ class Game {
             }
         }, 1000); // Update every second
     }
-
-
     stopTimer() {
         if (this.timerInterval) {
             clearInterval(this.timerInterval);
             this.timerInterval = null;
         }
     }
-
     resetTimer() {
         this.stopTimer();
         if (this.timerCount === 0) {
@@ -473,8 +470,6 @@ class Game {
             this.startCountdownTimer();
         }
     }
-
-
     updateTimerDisplay() {
         const timerElement = document.getElementById('timer');
         if (timerElement) {
@@ -489,7 +484,6 @@ class Game {
 
 
 
-    
     /**
      * Checks if the game has been won.
      * @returns {boolean} - True if all suit decks have 13 cards, false otherwise.
@@ -497,7 +491,6 @@ class Game {
     checkWin() {
         return this.SUITS.every(deck => deck.sizeDeck() === this.maxCardValue);
     }
-    
     /**
      * Updates the game board's display.
      */
@@ -550,7 +543,6 @@ class Game {
         
         return cardElement;
     }
-
     createDeckDiv(deck) {
         const deckDiv = document.createElement('div');
         deckDiv.className = 'deck';
@@ -584,7 +576,6 @@ class Game {
     
         return deckDiv;
     }
-
     /**
      * Creates a container div with a specified class name.
      * @param {string} className - The class name for the container.
