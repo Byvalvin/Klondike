@@ -18,8 +18,7 @@ class Game {
         this.acesFirst = diff.suitOrdering==="random" ? flipCoin() : diff.suitOrdering==="acesFirst";
         this.timerCount = parameterScores.timed[diff.timed].value; //"none" is 0 which means will count up indefinitely
 
-        this.timer = 0;
-        this.timerInterval = null; // Store timer interval ID
+        this.timer = 0; // to track the time remaining if timerCount is not 0
         
         this.startMessage = 'Welcome to Klondike!';
         this.endMessage = 'Thank you for playing';
