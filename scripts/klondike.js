@@ -9,18 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameControls = document.getElementById('game-controls');
     const stateControls = document.getElementById('state-controls');
 
-    // Show difficulty selector and start button
-    function showDifficultySelector() {
-        difficultySelector.classList.remove('hidden');
-        gameControls.classList.add('hidden');
-        stateControls.classList.add('hidden');
-    }
-
-    // Hide difficulty selector and start button
-    function hideDifficultySelector() {
-        difficultySelector.classList.add('hidden');
-        gameControls.classList.remove('hidden');
-        stateControls.classList.remove('hidden');
+    // Show or hide the difficulty selector and game controls
+    function toggleDifficultySelector(show) {
+        difficultySelector.classList.toggle('hidden', !show);
+        gameControls.classList.toggle('hidden', show);
+        stateControls.classList.toggle('hidden', show);
     }
     
     // Populate the difficulty selector with options
@@ -40,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const game = new Game(params);
             setupEventListeners(game);
             game.updateBoard();
-            hideDifficultySelector();
+            toggleDifficultySelector(false);
             
         } else {
             updateStatus('Selected difficulty not found', true);
@@ -85,13 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('toggle-timer').addEventListener('click', () => {
             const timerContainer = document.getElementById('timer-container');
-            if (timerContainer.classList.contains('hidden-timer')) {
-                timerContainer.classList.remove('hidden-timer');
-                //toggleTimerButton.querySelector('span').innerText = 'Hide Timer';
-            } else {
-                timerContainer.classList.add('hidden-timer');
-                //toggleTimerButton.querySelector('span').innerText = 'Show Timer';
-            }
+            timerContainer.classList.toggle('hidden-timer');
         });
         
         document.getElementById('load-button').addEventListener('click', () => {
@@ -138,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeGame(defaultGameName, defaultGame);
 
     // Optionally initialize with default or pre-selected difficulty if needed
-    showDifficultySelector(); // Show the difficulty selector initially
+    toggleDifficultySelector(true); // Show the difficulty selector initially
 });
 
 
