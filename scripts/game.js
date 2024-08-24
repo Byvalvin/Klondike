@@ -424,6 +424,8 @@ class Game {
     }
 
     startTimer() {
+        // Ensure no previous timer is running
+        this.stopTimer();
         this.timer = 0;
         this.timerInterval = setInterval(() => {
             this.timer += 1;
@@ -434,6 +436,8 @@ class Game {
 
     
     startCountdownTimer() {
+        // Ensure no previous timer is running
+        this.stopTimer();
         const now = Date.now();
         const endTime = now + this.timerCount * 60 * 1000; // Duration in milliseconds
     
