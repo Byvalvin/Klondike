@@ -294,8 +294,14 @@ class Game {
         // Get only the cards that can move, leave the rest in deckCards
         if (stopValue !== null) {
             const moveableCards = [];
-            while (!deckCards.isEmpty() && deckCards.peekDeck().rankCard() <= stopValue) {
-                moveableCards.unshift(deckCards.popDeck());
+            if(this.acesFirst){
+                while (!deckCards.isEmpty() && deckCards.peekDeck().rankCard() <= stopValue) {
+                    moveableCards.unshift(deckCards.popDeck());
+                }
+            }else{
+                while (!deckCards.isEmpty() && deckCards.peekDeck().rankCard() >= stopValue) {
+                    moveableCards.unshift(deckCards.popDeck());
+                }
             }
             toDeck.updateDeck(moveableCards);
         } else {
