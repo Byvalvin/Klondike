@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('done-button').addEventListener('click', () => {
             game.done('Game over');
-            showDifficultySelector();
+            toggleDifficultySelector(true);
             updateStatus('Game over');
         });
 
