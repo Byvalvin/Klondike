@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameControls = document.getElementById('game-controls');
     const stateControls = document.getElementById('state-controls');
 
+    let defaultGameHolder = null;
+
     // Show or hide the difficulty selector and game controls
     function toggleDifficultySelector(show) {
         difficultySelector.classList.toggle('hidden', !show);
@@ -28,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize the game with params
     function initializeGame(difficultyName, params) {
+        if(defaultGameHolder){
+            defaultGameHolder.stopTimer();
+        }
         if (params) {
             console.log(`Initializing game with difficulty: ${difficultyName}`, params);
             const game = new Game(params);
@@ -124,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Optionally initialize with default or pre-selected difficulty if needed
     const defaultGameName = "Default";
     const defaultGame = { pileOrdering:"none", numberOfPiles:"four", suitOrdering:"acesFirst", timed:"none" };
-    initializeGame(defaultGameName, defaultGame);
+    defaultGameHolder = initializeGame(defaultGameName, defaultGame);
 
     // Optionally initialize with default or pre-selected difficulty if needed
     toggleDifficultySelector(true); // Show the difficulty selector initially
