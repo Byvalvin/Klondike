@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const difficultySelect = document.getElementById('difficulty');
     const startButton = document.getElementById('start-button');
 
+    const timerDisplay = document.getElementById('timer');
+    //const toggleTimerButton = document.getElementById('toggle-timer');
+    
     const difficultySelector = document.getElementById('difficulty-selector');
     const gameControls = document.getElementById('game-controls');
     const stateControls = document.getElementById('state-controls');
@@ -85,12 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('toggle-timer').addEventListener('click', () => {
             const timerContainer = document.getElementById('timer-container');
-            if (timerContainer.style.display === 'none') {
-                timerContainer.style.display = 'flex';
-                this.innerText = 'Hide Timer';
+            if (timerContainer.classList.contains('hidden-timer')) {
+                timerContainer.classList.remove('hidden-timer');
+                toggleTimerButton.querySelector('span').innerText = 'Hide Timer';
             } else {
-                timerContainer.style.display = 'none';
-                this.innerText = 'Show Timer';
+                timerContainer.classList.add('hidden-timer');
+                toggleTimerButton.querySelector('span').innerText = 'Show Timer';
             }
         });
         
