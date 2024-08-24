@@ -430,16 +430,23 @@ class Game {
             this.updateTimerDisplay();
         }, 1000); // Update every second
     }
+
+    initializeTimer() {
+        this.timer = this.timerCount * 60; // Initialize the timer in seconds
+        this.updateTimerDisplay();
+    }
     
     startCountdownTimer() {
+        this.initializeTimer(); // Initialize timer
+    
         const now = Date.now();
-        const endTime = now + this.timerCount * 60 * 1000; // Convert minutes to milliseconds
+        const endTime = now + this.timerCount * 60 * 1000; // Duration in milliseconds
     
         this.timerInterval = setInterval(() => {
             const remainingTime = endTime - Date.now();
-        
+    
             if (remainingTime <= 0) {
-                this.stopTimer();
+                clearInterval(this.timerInterval); // Stop the timer
                 this.timer = 0;
                 this.updateTimerDisplay();
                 // Handle game end if needed
@@ -450,6 +457,7 @@ class Game {
             }
         }, 1000); // Update every second
     }
+
 
     stopTimer() {
         if (this.timerInterval) {
@@ -471,21 +479,14 @@ class Game {
     updateTimerDisplay() {
         const timerElement = document.getElementById('timer');
         if (timerElement) {
-            let minutes, seconds;
+            const minutes = Math.floor(this.timer / 60);
+            const seconds = this.timer % 60;
     
-            if (this.timerCount === 0) {
-                // Count up timer
-                minutes = Math.floor(this.timer / 60);
-                seconds = this.timer % 60;
-            } else {
-                // Countdown timer
-                minutes = Math.floor(this.timer / 60);
-                seconds = this.timer % 60;
-            }
-    
+            // Display in MM:SS format
             timerElement.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
     }
+
 
 
 
