@@ -126,21 +126,55 @@ header {
     display: none;
 }
 
-/*Timer */
+/* Timer Display */
 #timer-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 10px 0;
+    padding: 10px;
+    background-color: var(--background-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #timer {
-    font-size: 20px;
-    margin-right: 10px;
+    font-size: 2em;
+    color: var(--text-color);
+    font-weight: bold;
+    margin-right: 15px;
 }
 
+/* Toggle Timer Button */
 #toggle-timer {
-    font-size: 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-size-medium);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
 }
+
+#toggle-timer:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+#toggle-timer:active {
+    transform: scale(0.95);
+}
+
+#toggle-timer .material-icons {
+    font-size: 1.2em;
+    margin-right: 8px;
+}
+
+
 #game-controls, #state-controls {
     display: flex;
     gap: var(--margin-small);
