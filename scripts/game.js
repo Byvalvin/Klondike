@@ -18,7 +18,7 @@ class Game {
         this.acesFirst = diff.suitOrdering==="random" ? flipCoin() : diff.suitOrdering==="acesFirst";
         this.timerCount = parameterScores.timed[diff.timed].value; //"none" is 0 which means will count up indefinitely
 
-        this.timer = 0; // to track the time remaining if timerCount is not 0
+        this.timer = this.timerCount * 60; // to track the time remaining if timerCount is not 0
         this.timeInterval = null;
         
         this.startMessage = 'Welcome to Klondike!';
@@ -431,14 +431,9 @@ class Game {
         }, 1000); // Update every second
     }
 
-    initializeTimer() {
-        this.timer = this.timerCount * 60; // Initialize the timer in seconds
-        this.updateTimerDisplay();
-    }
+
     
     startCountdownTimer() {
-        this.initializeTimer(); // Initialize timer
-    
         const now = Date.now();
         const endTime = now + this.timerCount * 60 * 1000; // Duration in milliseconds
     
