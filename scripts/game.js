@@ -65,10 +65,12 @@ class Game {
             this.Stock.peekDeck().faceupCard(true);
         }
 
-        if (this.showTimer) {
+        if (this.timerCount === 0) {
             this.startTimer();
+        } else {
+            this.startCountdownTimer();
         }
-        
+            
         this.updateBoard();
     }
 
@@ -173,6 +175,7 @@ class Game {
      */
     done(message) {
         this.gameOn = false;
+        this.stopTimer(); // Ensure timer is stopped when game ends
         document.getElementById('status').innerText = message;
         //this.initializeGame();
         console.log(message);
@@ -428,6 +431,25 @@ class Game {
         }, 1000); // Update every second
     }
 
+    startCountdownTimer() {
+        const now = Date.now();
+        const endTime = now + this.timerCount * 60 * 1000; // Convert minutes to milliseconds
+    
+        this.timerInterval = setInterval(() => {
+            const remainingTime = endTime - Date.now();
+    
+            if (remainingTime <= 0) {
+                this.stopTimer();
+                this.timer = 0;
+                this.updateTimerDisplay();
+                // Handle game end if needed
+                this.done('Time is up!');
+            } else {
+                this.timer = Math.floor((endTime - Date.now()) / 1000); // Update timer in seconds
+                this.updateTimerDisplay();
+            }
+        }, 1000); // Update every second
+    }
     stopTimer() {
         if (this.timerInterval) {
             clearInterval(this.timerInterval);
@@ -437,19 +459,33 @@ class Game {
 
     resetTimer() {
         this.stopTimer();
-        if (this.showTimer) {
+        if (this.timerCount === 0) {
             this.startTimer();
+        } else {
+            this.startCountdownTimer();
         }
     }
+
 
     updateTimerDisplay() {
         const timerElement = document.getElementById('timer');
         if (timerElement) {
-            const minutes = Math.floor(this.timer / 60);
-            const seconds = this.timer % 60;
+            let minutes, seconds;
+    
+            if (this.timerCount === 0) {
+                // Count up timer
+                minutes = Math.floor(this.timer / 60);
+                seconds = this.timer % 60;
+            } else {
+                // Countdown timer
+                minutes = Math.floor(this.timer / 60);
+                seconds = this.timer % 60;
+            }
+    
             timerElement.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
     }
+
     
     /**
      * Checks if the game has been won.
