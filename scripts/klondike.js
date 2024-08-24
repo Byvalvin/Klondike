@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             updateStatus('Selected difficulty not found', true);
         }
+
+        return game;
     }
 
     // Updates the status element with a message
