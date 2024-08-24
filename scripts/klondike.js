@@ -4,9 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusElement = document.getElementById('status');
     const difficultySelect = document.getElementById('difficulty');
     const startButton = document.getElementById('start-button');
-
-    const timerDisplay = document.getElementById('timer');
-    //const toggleTimerButton = document.getElementById('toggle-timer');
     
     const difficultySelector = document.getElementById('difficulty-selector');
     const gameControls = document.getElementById('game-controls');
