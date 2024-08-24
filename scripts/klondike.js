@@ -39,12 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
             setupEventListeners(game);
             game.updateBoard();
             toggleDifficultySelector(false);
-            
+            return game;            
         } else {
             updateStatus('Selected difficulty not found', true);
         }
 
-        return game;
+        
     }
 
     // Updates the status element with a message
