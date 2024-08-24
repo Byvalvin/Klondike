@@ -90,10 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const timerContainer = document.getElementById('timer-container');
             if (timerContainer.classList.contains('hidden-timer')) {
                 timerContainer.classList.remove('hidden-timer');
-                toggleTimerButton.querySelector('span').innerText = 'Hide Timer';
+                //toggleTimerButton.querySelector('span').innerText = 'Hide Timer';
             } else {
                 timerContainer.classList.add('hidden-timer');
-                toggleTimerButton.querySelector('span').innerText = 'Show Timer';
+                //toggleTimerButton.querySelector('span').innerText = 'Show Timer';
             }
         });
         
