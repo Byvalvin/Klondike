@@ -430,14 +430,14 @@ class Game {
             this.updateTimerDisplay();
         }, 1000); // Update every second
     }
-
+    
     startCountdownTimer() {
         const now = Date.now();
         const endTime = now + this.timerCount * 60 * 1000; // Convert minutes to milliseconds
     
         this.timerInterval = setInterval(() => {
             const remainingTime = endTime - Date.now();
-    
+        
             if (remainingTime <= 0) {
                 this.stopTimer();
                 this.timer = 0;
@@ -445,11 +445,12 @@ class Game {
                 // Handle game end if needed
                 this.done('Time is up!');
             } else {
-                this.timer = Math.floor((endTime - Date.now()) / 1000); // Update timer in seconds
+                this.timer = Math.floor(remainingTime / 1000); // Update timer in seconds
                 this.updateTimerDisplay();
             }
         }, 1000); // Update every second
     }
+
     stopTimer() {
         if (this.timerInterval) {
             clearInterval(this.timerInterval);
@@ -485,6 +486,8 @@ class Game {
             timerElement.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
     }
+
+
 
     
     /**
