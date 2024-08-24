@@ -19,6 +19,7 @@ class Game {
         this.timerCount = parameterScores.timed[diff.timed].value; //"none" is 0 which means will count up indefinitely
 
         this.timer = 0; // to track the time remaining if timerCount is not 0
+        this.timeInterval = null;
         
         this.startMessage = 'Welcome to Klondike!';
         this.endMessage = 'Thank you for playing';
