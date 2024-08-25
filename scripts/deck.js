@@ -32,7 +32,7 @@ class Deck {
      * @returns {boolean} - True if the deck is empty, false otherwise.
      */
     isEmpty() {
-        return this.sizeDeck() === 0;
+        return this.cards.length === 0;
     }
 
     /**
@@ -41,9 +41,7 @@ class Deck {
      * @throws {Error} - Throws an error if the deck is empty.
      */
     peekDeck() {
-        if (this.isEmpty()) {
-            throw new Error('Deck is empty');
-        }
+        if (this.isEmpty()) throw new Error('Deck is empty');
         return this.cards[this.cards.length - 1];
     }
 
@@ -53,9 +51,7 @@ class Deck {
      * @throws {TypeError} - Throws an error if the argument is not a Card instance.
      */
     pushDeck(card) {
-        if (!(card instanceof Card)) {
-            throw new TypeError('Argument must be an instance of Card');
-        }
+        if (!(card instanceof Card)) throw new TypeError('Argument must be an instance of Card');
         this.cards.push(card);
     }
 
@@ -65,9 +61,7 @@ class Deck {
      * @throws {Error} - Throws an error if the deck is empty.
      */
     popDeck() {
-        if (this.isEmpty()) {
-            throw new Error('Deck is empty');
-        }
+        if (this.isEmpty()) throw new Error('Deck is empty');
         return this.cards.pop();
     }
 
@@ -84,7 +78,7 @@ class Deck {
      * @returns {Card[]} - A copy of the deck's cards.
      */
     getCardsList() {
-        return this.cards.slice();
+        return [...this.cards];
     }
 
     /**
@@ -119,9 +113,7 @@ class Deck {
      * @throws {TypeError} - Throws an error if the argument is not a Deck instance.
      */
     addDeck(deck) {
-        if (!(deck instanceof Deck)) {
-            throw new TypeError('Argument must be an instance of Deck');
-        }
+        if (!(deck instanceof Deck)) throw new TypeError('Argument must be an instance of Deck');
         this.cards.push(...deck.cards);
     }
 
@@ -134,7 +126,7 @@ class Deck {
         if (!Array.isArray(cardsToAdd) || !cardsToAdd.every(card => card instanceof Card)) {
             throw new TypeError('Argument must be an array of Card instances');
         }
-        this.cards = this.cards.concat(cardsToAdd);
+        this.cards = [...this.cards, ...cardsToAdd];
     }
 
     /**
@@ -146,7 +138,7 @@ class Deck {
         if (!Array.isArray(cardsToSet) || !cardsToSet.every(card => card instanceof Card)) {
             throw new TypeError('Argument must be an array of Card instances');
         }
-        this.cards = cardsToSet;
+        this.cards = [...cardsToSet];
     }
 
     /**
@@ -154,9 +146,9 @@ class Deck {
      * @returns {Deck} - A new deck with the cards reversed.
      */
     getReverseDeck() {
-        const rev = new Deck(`reverse-${this.name}`);
-        rev.setDeck([...this.cards].reverse()); // Create a copy and reverse it
-        return rev;
+        const reversedDeck = new Deck(`reverse-${this.name}`);
+        reversedDeck.setDeck([...this.cards].reverse());
+        return reversedDeck;
     }
 
     /**
@@ -173,6 +165,7 @@ class Deck {
         this.cards.forEach(card => card.faceupCard(false));
     }
 }
+
 
 
 
