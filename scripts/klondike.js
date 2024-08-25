@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const numberMap = { three: 3, four: 4, seven: 7 };
         numberOfPilesInfo.textContent = numberMap[params.numberOfPiles] || params.numberOfPiles;
         
-        suitOrderingInfo.textContent = params.suitOrdering === "acesFirst" ? "Aces First" : "Kings First";
+        suitOrderingInfo.textContent = currentGameHolder.acesFirst ? "Aces First" : "Kings First";
 
         const timeMap = { threeMins: 3, fiveMins: 5, tenMins: 10 };
         timedInfo.textContent = timeMap[params.timed] || params.timed;
