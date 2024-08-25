@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const timedInfo = document.getElementById('timed-info');
     const difficultyInfoHeader = document.getElementById('difficulty-info-header');
 
+    const timerButton = document.getElementById('toggle-timer');
+    
     let currentGameHolder = null;
     let infoVisible = true;
 
@@ -93,9 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleDifficultyInfoButton.querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
         });
         
-        document.getElementById('toggle-timer').addEventListener('click', () => {
-            document.getElementById('timer-container').classList.toggle('hidden-timer');
-        });
 
         document.getElementById('load-button').addEventListener('click', () => {
             const data = localStorage.getItem('savedGame');
@@ -153,6 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
         updateStatus(`Difficulty: ${selectedDifficulty}`);
     });
 
+    timerButton.addEventListener('click', () => {
+        document.getElementById('timer-container').classList.toggle('hidden-timer');
+    });
+    
     const defaultGameName = "Default";
     const defaultGame = { pileOrdering: "none", numberOfPiles: "four", suitOrdering: "acesFirst", timed: "none" };
     initializeGame(defaultGameName, defaultGame);
