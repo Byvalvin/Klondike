@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const numberOfPilesInfo = document.getElementById('number-of-piles-info');
     const suitOrderingInfo = document.getElementById('suit-ordering-info');
     const timedInfo = document.getElementById('timed-info');
-    const closeDifficultyInfoButton = document.getElementById('close-difficulty-info');
+    const difficultyInfoHeader = document.getElementById('difficulty-info-header');
 
     let currentGameHolder = null;
+    let infoVisible = true;
 
     function toggleDifficultySelector(show) {
         difficultySelector.classList.toggle('hidden', !show);
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setupEventListeners(currentGameHolder);
             currentGameHolder.updateBoard();
             toggleDifficultySelector(false);
-            showDifficultyInfo(params); // Show difficulty info when initializing the game
+            showDifficultyInfo(difficultyName, params); // Show difficulty info when initializing the game
         } else {
             updateStatus('Selected difficulty not found', true);
         }
@@ -83,6 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
         addButtonListener('cheat-button', () => game.cheat(), 'Cheat mode activated', 'Error activating cheat mode');
         addButtonListener('save-button', () => game.save(), 'Game saved', 'Error saving game');
 
+        
+        // Add event listener for the toggle arrow in the difficulty info section
+        // Toggle visibility of the difficulty info section
+        document.getElementById('toggle-difficulty-info').addEventListener('click', () => {
+            infoVisible = !infoVisible;
+            difficultyInfoSection.classList.toggle('hidden', !infoVisible);
+            toggleDifficultyInfoButton.querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
+        });
+        
         document.getElementById('toggle-timer').addEventListener('click', () => {
             document.getElementById('timer-container').classList.toggle('hidden-timer');
         });
@@ -113,27 +123,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Show difficulty info in the info section
-    function showDifficultyInfo(params) {
-        pileOrderingInfo.textContent = params.pileOrdering==="none" ? 
-            params.pileOrdering 
+    function showDifficultyInfo(difficultyName, params) {
+        difficultyInfoHeader.textContent = `Difficulty: ${difficultyName}`;
+        
+        pileOrderingInfo.textContent = params.pileOrdering === "none" ? 
+            "None" 
             : 
-            params.pileOrdering==="altColor" ? "Alternate Colours" : "Same Colours";
+            params.pileOrdering === "altColor" ? "Alternate Colours" : "Same Colours";
         
-        const numberMap = {three:3, four:4, seven:7};
-        numberOfPilesInfo.textContent = numberMap[params.numberOfPiles];
+        const numberMap = { three: 3, four: 4, seven: 7 };
+        numberOfPilesInfo.textContent = numberMap[params.numberOfPiles] || params.numberOfPiles;
         
-        suitOrderingInfo.textContent = params.suitOrdering==="acesFirst" ? "Aces First" : "Kings First";
+        suitOrderingInfo.textContent = params.suitOrdering === "acesFirst" ? "Aces First" : "Kings First";
 
-        const timeMap = {threeMins:3, fiveMins:5, tenMins:10};
+        const timeMap = { threeMins: 3, fiveMins: 5, tenMins: 10 };
         timedInfo.textContent = timeMap[params.timed] || params.timed;
         
         difficultyInfoSection.classList.remove('hidden');
     }
 
-    // Hide difficulty info section
-    function hideDifficultyInfo() {
-        difficultyInfoSection.classList.add('hidden');
-    }
 
     // Begin Klondike
     populateDifficultySelector();
@@ -150,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeGame(defaultGameName, defaultGame);
     toggleDifficultySelector(true);
 
-    // Add event listener for the close button in the difficulty info section
-    closeDifficultyInfoButton.addEventListener('click', hideDifficultyInfo);
 });
+
 
