@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         suitOrderingInfo.textContent = params.suitOrdering==="acesFirst" ? "Aces First" : "Kings First";
 
         const timeMap = {threeMins:3, fiveMins:5, tenMins:10};
-        timedInfo.textContent = timeMap[params.timed];
+        timedInfo.textContent = timeMap[params.timed] || params.timed;
         
         difficultyInfoSection.classList.remove('hidden');
     }
