@@ -1,28 +1,26 @@
+// mode.js
 
-//mode.js
 
-const themeButtonID = 'card-logo';
-//logo
+// Create and style a card element for the logo
 const logoContainer = document.getElementById(themeButtonID);
-
-// Create a card element
 const cardElement = document.createElement('div');
 cardElement.className = 'card'; // Use the same class as for cards
-
-// Set inner HTML for the card
 cardElement.innerHTML = `
     <div class="card-symbol s">♠</div>
     <div class="card-content">A</div>
 `;
-logoContainer.appendChild(cardElement); // Add the card element to the logo container
+logoContainer.appendChild(cardElement);
 
-
+// Light or Dark Mode
+const themeButtonID = 'card-logo';
 const themeToggleButton = document.getElementById(themeButtonID);
 
 function applyThemeBasedOnTime() {
     const currentHour = new Date().getHours();
     console.log(`Current Hour: ${currentHour}`); // Debugging line
-    if (currentHour >= 17) { // 17 represents 5 PM
+
+    // Use more specific times for theme changes if desired
+    if (currentHour >= 17) { // After 5 PM
         console.log('Setting dark theme'); // Debugging line
         document.body.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
@@ -33,20 +31,21 @@ function applyThemeBasedOnTime() {
     }
 }
 
-
-// Apply theme based on time
+// Apply theme based on the time of day
 applyThemeBasedOnTime();
 
 // Toggle theme manually
 if (themeToggleButton) {
     themeToggleButton.addEventListener('click', () => {
         let currentTheme = document.body.getAttribute('data-theme');
-        console.log(`Current Theme: ${currentTheme}`); // Debugging line
         let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        console.log(`New Theme: ${newTheme}`); // Debugging line
         document.body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
+
+        // Optional: Add visual feedback or animation here
+        console.log(`Theme toggled to: ${newTheme}`); // Debugging line
     });
 } else {
     console.warn('Theme toggle button not found.');
 }
+
