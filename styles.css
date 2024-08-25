@@ -179,10 +179,13 @@ header {
     display: none;
 }
 
-/* Ensure button icon is still visible */
+
+
+/*
 .hidden-timer #toggle-timer::after {
-    /*content: "Show Timer";*/
-}
+    content: "Show Timer";
+} 
+*/
 
 #game-controls, #state-controls {
     display: flex;
