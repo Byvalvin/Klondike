@@ -20,7 +20,6 @@
     --card-face-down-color: #BDC3C7;
 }
 
-
 /* Root Variables */
 :root {
     --primary-color: #3498DB;
@@ -113,8 +112,7 @@ header {
     padding: var(--padding-medium);
 }
 
-
-/* Display the difficulty selector and start button when needed */
+/* Difficulty Selector */
 #difficulty-selector {
     display: flex;
     flex-direction: column;
@@ -179,14 +177,7 @@ header {
     display: none;
 }
 
-
-
-/*
-.hidden-timer #toggle-timer::after {
-    content: "Show Timer";
-} 
-*/
-
+/* Game Controls */
 #game-controls, #state-controls {
     display: flex;
     gap: var(--margin-small);
@@ -393,14 +384,13 @@ button:focus {
     font-size: 1em;
 }
 
-.card-symbol.s, .card-symbol.c{
+.card-symbol.s, .card-symbol.c {
     color: black;
 }
 
 .card-symbol.h, .card-symbol.d {
     color: red;
 }
-
 
 /* Responsive Design */
 @media (max-width: 600px) {
