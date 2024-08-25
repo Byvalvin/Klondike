@@ -1,5 +1,6 @@
 // mode.js
 
+const themeButtonID = 'card-logo';
 
 // Create and style a card element for the logo
 const logoContainer = document.getElementById(themeButtonID);
@@ -12,9 +13,6 @@ cardElement.innerHTML = `
 logoContainer.appendChild(cardElement);
 
 // Light or Dark Mode
-const themeButtonID = 'card-logo';
-const themeToggleButton = document.getElementById(themeButtonID);
-
 function applyThemeBasedOnTime() {
     const currentHour = new Date().getHours();
     console.log(`Current Hour: ${currentHour}`); // Debugging line
@@ -35,6 +33,7 @@ function applyThemeBasedOnTime() {
 applyThemeBasedOnTime();
 
 // Toggle theme manually
+const themeToggleButton = document.getElementById(themeButtonID);
 if (themeToggleButton) {
     themeToggleButton.addEventListener('click', () => {
         let currentTheme = document.body.getAttribute('data-theme');
