@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             difficultySelect.appendChild(option);
         });
     }
-
+    
     function initializeGame(difficultyName, params) {
         if (currentGameHolder) {
             currentGameHolder.stopTimer();
@@ -85,15 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         addButtonListener('board-button', () => game.board(), 'Board updated', 'Error updating board');
         addButtonListener('cheat-button', () => game.cheat(), 'Cheat mode activated', 'Error activating cheat mode');
         addButtonListener('save-button', () => game.save(), 'Game saved', 'Error saving game');
-
-        
-        // Add event listener for the toggle arrow in the difficulty info section
-        // Toggle visibility of the difficulty info section
-        document.getElementById('toggle-difficulty-info').addEventListener('click', () => {
-            infoVisible = !infoVisible;
-            difficultyInfoSection.classList.toggle('hidden', !infoVisible);
-            toggleDifficultyInfoButton.querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
-        });
         
 
         document.getElementById('load-button').addEventListener('click', () => {
@@ -152,6 +143,14 @@ document.addEventListener('DOMContentLoaded', () => {
         updateStatus(`Difficulty: ${selectedDifficulty}`);
     });
 
+    // Add event listener for the toggle arrow in the difficulty info section
+    // Toggle visibility of the difficulty info section
+    document.getElementById('toggle-difficulty-info').addEventListener('click', () => {
+        infoVisible = !infoVisible;
+        difficultyInfoSection.classList.toggle('hidden', !infoVisible);
+        toggleDifficultyInfoButton.querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
+    });
+    
     timerButton.addEventListener('click', () => {
         document.getElementById('timer-container').classList.toggle('hidden-timer');
     });
