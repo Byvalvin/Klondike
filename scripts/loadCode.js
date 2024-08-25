@@ -1,7 +1,7 @@
 // Function to load scripts from the stack dynamically
-const loadScripts = (stack) => {
+const loadScripts = (stack, onComplete) => {
   if (stack.length === 0) {
-    console.log('All scripts loaded.');
+    if (typeof onComplete === 'function') onComplete(); // Execute callback if provided
     return;
   }
 
@@ -12,17 +12,25 @@ const loadScripts = (stack) => {
   script.defer = true;
   script.onload = () => {
     console.log(msg);
-    loadScripts(stack); // Load the next script from the stack
+    loadScripts(stack, onComplete); // Load the next script from the stack
   };
-  script.onerror = () => console.error(`Failed to load ${src}`);
+  script.onerror = () => {
+    console.error(`Failed to load ${src}`);
+    // Optionally, you could retry loading the script or handle failure
+    loadScripts(stack, onComplete);
+  };
   document.body.appendChild(script);
 };
-
 
 // Define the stack of scripts
 const scriptStack = [
   { src: 'scripts/mode.js', msg: 'Done loading mode.js' },
-    // Add more scripts here as needed
+  // Add more scripts here as needed
 ];
+
 // Start loading scripts from the stack
-loadScripts(scriptStack);
+loadScripts(scriptStack, () => {
+  console.log('All scripts have been loaded and initialized.');
+  // Optionally, trigger additional actions here
+});
+
