@@ -269,6 +269,41 @@ button:focus {
     transform: translateX(-50%);
 }
 
+/* Difficulty Info Section */
+#difficulty-info {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 5px;
+    padding: var(--padding-medium);
+    margin: var(--margin-medium);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#difficulty-info.hidden {
+    display: none;
+}
+
+#difficulty-info h2 {
+    margin-top: 0;
+}
+
+#difficulty-info button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: var(--padding-small);
+    margin-top: var(--margin-small);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#difficulty-info button:hover {
+    background-color: var(--primary-dark);
+}
+
+
 /* Game Board */
 #game-board {
     display: flex;
