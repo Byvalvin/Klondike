@@ -10,7 +10,6 @@
 <body>
     <header>
         <div id="logo-container">
-            <!-- Placeholder for dynamically added card logo -->
             <div id="card-logo" class="card-logo"></div>
             <h1>Klondike Solitaire</h1>
         </div>
@@ -29,44 +28,44 @@
             <!-- Timer Display and Toggle Button -->
             <div id="timer-container" class="hidden-timer">
                 <div id="timer">00:00</div>
-                <button id="toggle-timer" class="icon-button" title="Toggle Timer">
+                <button id="toggle-timer" class="icon-button" title="Toggle Timer" aria-label="Toggle Timer">
                     <span class="material-icons">timer</span>
                 </button>
             </div>     
             
             <div id="game-controls">
-                <button id="reset-button">Restock</button>
-                <button id="discard-button">Discard</button>
-                <button id="cheat-button" class="hidden">Cheat</button>
+                <button id="reset-button" class="icon-button" aria-label="Restock">Restock</button>
+                <button id="discard-button" class="icon-button" aria-label="Discard">Discard</button>
+                <button id="cheat-button" class="icon-button hidden" aria-label="Cheat">Cheat</button>
             </div>
             <div id="state-controls">
-                <button id="save-button" class="icon-button" title="Save Game">
+                <button id="save-button" class="icon-button" aria-label="Save Game" title="Save Game">
                     <span class="material-icons">save</span>
                 </button>
                 
-                <button id="load-button" class="icon-button" title="Load Game">
+                <button id="load-button" class="icon-button" aria-label="Load Game" title="Load Game">
                     <span class="material-icons">folder_open</span>
                 </button>
                 
-                <button id="done-button" class="icon-button" title="End Game">
+                <button id="done-button" class="icon-button" aria-label="End Game" title="End Game">
                     <span class="material-icons">close</span>
                 </button>
             </div>
-
         </section>
 
         <section id="game-board" class="game-board">
             <!-- Game board will be dynamically updated by game.js -->
         </section>
     </main>
-    <script src="scripts/loadCode.js" defer=true></script>
-    <script src="scripts/card.js" defer=true></script>
-    <script src="scripts/deck.js" defer=true></script>
-    <script src="scripts/difficulty.js" defer=true></script>
-    <script src="scripts/game.js" defer=true></script>
-    <script src="scripts/klondike.js" defer=true></script>
+    <script src="scripts/loadCode.js" defer></script>
+    <script src="scripts/card.js" defer></script>
+    <script src="scripts/deck.js" defer></script>
+    <script src="scripts/difficulty.js" defer></script>
+    <script src="scripts/game.js" defer></script>
+    <script src="scripts/klondike.js" defer></script>
 </body>
 </html>
+
 
 
 
