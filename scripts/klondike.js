@@ -1,24 +1,24 @@
 // klondike.js
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Setup Klondike
     const statusElement = document.getElementById('status');
-    const difficultySelect = document.getElementById('difficulty');
+
     const startButton = document.getElementById('start-button');
     
+    const difficultySelect = document.getElementById('difficulty');
     const difficultySelector = document.getElementById('difficulty-selector');
+    
     const gameControls = document.getElementById('game-controls');
     const stateControls = document.getElementById('state-controls');
 
     let currentGameHolder = null;
 
-    // Show or hide the difficulty selector and game controls
     function toggleDifficultySelector(show) {
         difficultySelector.classList.toggle('hidden', !show);
         gameControls.classList.toggle('hidden', show);
         stateControls.classList.toggle('hidden', show);
     }
-    
-    // Populate the difficulty selector with options
     function populateDifficultySelector() {
         difficulties.forEach(difficulty => {
             const option = document.createElement('option');
@@ -28,26 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize the game with params
     function initializeGame(difficultyName, params) {
-        if(currentGameHolder){
+        if(currentGameHolder) {
             currentGameHolder.stopTimer();
         }
         if (params) {
             console.log(`Initializing game with difficulty: ${difficultyName}`, params);
-            const game = new Game(params);
-            setupEventListeners(game);
-            game.updateBoard();
+            currentGameHolder = new Game(params);
+            setupEventListeners(currentGameHolder);
+            currentGameHolder.updateBoard();
             toggleDifficultySelector(false);
-            currentGameHolder = game;      
         } else {
             updateStatus('Selected difficulty not found', true);
         }
-
-        
     }
 
-    // Updates the status element with a message
     function updateStatus(message, isError = false) {
         statusElement.innerText = message;
         if (isError) {
@@ -55,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Handles button actions with error handling
     function handleButtonAction(action, successMessage, errorMessage) {
         try {
             action();
@@ -64,8 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateStatus(errorMessage, true);
         }
     }
-
-    // Adds an event listener to a button if it exists
     function addButtonListener(buttonId, action, successMessage, errorMessage) {
         const button = document.getElementById(buttonId);
         if (button) {
@@ -75,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Sets up event listeners for game controls
     function setupEventListeners(game) {
         addButtonListener('reset-button', () => game.reset(), 'Stock reset', 'Error resetting stock');
         addButtonListener('discard-button', () => game.discard(), 'Discarded cards from stock', 'Error discarding cards');
@@ -84,10 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
         addButtonListener('save-button', () => game.save(), 'Game saved', 'Error saving game');
 
         document.getElementById('toggle-timer').addEventListener('click', () => {
-            const timerContainer = document.getElementById('timer-container');
-            timerContainer.classList.toggle('hidden-timer');
+            document.getElementById('timer-container').classList.toggle('hidden-timer');
         });
-        
+
         document.getElementById('load-button').addEventListener('click', () => {
             const data = localStorage.getItem('savedGame');
             if (data) {
@@ -103,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateStatus('Game over');
         });
 
-        // drag and drop
         document.querySelectorAll('.deck').forEach(deck => {
             deck.addEventListener('dragstart', (e) => game.handleDragStart(e, deck));
             deck.addEventListener('dragover', (e) => e.preventDefault());
@@ -114,10 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Populate the difficulty selector
+    // Begin Klondike
     populateDifficultySelector();
 
-    // Initialize the game when the start button is clicked
     startButton.addEventListener('click', () => {
         const selectedDifficulty = difficultySelect.value;
         const params = getDifficultyParams(selectedDifficulty);
@@ -125,15 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
         updateStatus(`Difficulty: ${selectedDifficulty}`);
     });
 
-    
-    // Optionally initialize with default or pre-selected difficulty if needed
     const defaultGameName = "Default";
-    const defaultGame = { pileOrdering:"none", numberOfPiles:"four", suitOrdering:"acesFirst", timed:"none" };
+    const defaultGame = { pileOrdering: "none", numberOfPiles: "four", suitOrdering: "acesFirst", timed: "none" };
     initializeGame(defaultGameName, defaultGame);
-
-    // Optionally initialize with default or pre-selected difficulty if needed
-    toggleDifficultySelector(true); // Show the difficulty selector initially
+    toggleDifficultySelector(true);
 });
-
-
-
