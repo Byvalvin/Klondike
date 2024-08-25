@@ -5,12 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusElement = document.getElementById('status');
 
     const startButton = document.getElementById('start-button');
-    
     const difficultySelect = document.getElementById('difficulty');
     const difficultySelector = document.getElementById('difficulty-selector');
-    
     const gameControls = document.getElementById('game-controls');
     const stateControls = document.getElementById('state-controls');
+
+    // Difficulty Info Elements
+    const difficultyInfoSection = document.getElementById('difficulty-info');
+    const pileOrderingInfo = document.getElementById('pile-ordering-info');
+    const numberOfPilesInfo = document.getElementById('number-of-piles-info');
+    const suitOrderingInfo = document.getElementById('suit-ordering-info');
+    const timedInfo = document.getElementById('timed-info');
+    const closeDifficultyInfoButton = document.getElementById('close-difficulty-info');
 
     let currentGameHolder = null;
 
@@ -19,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameControls.classList.toggle('hidden', show);
         stateControls.classList.toggle('hidden', show);
     }
+
     function populateDifficultySelector() {
         difficulties.forEach(difficulty => {
             const option = document.createElement('option');
@@ -29,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function initializeGame(difficultyName, params) {
-        if(currentGameHolder) {
+        if (currentGameHolder) {
             currentGameHolder.stopTimer();
         }
         if (params) {
@@ -38,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setupEventListeners(currentGameHolder);
             currentGameHolder.updateBoard();
             toggleDifficultySelector(false);
+            showDifficultyInfo(params); // Show difficulty info when initializing the game
         } else {
             updateStatus('Selected difficulty not found', true);
         }
@@ -58,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateStatus(errorMessage, true);
         }
     }
+
     function addButtonListener(buttonId, action, successMessage, errorMessage) {
         const button = document.getElementById(buttonId);
         if (button) {
@@ -103,6 +112,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Show difficulty info in the info section
+    function showDifficultyInfo(params) {
+        pileOrderingInfo.textContent = params.pileOrdering;
+        numberOfPilesInfo.textContent = params.numberOfPiles;
+        suitOrderingInfo.textContent = params.suitOrdering;
+        timedInfo.textContent = params.timed;
+        difficultyInfoSection.classList.remove('hidden');
+    }
+
+    // Hide difficulty info section
+    function hideDifficultyInfo() {
+        difficultyInfoSection.classList.add('hidden');
+    }
+
     // Begin Klondike
     populateDifficultySelector();
 
@@ -117,4 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const defaultGame = { pileOrdering: "none", numberOfPiles: "four", suitOrdering: "acesFirst", timed: "none" };
     initializeGame(defaultGameName, defaultGame);
     toggleDifficultySelector(true);
+
+    // Add event listener for the close button in the difficulty info section
+    closeDifficultyInfoButton.addEventListener('click', hideDifficultyInfo);
 });
+
