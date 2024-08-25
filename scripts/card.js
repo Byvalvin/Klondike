@@ -3,25 +3,32 @@
  */
 class Card {
     /**
+     * Card rank values.
+     */
+    static ranking = {
+        'K': 13, 'Q': 12, 'J': 11, 'T': 10, '9': 9, '8': 8,
+        '7': 7, '6': 6, '5': 5, '4': 4, '3': 3, '2': 2, 'A': 1
+    };
+
+    /**
+     * Card suits and their symbols.
+     */
+    static suits = {
+        's': 'Spades', 'h': 'Hearts', 'd': 'Diamonds', 'c': 'Clubs'
+    };
+
+    static symbols = {
+        's': '♠', // Spades
+        'h': '♥', // Hearts
+        'd': '♦', // Diamonds
+        'c': '♣'  // Clubs
+    };
+
+    /**
      * Creates an instance of Card.
      * @param {string} suit - The suit of the card ('s', 'h', 'd', 'c').
      * @param {string} rank - The rank of the card ('A', '2', '3', ..., 'K').
      */
-
-    static ranking = {
-            'K': 13, 'Q': 12, 'J': 11, 'T': 10, '9': 9, '8': 8,
-            '7': 7, '6': 6, '5': 5, '4': 4, '3': 3, '2': 2, 'A': 1
-    };    
-    static suits = {
-            's': 'Spades', 'h': 'Hearts', 'd': 'Diamonds', 'c': 'Clubs'
-    };
-    static symbols = {
-            's':'♠', // Spades
-            'h':'♥', // Hearts
-            'd':'♦', // Diamonds
-            'c':'♣', // Clubs            
-    }
-    
     constructor(suit, rank) {
         this.suit = suit.toLowerCase();
         this.rank = rank;
@@ -33,7 +40,7 @@ class Card {
      * @returns {number} - The rank of the card.
      */
     rankCard() {
-        return Card.ranking[this.rank];
+        return Card.ranking[this.rank] || 0; // Returns 0 if rank is invalid
     }
 
     /**
@@ -41,7 +48,6 @@ class Card {
      * @returns {string} - The name of the suit.
      */
     suitCard() {
-
         return Card.suits[this.suit] || 'Unknown Suit';
     }
 
@@ -69,6 +75,10 @@ class Card {
         return this.visible ? `${this.rank}${this.suit}` : '??';
     }
 
+    /**
+     * Returns a string representation of the card with suit symbol.
+     * @returns {string} - The string representation with suit symbol.
+     */
     toStringSymbol() {
         return this.visible ? `${this.rank}${Card.symbols[this.suit]}` : '??';
     }
@@ -80,15 +90,5 @@ class Card {
     toJSON() {
         return `${this.rank}${this.suit}${this.visible ? '+' : '-'}`;
     }
-    
-    // Return the appropriate suit symbol
-    getSuitSymbol(suit) {
-        switch (suit) {
-            case 's': return '♠'; // Spades
-            case 'h': return '♥'; // Hearts
-            case 'd': return '♦'; // Diamonds
-            case 'c': return '♣'; // Clubs
-            default: return '';
-        }
-    }      
 }
+
