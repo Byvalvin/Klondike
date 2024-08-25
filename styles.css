@@ -279,6 +279,8 @@ button:focus {
     margin: var(--margin-medium);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 #difficulty-info.hidden {
@@ -287,33 +289,41 @@ button:focus {
 
 #difficulty-info h2 {
     margin-top: 0;
+    font-size: var(--font-size-large);
 }
 
 #difficulty-info-details {
     display: flex;
     flex-wrap: wrap;
     gap: var(--margin-small);
+    margin-bottom: var(--margin-small);
 }
 
 #difficulty-info p {
     margin: 0;
+    font-size: var(--font-size-medium);
 }
 
 #difficulty-info button {
     background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: var(--padding-small);
+    padding: var(--padding-small) var(--padding-medium);
     margin-top: var(--margin-small);
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     display: flex;
     align-items: center;
+    font-size: var(--font-size-medium);
 }
 
 #difficulty-info button:hover {
     background-color: var(--primary-dark);
+}
+
+#difficulty-info button:active {
+    transform: scale(0.95);
 }
 
 #toggle-difficulty-info .material-icons {
