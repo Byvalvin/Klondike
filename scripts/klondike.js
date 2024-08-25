@@ -114,10 +114,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show difficulty info in the info section
     function showDifficultyInfo(params) {
-        pileOrderingInfo.textContent = params.pileOrdering;
-        numberOfPilesInfo.textContent = params.numberOfPiles;
-        suitOrderingInfo.textContent = params.suitOrdering;
-        timedInfo.textContent = params.timed;
+        pileOrderingInfo.textContent = params.pileOrdering==="none" ? 
+            params.pileOrdering 
+            : 
+            params.pileOrdering==="altColor" ? "Alternate Colours" : "Same Colours";
+        
+        const numberMap = {three:3, four:4, seven:7};
+        numberOfPilesInfo.textContent = numberMap[params.numberOfPiles];
+        
+        suitOrderingInfo.textContent = params.suitOrdering==="acesFirst" ? "Aces First" : "Kings First";
+
+        const timeMap = {threeMins:3, fiveMins:5, tenMins:10};
+        timedInfo.textContent = timeMap[params.timed];
+        
         difficultyInfoSection.classList.remove('hidden');
     }
 
