@@ -67,6 +67,25 @@
             </button>
         </section>
 
+        <!-- Game History Table -->
+        <section id="game-history" class="hidden">
+            <h2>Game History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Difficulty</th>
+                        <th>Parameters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be populated by gameHistory.js -->
+                </tbody>
+            </table>
+            <button id="toggle-game-history" class="icon-button" aria-label="Toggle Game History">
+                <span class="material-icons">keyboard_arrow_down</span>
+            </button>
+        </section>
+
         <section id="game-board" class="game-board">
             <!-- Game board will be dynamically updated by game.js -->
         </section>
@@ -77,8 +96,10 @@
     <script src="scripts/difficulty.js" defer></script>
     <script src="scripts/game.js" defer></script>
     <script src="scripts/klondike.js" defer></script>
+    <script src="scripts/gameHistory.js" defer></script>
 </body>
 </html>
+
 
 
 
