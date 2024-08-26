@@ -18,10 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const timedInfo = document.getElementById('timed-info');
     const difficultyInfoHeader = document.getElementById('difficulty-info-header');
 
+    // Game History Elements
+    const gameHistorySection = document.getElementById('game-history');
+    const gameHistoryTableBody = gameHistorySection.querySelector('tbody');
+    const toggleGameHistoryButton = document.getElementById('toggle-game-history');
+
     const timerButton = document.getElementById('toggle-timer');
     
     let currentGameHolder = null;
     let infoVisible = true;
+    let historyVisible = false;
 
     function toggleDifficultySelector(show) {
         difficultySelector.classList.toggle('hidden', !show);
@@ -85,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
         addButtonListener('board-button', () => game.board(), 'Board updated', 'Error updating board');
         addButtonListener('cheat-button', () => game.cheat(), 'Cheat mode activated', 'Error activating cheat mode');
         addButtonListener('save-button', () => game.save(), 'Game saved', 'Error saving game');
-        
 
         document.getElementById('load-button').addEventListener('click', () => {
             const data = localStorage.getItem('savedGame');
@@ -100,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
             game.done('Game over');
             toggleDifficultySelector(true);
             updateStatus('Game over');
+            recordGameHistory(game.getParams());
         });
 
         document.querySelectorAll('.deck').forEach(deck => {
@@ -112,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Show difficulty info in the info section
     function showDifficultyInfo(difficultyName, params) {
         difficultyInfoHeader.textContent = `Difficulty: ${difficultyName}`;
         
@@ -132,25 +137,29 @@ document.addEventListener('DOMContentLoaded', () => {
         difficultyInfoSection.classList.remove('hidden');
     }
 
+    function recordGameHistory(params) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${params.difficultyName}</td>
+            <td>Pile Order: ${params.pileOrdering}, Number of Piles: ${params.numberOfPiles}, Suit Order: ${params.suitOrdering}, Timed: ${params.timed}</td>
+        `;
+        gameHistoryTableBody.appendChild(row);
+    }
 
-    // Begin Klondike
-    populateDifficultySelector();
-
-    startButton.addEventListener('click', () => {
-        const selectedDifficulty = difficultySelect.value;
-        const params = getDifficultyParams(selectedDifficulty);
-        initializeGame(selectedDifficulty, params);
-        updateStatus(`Difficulty: ${selectedDifficulty}`);
-    });
-
-    // Add event listener for the toggle arrow in the difficulty info section
     // Toggle visibility of the difficulty info section
     document.getElementById('toggle-difficulty-info').addEventListener('click', () => {
         infoVisible = !infoVisible;
         difficultyInfoSection.classList.toggle('hidden', !infoVisible);
-        toggleDifficultyInfoButton.querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
+        document.getElementById('toggle-difficulty-info').querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
     });
-    
+
+    // Toggle visibility of the game history section
+    toggleGameHistoryButton.addEventListener('click', () => {
+        historyVisible = !historyVisible;
+        gameHistorySection.classList.toggle('hidden', !historyVisible);
+        toggleGameHistoryButton.querySelector('.material-icons').textContent = historyVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
+    });
+
     timerButton.addEventListener('click', () => {
         document.getElementById('timer-container').classList.toggle('hidden-timer');
     });
@@ -161,5 +170,3 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleDifficultySelector(true);
 
 });
-
-
