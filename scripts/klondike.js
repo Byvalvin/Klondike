@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let infoVisible = true;
     let historyVisible = false;
 
+    const toggleVisibility = (element, show) => element.classList.toggle('hidden', !show);
+
     function toggleDifficultySelector(show) {
         difficultySelector.classList.toggle('hidden', !show);
         gameControls.classList.toggle('hidden', show);
@@ -136,6 +138,30 @@ document.addEventListener('DOMContentLoaded', () => {
         
         difficultyInfoSection.classList.remove('hidden');
     }
+
+    /*
+    
+    function showDifficultyInfo(difficultyName, params) {
+        difficultyInfoHeader.textContent = `Difficulty: ${difficultyName}`;
+        pileOrderingInfo.textContent = {
+            "none": "None",
+            "altColor": "Alternate Colours",
+            "sameColor": "Same Colours"
+        }[params.pileOrdering];
+        numberOfPilesInfo.textContent = {
+            "three": 3,
+            "four": 4,
+            "seven": 7
+        }[params.numberOfPiles] || params.numberOfPiles;
+        suitOrderingInfo.textContent = currentGameHolder.acesFirst ? "Aces First" : "Kings First";
+        timedInfo.textContent = {
+            "threeMins": 3,
+            "fiveMins": 5,
+            "tenMins": 10
+        }[params.timed] || params.timed;
+        toggleVisibility(difficultyInfoSection, true);
+    }
+    */
 
     function recordGameHistory(params) {
         const row = document.createElement('tr');
