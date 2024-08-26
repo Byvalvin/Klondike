@@ -320,6 +320,41 @@ button:focus {
     font-size: 24px;
 }
 
+/* Game History Section */
+#game-history {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 5px;
+    padding: var(--padding-medium);
+    margin: var(--margin-medium);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+#game-history.hidden {
+    display: none;
+}
+
+#game-history table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#game-history th, #game-history td {
+    padding: var(--padding-small);
+    border-bottom: 1px solid var(--card-border-color);
+}
+
+#game-history th {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: left;
+}
+
+#game-history tr:hover {
+    background-color: #f0f0f0;
+}
 
 
 /* Game Board */
