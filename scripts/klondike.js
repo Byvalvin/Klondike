@@ -1,9 +1,6 @@
-// klondike.js
-
 document.addEventListener('DOMContentLoaded', () => {
     // Setup Klondike
     const statusElement = document.getElementById('status');
-
     const startButton = document.getElementById('start-button');
     const difficultySelect = document.getElementById('difficulty');
     const difficultySelector = document.getElementById('difficulty-selector');
@@ -32,7 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let infoVisible = false;
     let historyVisible = false;
 
-    const toggleVisibility = (element, show) => element.classList.toggle('hidden', !show);
+    const toggleVisibility = (element, show) => {
+        if (element) {
+            element.classList.toggle('hidden', !show);
+        }
+    };
 
     function toggleDifficultySelector(show) {
         difficultySelector.classList.toggle('hidden', !show);
@@ -49,23 +50,21 @@ document.addEventListener('DOMContentLoaded', () => {
             difficultySelect.appendChild(option);
         });
     }
-    
+
     function initializeGame(difficultyName, params) {
         if (currentGameHolder) {
             currentGameHolder.stopTimer();
         }
         if (params) {
             console.log(`Initializing game with difficulty: ${difficultyName}`, params);
-            currentGameParams = {difficultyName, ...params};
+            currentGameParams = { difficultyName, ...params };
             currentGameHolder = new Game(params);
             setupEventListeners(currentGameHolder);
             currentGameHolder.updateBoard();
             toggleDifficultySelector(false);
-            showDifficultyInfo(difficultyName, params); // Show difficulty info when initializing the game
-            toggleVisibility(difficultyInfoSection, true); // Make sure info section is visible
-
-            difficultyInfoContainer.classList.remove('hidden'); // Show the difficulty info toggle button
-            difficultyInfoButton.classList.remove('hidden'); // Show the difficulty info toggle button
+            showDifficultyInfo(difficultyName, params); // Show difficulty info
+            toggleVisibility(difficultyInfoContainer, true); // Ensure the container is visible
+            difficultyInfoButton.classList.remove('hidden'); // Ensure the button is visible
         } else {
             updateStatus('Selected difficulty not found', true);
         }
