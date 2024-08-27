@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const stateControls = document.getElementById('state-controls');
 
     // Difficulty Info Elements
+    const difficultyInfoContainer = document.getElementById('difficulty-info-container');
     const difficultyInfoButton = document.getElementById('toggle-difficulty-info');
     const difficultyInfoSection = document.getElementById('difficulty-info');
     const pileOrderingInfo = document.getElementById('pile-ordering-info');
@@ -62,6 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleDifficultySelector(false);
             showDifficultyInfo(difficultyName, params); // Show difficulty info when initializing the game
             toggleVisibility(difficultyInfoSection, true); // Make sure info section is visible
+
+            difficultyInfoContainer.classList.remove('hidden'); // Show the difficulty info toggle button
             difficultyInfoButton.classList.remove('hidden'); // Show the difficulty info toggle button
         } else {
             updateStatus('Selected difficulty not found', true);
