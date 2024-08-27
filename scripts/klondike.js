@@ -172,6 +172,16 @@ document.addEventListener('DOMContentLoaded', () => {
         gameHistoryTableBody.appendChild(row);
     }
 
+    // Begin Klondike
+    populateDifficultySelector();
+
+    startButton.addEventListener('click', () => {
+        const selectedDifficulty = difficultySelect.value;
+        const params = getDifficultyParams(selectedDifficulty);
+        initializeGame(selectedDifficulty, params);
+        updateStatus(`Difficulty: ${selectedDifficulty}`);
+    });
+
     // Toggle visibility of the difficulty info section
     document.getElementById('toggle-difficulty-info').addEventListener('click', () => {
         infoVisible = !infoVisible;
