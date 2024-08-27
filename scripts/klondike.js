@@ -166,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     */
 
     function recordGameHistory(params) {
+        console.log("record");
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${params.difficultyName}</td>
