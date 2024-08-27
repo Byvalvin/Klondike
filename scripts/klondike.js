@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const timerButton = document.getElementById('toggle-timer');
     
     let currentGameHolder = null;
+    let currentGameParams = null;
     let infoVisible = true;
     let historyVisible = false;
 
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (params) {
             console.log(`Initializing game with difficulty: ${difficultyName}`, params);
+            currentGameParams = {name:difficultyName, ...params};
             currentGameHolder = new Game(params);
             setupEventListeners(currentGameHolder);
             currentGameHolder.updateBoard();
@@ -109,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             game.done('Game over');
             toggleDifficultySelector(true);
             updateStatus('Game over');
-            recordGameHistory(game.getParams());
+            recordGameHistory(currentGameParams);
         });
 
         document.querySelectorAll('.deck').forEach(deck => {
