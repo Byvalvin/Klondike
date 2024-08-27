@@ -272,6 +272,7 @@ button:focus {
 /* Difficulty Info Section */
 #difficulty-info-container {
     position: relative;
+    margin: var(--margin-medium);
 }
 
 #difficulty-info {
@@ -280,14 +281,12 @@ button:focus {
     border: 1px solid var(--card-border-color);
     border-radius: 5px;
     padding: var(--padding-medium);
-    margin: var(--margin-medium);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
     display: none; /* Initially hidden */
-}
-
-#difficulty-info.hidden {
-    display: none;
+    position: relative;
+    width: fit-content;
+    max-width: 90%;
+    margin: var(--margin-medium) auto;
 }
 
 #difficulty-info h2 {
@@ -334,7 +333,6 @@ button:focus {
     margin-right: 8px;
 }
 
-
 /* Game History Section */
 #game-history {
     background-color: var(--background-color);
@@ -371,71 +369,6 @@ button:focus {
     background-color: #f0f0f0;
 }
 
-/*
-#completed-games {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    border: 1px solid var(--card-border-color);
-    border-radius: 5px;
-    padding: var(--padding-medium);
-    margin: var(--margin-medium);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-#completed-games.hidden {
-    display: none;
-}
-
-#completed-games table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-#completed-games th, #completed-games td {
-    border: 1px solid var(--card-border-color);
-    padding: var(--padding-small);
-    text-align: left;
-}
-
-#completed-games th {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-#completed-games td {
-    background-color: #fff;
-}
-
-#toggle-completed-games {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: var(--padding-small) var(--padding-medium);
-    font-size: var(--font-size-medium);
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: flex;
-    align-items: center;
-}
-
-#toggle-completed-games:hover {
-    background-color: var(--primary-dark);
-    transform: scale(1.05);
-}
-
-#toggle-completed-games:active {
-    transform: scale(0.95);
-}
-
-#toggle-completed-games .material-icons {
-    font-size: 1.2em;
-    margin-right: 8px;
-}
-*/
-
-
 /* Game Board */
 #game-board {
     display: flex;
@@ -449,7 +382,7 @@ button:focus {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    align-items: center;    
+    align-items: center;
     justify-content: space-around;
     padding: var(--padding-medium);
     background-color: #fff;
@@ -577,6 +510,3 @@ button:focus {
         font-size: var(--font-size-small);
     }
 }
-
-
-
