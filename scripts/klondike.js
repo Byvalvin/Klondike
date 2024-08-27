@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameControls.classList.toggle('hidden', show);
         stateControls.classList.toggle('hidden', show);
     }
+
     function populateDifficultySelector() {
         difficulties.forEach(difficulty => {
             const option = document.createElement('option');
@@ -61,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleDifficultySelector(false);
             showDifficultyInfo(difficultyName, params); // Show difficulty info when initializing the game
             toggleVisibility(difficultyInfoSection, true); // Make sure info section is visible
+            difficultyInfoButton.classList.remove('hidden'); // Show the difficulty info toggle button
         } else {
             updateStatus('Selected difficulty not found', true);
         }
@@ -135,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const numberMap = { three: 3, four: 4, seven: 7 };
         numberOfPilesInfo.textContent = numberMap[params.numberOfPiles] || params.numberOfPiles;
         
-        suitOrderingInfo.textContent = currentGameHolder.acesFirst ? "Aces First" : "Kings First";
+        suitOrderingInfo.textContent = params.suitOrdering === "acesFirst" ? "Aces First" : "Kings First";
 
         const timeMap = { threeMins: 3, fiveMins: 5, tenMins: 10 };
         timedInfo.textContent = timeMap[params.timed] || params.timed;
@@ -153,10 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Begin Klondike
-    // show player game difficulty options
+    // Show player game difficulty options
     populateDifficultySelector();
 
-    // start a new game
+    // Start a new game
     startButton.addEventListener('click', () => {
         const selectedDifficulty = difficultySelect.value;
         const params = getDifficultyParams(selectedDifficulty);
@@ -183,10 +185,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('timer-container').classList.toggle('hidden-timer');
     });
 
-    // init default game
+    // Initialize default game
     const defaultGameName = "Default";
     const defaultGame = { pileOrdering: "none", numberOfPiles: "four", suitOrdering: "acesFirst", timed: "none" };
     initializeGame(defaultGameName, defaultGame);
     toggleDifficultySelector(true);
-
 });
