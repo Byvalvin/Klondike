@@ -270,6 +270,10 @@ button:focus {
 }
 
 /* Difficulty Info Section */
+#difficulty-info-container {
+    position: relative;
+}
+
 #difficulty-info {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -279,6 +283,7 @@ button:focus {
     margin: var(--margin-medium);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
+    display: none; /* Initially hidden */
 }
 
 #difficulty-info.hidden {
@@ -299,26 +304,36 @@ button:focus {
     margin: 0;
 }
 
-#difficulty-info button {
+/* Toggle Difficulty Info Button */
+#toggle-difficulty-info {
     background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: var(--padding-small);
-    margin-top: var(--margin-small);
-    cursor: pointer;
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-size-medium);
     border-radius: 5px;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000; /* Ensure it's on top */
 }
 
-#difficulty-info button:hover {
+#toggle-difficulty-info:hover {
     background-color: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+#toggle-difficulty-info:active {
+    transform: scale(0.95);
 }
 
 #toggle-difficulty-info .material-icons {
-    font-size: 24px;
+    font-size: 1.2em;
+    margin-right: 8px;
 }
+
 
 /* Game History Section */
 #game-history {
