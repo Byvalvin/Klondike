@@ -17,22 +17,43 @@
     </header>
     <main>
         <section id="controls">
-            <div id="difficulty-selector">
-                <label for="difficulty">Select Difficulty:</label>
-                <select id="difficulty">
-                    <!-- Options will be populated by JavaScript -->
-                </select>
-                <button id="start-button">Start Game</button>
+            <div id="difficulty-section">
+                <!-- Difficulty Selector and Start Button -->
+                <div id="difficulty-selector">
+                    <label for="difficulty">Select Difficulty:</label>
+                    <select id="difficulty">
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                    <button id="start-button">Start Game</button>
+                </div>
+
+                <!-- Difficulty Info Section -->
+                <div id="difficulty-info-container">
+                    <div id="difficulty-info" class="hidden">
+                        <h2 id="difficulty-info-header"></h2>
+                        <div id="difficulty-info-details">
+                            <p><strong>Pile Order:</strong> <span id="pile-ordering-info"></span></p>
+                            <p><strong>Piles:</strong> <span id="number-of-piles-info"></span></p>
+                            <p><strong>Suit Order:</strong> <span id="suit-ordering-info"></span></p>
+                            <p><strong>Timed:</strong> <span id="timed-info"></span></p>
+                        </div>
+                    </div>
+
+                    <!-- Toggle Difficulty Info Button -->
+                    <button id="toggle-difficulty-info" class="icon-button" aria-label="Toggle Difficulty Info">
+                        <span class="material-icons">keyboard_arrow_down</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Timer Display and Toggle Button -->
-            <div id="timer-container" class="hidden-timer">
+            <div id="timer-container">
                 <div id="timer">00:00</div>
                 <button id="toggle-timer" class="icon-button" title="Toggle Timer" aria-label="Toggle Timer">
                     <span class="material-icons">timer</span>
                 </button>
-            </div>     
-            
+            </div>
+
             <div id="game-controls">
                 <button id="reset-button" aria-label="Restock">Restock</button>
                 <button id="discard-button" aria-label="Discard">Discard</button>
@@ -51,20 +72,6 @@
                     <span class="material-icons">close</span>
                 </button>
             </div>
-        </section>
-
-        <!-- Difficulty Info Section -->
-        <section id="difficulty-info" class="hidden">
-            <h2 id="difficulty-info-header"></h2>
-            <div id="difficulty-info-details">
-                <p><strong>Pile Order:</strong> <span id="pile-ordering-info"></span></p>
-                <p><strong>Piles:</strong> <span id="number-of-piles-info"></span></p>
-                <p><strong>Suit Order:</strong> <span id="suit-ordering-info"></span></p>
-                <p><strong>Timed:</strong> <span id="timed-info"></span></p>
-            </div>
-            <button id="toggle-difficulty-info" class="icon-button" aria-label="Toggle Difficulty Info">
-                <span class="material-icons">keyboard_arrow_down</span>
-            </button>
         </section>
 
         <!-- Game History Table -->
@@ -99,11 +106,3 @@
     <script src="scripts/gameHistory.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
