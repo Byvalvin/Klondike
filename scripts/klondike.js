@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusElement = document.getElementById('status');
 
     const startButton = document.getElementById('start-button');
-    
     const difficultySelect = document.getElementById('difficulty');
     const difficultySelector = document.getElementById('difficulty-selector');
     const gameControls = document.getElementById('game-controls');
@@ -26,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameHistoryButton = document.getElementById('toggle-game-history');
 
     const timerButton = document.getElementById('toggle-timer');
-    
+
     let currentGameHolder = null;
     let currentGameParams = null;
-    let infoVisible = true;
+    let infoVisible = false;
     let historyVisible = false;
 
     const toggleVisibility = (element, show) => element.classList.toggle('hidden', !show);
@@ -140,35 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const timeMap = { threeMins: 3, fiveMins: 5, tenMins: 10 };
         timedInfo.textContent = timeMap[params.timed] || params.timed;
         
-        difficultyInfoSection.classList.remove('hidden');
-    }
-
-    /*
-    
-    function showDifficultyInfo(difficultyName, params) {
-        difficultyInfoHeader.textContent = `Difficulty: ${difficultyName}`;
-        pileOrderingInfo.textContent = {
-            "none": "None",
-            "altColor": "Alternate Colours",
-            "sameColor": "Same Colours"
-        }[params.pileOrdering];
-        numberOfPilesInfo.textContent = {
-            "three": 3,
-            "four": 4,
-            "seven": 7
-        }[params.numberOfPiles] || params.numberOfPiles;
-        suitOrderingInfo.textContent = currentGameHolder.acesFirst ? "Aces First" : "Kings First";
-        timedInfo.textContent = {
-            "threeMins": 3,
-            "fiveMins": 5,
-            "tenMins": 10
-        }[params.timed] || params.timed;
         toggleVisibility(difficultyInfoSection, true);
     }
-    */
 
     function recordGameHistory(params) {
-        console.log("record");
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${params.difficultyName}</td>
@@ -192,15 +166,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toggle visibility of the difficulty info section
     difficultyInfoButton.addEventListener('click', () => {
         infoVisible = !infoVisible;
-        difficultyInfoSection.classList.toggle('hidden', !infoVisible);
-        document.getElementById('toggle-difficulty-info').querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
+        toggleVisibility(difficultyInfoSection, infoVisible);
+        difficultyInfoButton.querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
     });
 
     // Toggle visibility of the game history section
     gameHistoryButton.addEventListener('click', () => {
         historyVisible = !historyVisible;
-        gameHistorySection.classList.toggle('hidden', !historyVisible);
-        toggleGameHistoryButton.querySelector('.material-icons').textContent = historyVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
+        toggleVisibility(gameHistorySection, historyVisible);
+        gameHistoryButton.querySelector('.material-icons').textContent = historyVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
     });
 
     // Toggle timer visibility
