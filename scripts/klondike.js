@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (params) {
             console.log(`Initializing game with difficulty: ${difficultyName}`, params);
-            currentGameParams = {name:difficultyName, ...params};
+            currentGameParams = {difficultyName, ...params};
             currentGameHolder = new Game(params);
             setupEventListeners(currentGameHolder);
             currentGameHolder.updateBoard();
