@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const stateControls = document.getElementById('state-controls');
 
     // Difficulty Info Elements
-    const difficultyInfoContainer = document.getElementById('difficulty-info-container');
     const difficultyInfoButton = document.getElementById('toggle-difficulty-info');
     const difficultyInfoSection = document.getElementById('difficulty-info');
     const pileOrderingInfo = document.getElementById('pile-ordering-info');
@@ -171,7 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toggle visibility of the difficulty info section
     difficultyInfoButton.addEventListener('click', () => {
         infoVisible = !infoVisible;
-        toggleVisibility(difficultyInfoSection, infoVisible);
+        toggleVisibility(document.getElementById('difficulty-info-container'), infoVisible);
+        //toggleVisibility(difficultyInfoSection, infoVisible);
         difficultyInfoButton.querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
     });
 
