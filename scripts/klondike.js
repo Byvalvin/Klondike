@@ -5,12 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusElement = document.getElementById('status');
 
     const startButton = document.getElementById('start-button');
+    
     const difficultySelect = document.getElementById('difficulty');
     const difficultySelector = document.getElementById('difficulty-selector');
     const gameControls = document.getElementById('game-controls');
     const stateControls = document.getElementById('state-controls');
 
     // Difficulty Info Elements
+    const difficultyInfoButton = document.getElementById('toggle-difficulty-info');
     const difficultyInfoSection = document.getElementById('difficulty-info');
     const pileOrderingInfo = document.getElementById('pile-ordering-info');
     const numberOfPilesInfo = document.getElementById('number-of-piles-info');
@@ -21,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Game History Elements
     const gameHistorySection = document.getElementById('game-history');
     const gameHistoryTableBody = gameHistorySection.querySelector('tbody');
-    const toggleGameHistoryButton = document.getElementById('toggle-game-history');
+    const gameHistoryButton = document.getElementById('toggle-game-history');
 
     const timerButton = document.getElementById('toggle-timer');
     
@@ -173,8 +175,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Begin Klondike
+    // show player game difficulty options
     populateDifficultySelector();
 
+    // start a new game
     startButton.addEventListener('click', () => {
         const selectedDifficulty = difficultySelect.value;
         const params = getDifficultyParams(selectedDifficulty);
@@ -183,23 +187,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Toggle visibility of the difficulty info section
-    document.getElementById('toggle-difficulty-info').addEventListener('click', () => {
+    difficultyInfoButton.addEventListener('click', () => {
         infoVisible = !infoVisible;
         difficultyInfoSection.classList.toggle('hidden', !infoVisible);
         document.getElementById('toggle-difficulty-info').querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
     });
 
     // Toggle visibility of the game history section
-    toggleGameHistoryButton.addEventListener('click', () => {
+    gameHistoryButton.addEventListener('click', () => {
         historyVisible = !historyVisible;
         gameHistorySection.classList.toggle('hidden', !historyVisible);
         toggleGameHistoryButton.querySelector('.material-icons').textContent = historyVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
     });
 
+    // Toggle timer visibility
     timerButton.addEventListener('click', () => {
         document.getElementById('timer-container').classList.toggle('hidden-timer');
     });
-    
+
+    // init default game
     const defaultGameName = "Default";
     const defaultGame = { pileOrdering: "none", numberOfPiles: "four", suitOrdering: "acesFirst", timed: "none" };
     initializeGame(defaultGameName, defaultGame);
