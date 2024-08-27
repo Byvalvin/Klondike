@@ -132,6 +132,10 @@ header {
     margin: var(--margin-medium);
 }
 
+#difficulty-info-container.hidden {
+    display: none;
+}
+
 #difficulty-info {
     background-color: var(--background-color);
     color: var(--text-color);
