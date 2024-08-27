@@ -35,10 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function toggleDifficultySelector(show) {
         difficultySelector.classList.toggle('hidden', !show);
+        startButton.classList.toggle('hidden', !show);
         gameControls.classList.toggle('hidden', show);
         stateControls.classList.toggle('hidden', show);
     }
-
     function populateDifficultySelector() {
         difficulties.forEach(difficulty => {
             const option = document.createElement('option');
@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentGameHolder.updateBoard();
             toggleDifficultySelector(false);
             showDifficultyInfo(difficultyName, params); // Show difficulty info when initializing the game
+            toggleVisibility(difficultyInfoSection, true); // Make sure info section is visible
         } else {
             updateStatus('Selected difficulty not found', true);
         }
