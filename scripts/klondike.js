@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const difficultySelector = document.getElementById('difficulty-selector');
 
     // Difficulty Info Elements
-    // const difficultyInfoContainer = document.getElementById('difficulty-info-container');
-    // const difficultyInfoButton = document.getElementById('toggle-difficulty-info');
     const difficultyInfoSection = document.getElementById('difficulty-info');
     const pileOrderingInfo = document.getElementById('pile-ordering-info');
     const numberOfPilesInfo = document.getElementById('number-of-piles-info');
@@ -93,8 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setupEventListeners(game) {
-        addButtonListener('reset-button', () => game.reset(), 'Stock reset', 'Error resetting stock');
-        addButtonListener('discard-button', () => game.discard(), 'Discarded cards from stock', 'Error discarding cards');
+        //addButtonListener('reset-button', () => game.reset(), 'Stock reset', 'Error resetting stock');
+        //addButtonListener('discard-button', () => game.discard(), 'Discarded cards from stock', 'Error discarding cards');
         addButtonListener('board-button', () => game.board(), 'Board updated', 'Error updating board');
         addButtonListener('cheat-button', () => game.cheat(), 'Cheat mode activated', 'Error activating cheat mode');
         addButtonListener('save-button', () => game.save(), 'Game saved', 'Error saving game');
