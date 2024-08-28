@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const startButton = document.getElementById('start-button');
     const difficultySelect = document.getElementById('difficulty');
     const difficultySelector = document.getElementById('difficulty-selector');
-    const gameControls = document.getElementById('game-controls');
-    const stateControls = document.getElementById('state-controls');
 
     // Difficulty Info Elements
     const difficultyInfoContainer = document.getElementById('difficulty-info-container');
