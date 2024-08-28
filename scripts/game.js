@@ -588,38 +588,47 @@ class Game {
     }
 
     handleDeckClick(deck) {
-        if (this.selectedCards === null) {
-            if (!deck.isEmpty()) {
-                this.selectedCards = new Deck("Selected");
-                if (deck.nameDeck().split(" ")[0] === "Pile") {
-                    const orderedCards = [];
-                    while (!deck.isEmpty() && deck.peekDeck().isFaceup()) {
-                        orderedCards.unshift(deck.popDeck());
+        if(deck === this.Stock && this.Stock.isEmpty() || deck === this.Discard && this.Stock.isEmpty()){
+            this.reset();
+            this.updateBoard();
+        else if(deck === this.Discard && !this.Stock.isEmpty()){
+            this.discard();
+            this.updateBoard();
+        }else{
+            if (this.selectedCards === null) {
+                if (!deck.isEmpty()) {
+                    this.selectedCards = new Deck("Selected");
+                    if (deck.nameDeck().split(" ")[0] === "Pile") {
+                        const orderedCards = [];
+                        while (!deck.isEmpty() && deck.peekDeck().isFaceup()) {
+                            orderedCards.unshift(deck.popDeck());
+                        }
+                        this.selectedCards.setDeck(orderedCards);
+                    } else {
+                        this.selectedCards.pushDeck(deck.popDeck());
                     }
-                    this.selectedCards.setDeck(orderedCards);
-                } else {
-                    this.selectedCards.pushDeck(deck.popDeck());
+                    this.selectedCards.peekDeck().originalDeck = deck; // Store original deck for move back if needed
+                    this.updateBoard(); // Update board to reflect changes
                 }
-                this.selectedCards.peekDeck().originalDeck = deck; // Store original deck for move back if needed
-                this.updateBoard(); // Update board to reflect changes
-            }
-        } else {
-            try {
-                if (deck.nameDeck().split(" ")[0] === "Pile") {
-                    this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
-                } else {
-                    this.move(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
-                }
-                this.selectedCards = null;
-            } catch (error) {
-                console.error(error.message);
-                if (this.selectedCards) {
-                    this.selectedCards.peekDeck().originalDeck.addDeck(this.selectedCards); // Add cards back to original
+            } else {
+                try {
+                    if (deck.nameDeck().split(" ")[0] === "Pile") {
+                        this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
+                    } else {
+                        this.move(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
+                    }
                     this.selectedCards = null;
+                } catch (error) {
+                    console.error(error.message);
+                    if (this.selectedCards) {
+                        this.selectedCards.peekDeck().originalDeck.addDeck(this.selectedCards); // Add cards back to original
+                        this.selectedCards = null;
+                    }
                 }
-            }
-            this.updateBoard(); // Update board to reflect changes
+                this.updateBoard(); // Update board to reflect changes
+            }        
         }
+        
     }
 
 
