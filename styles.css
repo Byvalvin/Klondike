@@ -112,48 +112,42 @@ header {
     padding: var(--padding-medium);
 }
 
-/* Difficulty Selector 
-#difficulty-selector {
+/* Difficulty Selector */
+#difficulty-selector, #difficulty-info-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
 }
 
-#difficulty-selector.hidden {
+#difficulty-selector.hidden, #difficulty-info-container.hidden{
     display: none;
 }
-*/
 
-/* Difficulty Section Container */
+
+/* Difficulty Section Container 
 #difficulty-section {
-    position: relative; /* Ensure children are positioned absolutely within this */
+    position: relative; 
     width: 100%;
-    max-width: 600px; /* Adjust as needed */
+    max-width: 600px;
     margin: 0 auto;
     padding: var(--padding-medium);
 }
+*/
 
-/* Difficulty Selector */
-#difficulty-selector, #difficulty-info-container {
-    position: absolute; /* Overlap both sections */
-    top: 0;
-    left: 0;
-    right: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
 
-/* Hide the section when it should not be visible */
+/* Hide the section when it should not be visible 
 #difficulty-selector.hidden, #difficulty-info-container.hidden {
     opacity: 0;
     visibility: hidden;
 }
-
-/* Show the section when it should be visible */
+*/
+/* Show the section when it should be visible 
 #difficulty-selector:not(.hidden), #difficulty-info-container:not(.hidden) {
     opacity: 1;
     visibility: visible;
 }
+*/
 
 /* Difficulty Info Section */
 #difficulty-info-container {
