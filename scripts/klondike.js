@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const difficultySelector = document.getElementById('difficulty-selector');
 
     // Difficulty Info Elements
-    const difficultyInfoContainer = document.getElementById('difficulty-info-container');
+    // const difficultyInfoContainer = document.getElementById('difficulty-info-container');
     const difficultyInfoButton = document.getElementById('toggle-difficulty-info');
     const difficultyInfoSection = document.getElementById('difficulty-info');
     const pileOrderingInfo = document.getElementById('pile-ordering-info');
@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleDifficultySelector(show) {
         toggleVisibility(difficultySelector, show);
         toggleVisibility(startButton, show);
-        toggleVisibility(difficultyInfoContainer, !show);
+        //toggleVisibility(difficultyInfoContainer, !show);
+        toggleVisibility(difficultyInfoSection, !show);
     }
 
     function populateDifficultySelector() {
