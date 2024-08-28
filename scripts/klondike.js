@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentGameHolder.updateBoard();
             toggleDifficultySelector(false);
             showDifficultyInfo(difficultyName, params); // Show difficulty info
-            difficultyInfoButton.classList.remove('hidden'); // Ensure the button is visible
+            // difficultyInfoButton.classList.remove('hidden'); // Ensure the button is visible
         } else {
             updateStatus('Selected difficulty not found', true);
         }
