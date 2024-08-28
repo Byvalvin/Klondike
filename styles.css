@@ -120,34 +120,11 @@ header {
     margin-bottom: 20px;
 }
 
-#difficulty-selector.hidden, #difficulty-info-container.hidden{
+#difficulty-selector.hidden, #difficulty-info-container.hidden, #difficulty-info.hidden  {
     display: none;
 }
 
 
-/* Difficulty Section Container 
-#difficulty-section {
-    position: relative; 
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: var(--padding-medium);
-}
-*/
-
-
-/* Hide the section when it should not be visible 
-#difficulty-selector.hidden, #difficulty-info-container.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-*/
-/* Show the section when it should be visible 
-#difficulty-selector:not(.hidden), #difficulty-info-container:not(.hidden) {
-    opacity: 1;
-    visibility: visible;
-}
-*/
 
 /* Difficulty Info Section */
 #difficulty-info-container {
@@ -213,7 +190,9 @@ header {
     margin-right: 8px;
 }
 
-
+#toggle-difficulty-info.hidden  {
+    display: none;
+}
 
 /* Timer Display */
 #timer-container {
