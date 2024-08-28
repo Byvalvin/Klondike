@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Difficulty Info Elements
     const difficultyInfoContainer = document.getElementById('difficulty-info-container');
     const difficultyInfoButton = document.getElementById('toggle-difficulty-info');
-    //const difficultyInfoSection = document.getElementById('difficulty-info');
+    const difficultyInfoSection = document.getElementById('difficulty-info');
     const pileOrderingInfo = document.getElementById('pile-ordering-info');
     const numberOfPilesInfo = document.getElementById('number-of-piles-info');
     const suitOrderingInfo = document.getElementById('suit-ordering-info');
