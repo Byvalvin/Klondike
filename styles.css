@@ -113,64 +113,43 @@ header {
 }
 
 /* Difficulty Selector */
-#difficulty-selector, #difficulty-info-container {
+#difficulty-selector, #difficulty-info {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
 }
 
-#difficulty-selector.hidden, #difficulty-info-container.hidden, #difficulty-info.hidden  {
+#difficulty-selector.hidden, #difficulty-info.hidden  {
     display: none;
 }
 
 
 
 /* Difficulty Info Section */
-#difficulty-info-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: var(--padding-medium);
-}
-
 #difficulty-info {
     background-color: var(--background-color);
     color: var(--text-color);
     border: 1px solid var(--card-border-color);
     border-radius: 5px;
-    padding: var(--padding-medium);
+    padding: var(--padding-small);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 90%;
     margin: var(--margin-medium) auto;
     display: block; /* Ensure it’s block level to handle spacing */
+    font-size: 0.9em; /* Reduce font size for a smaller appearance */
 }
 
 #difficulty-info h2 {
     margin-top: 0;
 }
 
-/* Difficulty Info Container */
-#difficulty-info-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: var(--padding-medium);
-    background-color: var(--background-color);
-    border: 1px solid var(--card-border-color);
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 90%;
-    margin: var(--margin-medium) auto;
-}
 
 /* Header and Toggle Button Container */
 #difficulty-info-header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%; /* Ensure it takes full width for proper alignment */
     margin-bottom: var(--margin-medium);
 }
 
@@ -178,6 +157,7 @@ header {
     display: flex;
     flex-wrap: wrap;
     gap: var(--margin-small);
+    font-size: 0.9em; /* Smaller font size for details */
 }
 
 #difficulty-info p {
