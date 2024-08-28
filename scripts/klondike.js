@@ -36,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function toggleDifficultySelector(show) {
-        difficultySelector.classList.toggle('hidden', !show);
-        startButton.classList.toggle('hidden', !show);
-        gameControls.classList.toggle('hidden', show);
-        stateControls.classList.toggle('hidden', show);
+        toggleVisibility(difficultySelector, show);
+        toggleVisibility(startButton, show);
+        toggleVisibility(gameControls, !show);
+        toggleVisibility(stateControls, !show);
     }
 
     function populateDifficultySelector() {
@@ -171,8 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toggle visibility of the difficulty info section
     difficultyInfoButton.addEventListener('click', () => {
         infoVisible = !infoVisible;
-        toggleVisibility(difficultyInfoContainer, infoVisible);
-        //toggleVisibility(difficultyInfoSection, infoVisible);
+        toggleVisibility(difficultyInfoContainer, !infoVisible);
+        toggleVisibility(difficultyInfoSection, infoVisible);
         difficultyInfoButton.querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
     });
 
@@ -194,3 +194,4 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeGame(defaultGameName, defaultGame);
     toggleDifficultySelector(true);
 });
+
