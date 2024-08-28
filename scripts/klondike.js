@@ -38,8 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleDifficultySelector(show) {
         toggleVisibility(difficultySelector, show);
         toggleVisibility(startButton, show);
-        toggleVisibility(gameControls, !show);
-        toggleVisibility(stateControls, !show);
+        toggleVisibility(difficultyInfoContainer, !show);
     }
 
     function populateDifficultySelector() {
@@ -63,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
             currentGameHolder.updateBoard();
             toggleDifficultySelector(false);
             showDifficultyInfo(difficultyName, params); // Show difficulty info
-            toggleVisibility(difficultyInfoContainer, true); // Ensure the container is visible
             difficultyInfoButton.classList.remove('hidden'); // Ensure the button is visible
         } else {
             updateStatus('Selected difficulty not found', true);
@@ -171,8 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toggle visibility of the difficulty info section
     difficultyInfoButton.addEventListener('click', () => {
         infoVisible = !infoVisible;
-        toggleVisibility(difficultyInfoContainer, !infoVisible);
-        toggleVisibility(difficultyInfoSection, infoVisible);
+        toggleDifficultySelector(infoVisible);
         difficultyInfoButton.querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
     });
 
@@ -194,4 +191,3 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeGame(defaultGameName, defaultGame);
     toggleDifficultySelector(true);
 });
-
