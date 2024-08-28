@@ -30,7 +30,12 @@
                 <!-- Difficulty Info Section -->
                 <div id="difficulty-info-container" class="hidden">
                     <div id="difficulty-info" class="hidden">
-                        <h2 id="difficulty-info-header"></h2>
+                        <div id="difficulty-info-header-container">
+                            <h2 id="difficulty-info-header">Difficulty Info</h2>
+                            <button id="toggle-difficulty-info" class="icon-button">
+                                <span class="material-icons">keyboard_arrow_down</span>
+                            </button>
+                        </div>
                         <div id="difficulty-info-details">
                             <p><strong>Pile Order:</strong> <span id="pile-ordering-info"></span></p>
                             <p><strong>Piles:</strong> <span id="number-of-piles-info"></span></p>
@@ -38,11 +43,6 @@
                             <p><strong>Timed:</strong> <span id="timed-info"></span></p>
                         </div>
                     </div>
-
-                    <!-- Toggle Difficulty Info Button -->
-                    <button id="toggle-difficulty-info" class="icon-button hidden" aria-label="Toggle Difficulty Info">
-                        <span class="material-icons">keyboard_arrow_down</span>
-                    </button>
                 </div>
             </div>
 
