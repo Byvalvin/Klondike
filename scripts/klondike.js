@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toggle visibility of the difficulty info section
     difficultyInfoButton.addEventListener('click', () => {
         infoVisible = !infoVisible;
-        toggleVisibility(difficultyInfoContainer, !infoVisible);
+        toggleDifficultySelector(infoVisible);
         difficultyInfoButton.querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
     });
 
