@@ -112,7 +112,7 @@ header {
     padding: var(--padding-medium);
 }
 
-/* Difficulty Selector */
+/* Difficulty Selector 
 #difficulty-selector {
     display: flex;
     flex-direction: column;
@@ -123,17 +123,45 @@ header {
 #difficulty-selector.hidden {
     display: none;
 }
+*/
+
+/* Difficulty Section Container */
+#difficulty-section {
+    position: relative; /* Ensure children are positioned absolutely within this */
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+    margin: 0 auto;
+    padding: var(--padding-medium);
+}
+
+/* Difficulty Selector */
+#difficulty-selector, #difficulty-info-container {
+    position: absolute; /* Overlap both sections */
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Hide the section when it should not be visible */
+#difficulty-selector.hidden, #difficulty-info-container.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Show the section when it should be visible */
+#difficulty-selector:not(.hidden), #difficulty-info-container:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
 
 /* Difficulty Info Section */
 #difficulty-info-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin: var(--margin-medium);
-}
-
-#difficulty-info-container.hidden {
-    display: none;
+    justify-content: center;
+    padding: var(--padding-medium);
 }
 
 #difficulty-info {
@@ -143,11 +171,9 @@ header {
     border-radius: 5px;
     padding: var(--padding-medium);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: none; /* Initially hidden */
-    position: relative;
-    width: fit-content;
     max-width: 90%;
     margin: var(--margin-medium) auto;
+    display: block; /* Ensure it’s block level to handle spacing */
 }
 
 #difficulty-info h2 {
@@ -176,6 +202,7 @@ header {
     transition: background-color 0.3s ease, transform 0.2s ease;
     display: flex;
     align-items: center;
+    margin-top: var(--margin-medium);
 }
 
 #toggle-difficulty-info:hover {
@@ -191,6 +218,7 @@ header {
     font-size: 1.2em;
     margin-right: 8px;
 }
+
 
 
 /* Timer Display */
