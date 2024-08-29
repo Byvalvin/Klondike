@@ -13,6 +13,8 @@ class Game {
      */
     constructor(diff) {
         console.log("got diff", diff);
+        this.gameDiff = diff.difficulty;
+        
         this.pileOrder = diff.pileOrdering;
         this.Npiles = parameterScores.numberOfPiles[diff.numberOfPiles].value;
         this.acesFirst = diff.suitOrdering==="random" ? flipCoin() : diff.suitOrdering==="acesFirst";
@@ -33,10 +35,26 @@ class Game {
 
 
         // for scoring system
-        this.baseScore;
+        this.score = 0;
+        this.baseScore = difficulties.reduce((acc, { name, minScore, maxScore }) => {
+            const averageScore = (minScore + maxScore) / 2;
+            acc[name] = averageScore;
+            return acc;
+        }, {});
         
         this.initializeGame();
     }
+
+    // Function to count the number of complete suit decks
+    countCompleteDecks() {
+        // Use filter to find all complete decks and then count them
+        return this.SUITS.filter(deck => deck.sizeDeck() === this.maxCardValue).length;
+    }
+
+    updateGameScore(){
+        
+    }
+
 
     /**
      * Initializes the game by creating and shuffling the deck, and dealing cards.
@@ -74,6 +92,9 @@ class Game {
         } else {
             this.startCountdownTimer();
         }
+
+        // start score
+        this.score = this.baseScore[this.gameDiff];
             
         this.updateBoard();
     }
