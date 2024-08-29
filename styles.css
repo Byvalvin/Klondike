@@ -8,12 +8,12 @@
     --text-color: #ECF0F1;
     --card-border-color: #34495E;
     --card-face-down-color: #95A5A6;
-    --stock-deck-bg: #3498DB; /* Light blue for dark theme */
-    --stock-deck-border: #2980B9; /* Darker blue */
-    --discard-deck-bg: #E74C3C; /* Bright red for dark theme */
-    --discard-deck-border: #C0392B; /* Darker red */
-    --deck-hover-bg: #2C3E50; /* Darker background on hover */
-    --deck-label-bg: #34495E; /* Background for labels */
+    --stock-deck-bg: #3498DB;
+    --stock-deck-border: #2980B9;
+    --discard-deck-bg: #E74C3C;
+    --discard-deck-border: #C0392B;
+    --deck-hover-bg: #2C3E50;
+    --deck-label-bg: #34495E;
 }
 
 /* Light Theme */
@@ -24,12 +24,12 @@
     --text-color: #2C3E50;
     --card-border-color: #BDC3C7;
     --card-face-down-color: #BDC3C7;
-    --stock-deck-bg: #007bff; /* Default blue for light theme */
-    --stock-deck-border: #0056b3; /* Darker blue */
-    --discard-deck-bg: #dc3545; /* Default red for light theme */
-    --discard-deck-border: #c82333; /* Darker red */
-    --deck-hover-bg: #f9f9f9; /* Light hover background */
-    --deck-label-bg: #f1f1f1; /* Background for labels */    
+    --stock-deck-bg: #007bff;
+    --stock-deck-border: #0056b3;
+    --discard-deck-bg: #dc3545;
+    --discard-deck-border: #c82333;
+    --deck-hover-bg: #f9f9f9;
+    --deck-label-bg: #f1f1f1;
 }
 
 /* Root Variables */
@@ -136,8 +136,6 @@ header {
     display: none;
 }
 
-
-
 /* Difficulty Info Section */
 #difficulty-info {
     background-color: var(--background-color);
@@ -149,13 +147,12 @@ header {
     max-width: 90%;
     margin: var(--margin-medium) auto;
     display: block; /* Ensure it’s block level to handle spacing */
-    font-size: 0.9em; /* Reduce font size for a smaller appearance */
+    font-size: 0.9em;
 }
 
 #difficulty-info h2 {
     margin-top: 0;
 }
-
 
 /* Header and Toggle Button Container */
 #difficulty-info-header-container {
@@ -169,7 +166,7 @@ header {
     display: flex;
     flex-wrap: wrap;
     gap: var(--margin-small);
-    font-size: 0.9em; /* Smaller font size for details */
+    font-size: 0.9em;
 }
 
 #difficulty-info p {
@@ -399,19 +396,7 @@ button:focus {
     gap: var(--margin-small);
 }
 
-.game-board {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    padding: var(--padding-medium);
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-/* Base styles for deck buttons */
+/* Deck Base Styles */
 .deck {
     border: 1px solid var(--card-border-color);
     padding: var(--padding-medium);
@@ -428,34 +413,27 @@ button:focus {
 }
 
 /* Hover effect for all decks */
-/*
 .deck:hover {
-    background-color: var(--deck-hover-bg, #f9f9f9);
+    background-color: var(--deck-hover-bg);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-*/
 
 /* Specific styles for Stock Deck */
 .stock-deck {
-    background-color: var(--stock-deck-bg, #007bff); /* Default blue for light theme */
-    border-color: var(--stock-deck-border, #0056b3); /* Default darker blue */
+    background-color: var(--stock-deck-bg);
+    border-color: var(--stock-deck-border);
 }
 
 /* Specific styles for Discard Deck */
 .discard-deck {
-    background-color: var(--discard-deck-bg, #dc3545); /* Default red for light theme */
-    border-color: var(--discard-deck-border, #c82333); /* Default darker red */
-}
-
-.stock-deck:hover, .discard-deck:hover {
-    background-color: var(--deck-hover-bg, #f9f9f9);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background-color: var(--discard-deck-bg);
+    border-color: var(--discard-deck-border);
 }
 
 /* Highlight style for clicked deck */
 .clicked {
-    border-color: gold; /* Highlight border color */
-    box-shadow: 0 0 12px gold; /* Highlight box shadow */
+    border-color: gold;
+    box-shadow: 0 0 12px gold;
 }
 
 /* Style for deck labels if needed */
@@ -464,7 +442,7 @@ button:focus {
     text-align: center;
     margin-bottom: var(--margin-small);
     font-size: var(--font-size-large);
-    background-color: var(--deck-label-bg, #f1f1f1);
+    background-color: var(--deck-label-bg);
     padding: var(--padding-small);
     border-radius: 4px;
 }
@@ -506,14 +484,14 @@ button:focus {
 
 /* Style for Stock Deck button */
 .stock-button {
-    background-color: var(--stock-deck-bg, #007bff); /* Adjust background color */
-    color: white; /* Text color */
+    background-color: var(--stock-deck-bg);
+    color: white;
 }
 
 /* Style for Discard Deck button */
 .discard-button {
-    background-color: var(--discard-deck-bg, #dc3545); /* Adjust background color */
-    color: white; /* Text color */
+    background-color: var(--discard-deck-bg);
+    color: white;
 }
 
 .deck-content .card {
@@ -573,20 +551,50 @@ button:focus {
 }
 
 /* Responsive Design */
+@media (max-width: 768px) {
+    .deck {
+        width: 120px;
+        height: 160px;
+    }
+    .deck-content .card {
+        width: 40px;
+        height: 60px;
+    }
+}
+
 @media (max-width: 600px) {
+    button {
+        padding: var(--padding-small) 12px;
+        font-size: var(--font-size-small);
+    }
+    #logo-container img {
+        width: 40px;
+    }
+    #timer {
+        font-size: 1.5em;
+    }
     .deck {
         width: 100px;
         height: 150px;
     }
     .deck-content .card {
-        width: 50px;
-        height: 70px;
+        width: 30px;
+        height: 50px;
     }
 }
 
 @media (max-width: 400px) {
     button {
-        padding: var(--padding-small) 18px;
+        padding: var(--padding-small) 10px;
         font-size: var(--font-size-small);
     }
+    .deck {
+        width: 80px;
+        height: 120px;
+    }
+    .deck-content .card {
+        width: 25px;
+        height: 40px;
+    }
 }
+
