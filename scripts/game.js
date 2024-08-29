@@ -416,7 +416,7 @@ class Game {
         const rankSuitTop = card.rankCard();
         const rankPileTop = toDeck.isEmpty() ? (this.acesFirst ? this.maxCardValue : 1) : toDeck.peekDeck().rankCard();
         return (
-            this.aceFirst ?
+            this.acesFirst ?
             (rankSuitTop + 1 === rankPileTop || rankSuitTop === this.maxCardValue && toDeck.isEmpty())
             :
             (rankSuitTop - 1 === rankPileTop || rankSuitTop === 1 && toDeck.isEmpty())
@@ -663,19 +663,23 @@ class Game {
     }
     handleDrop(event) {
         event.preventDefault();
-        const data = event.dataTransfer.getData('text/plain');
-        const { deckName, card } = JSON.parse(data);
+        const data = event.dataTransfer.getData('application/json');
+        const { deckName, cards } = JSON.parse(data);
         const fromDeck = [this.Stock, ...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === deckName);
-        
+    
         if (fromDeck) {
-            const cardToMove = new Card(card[0], card[1]);
-            cardToMove.faceupCard(card[2] === '+'); // Set card visibility
-            
+            const cardDeck = new Deck('temp');
+            cards.forEach(cardData => {
+                const card = new Card(cardData.suit, cardData.rank);
+                card.faceupCard(cardData.faceUp);
+                cardDeck.pushDeck(card);
+            });
+    
             const toDeckName = event.target.id;
             const toDeck = [...this.SUITS, ...this.PILES].find(deck => deck.nameDeck() === toDeckName);
             
             if (toDeck) {
-                this.move(fromDeck.nameDeck(), toDeck.nameDeck(), new Deck('temp').pushDeck(cardToMove));
+                this.move(fromDeck.nameDeck(), toDeck.nameDeck(), cardDeck);
             }
         }
     }
