@@ -30,6 +30,10 @@ class Game {
         this.PILES = Array.from({ length: this.Npiles }, (_, i) => new Deck(`Pile ${i + 1}`));
         this.selectedCards = null; // Track the currently selected cards
         this.maxCardValue = 13;
+
+
+        // for scoring system
+        this.baseScore = 
         
         this.initializeGame();
     }
@@ -423,7 +427,13 @@ class Game {
         ) && this.satisfyPileOrder(card, toDeck);
     }
 
-    
+
+    formatTime(seconds) {
+        // Display in MM:SS format
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }    
     startTimer() {
         // Ensure no previous timer is running
         this.stopTimer();
@@ -471,11 +481,7 @@ class Game {
     updateTimerDisplay() {
         const timerElement = document.getElementById('timer');
         if (timerElement) {
-            const minutes = Math.floor(this.timer / 60);
-            const seconds = this.timer % 60;
-    
-            // Display in MM:SS format
-            timerElement.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            timerElement.innerText = formatTime(this.timer);
         }
     }
 
