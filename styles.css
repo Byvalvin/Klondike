@@ -8,6 +8,12 @@
     --text-color: #ECF0F1;
     --card-border-color: #34495E;
     --card-face-down-color: #95A5A6;
+    --stock-deck-bg: #3498DB; /* Light blue for dark theme */
+    --stock-deck-border: #2980B9; /* Darker blue */
+    --discard-deck-bg: #E74C3C; /* Bright red for dark theme */
+    --discard-deck-border: #C0392B; /* Darker red */
+    --deck-hover-bg: #2C3E50; /* Darker background on hover */
+    --deck-label-bg: #34495E; /* Background for labels */
 }
 
 /* Light Theme */
@@ -18,6 +24,12 @@
     --text-color: #2C3E50;
     --card-border-color: #BDC3C7;
     --card-face-down-color: #BDC3C7;
+    --stock-deck-bg: #007bff; /* Default blue for light theme */
+    --stock-deck-border: #0056b3; /* Darker blue */
+    --discard-deck-bg: #dc3545; /* Default red for light theme */
+    --discard-deck-border: #c82333; /* Darker red */
+    --deck-hover-bg: #f9f9f9; /* Light hover background */
+    --deck-label-bg: #f1f1f1; /* Background for labels */    
 }
 
 /* Root Variables */
@@ -399,6 +411,7 @@ button:focus {
     border-radius: 5px;
 }
 
+/* Base styles for deck buttons */
 .deck {
     border: 1px solid var(--card-border-color);
     padding: var(--padding-medium);
@@ -414,21 +427,42 @@ button:focus {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Hover effect for all decks */
 .deck:hover {
-    background-color: #f9f9f9;
+    background-color: var(--deck-hover-bg, #f9f9f9);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Specific styles for Stock Deck */
+.stock-deck {
+    background-color: var(--stock-deck-bg, #007bff); /* Default blue for light theme */
+    border-color: var(--stock-deck-border, #0056b3); /* Default darker blue */
+}
+
+/* Specific styles for Discard Deck */
+.discard-deck {
+    background-color: var(--discard-deck-bg, #dc3545); /* Default red for light theme */
+    border-color: var(--discard-deck-border, #c82333); /* Default darker red */
+}
+
+/* Highlight style for clicked deck */
+.clicked {
+    border-color: gold; /* Highlight border color */
+    box-shadow: 0 0 12px gold; /* Highlight box shadow */
+}
+
+/* Style for deck labels if needed */
 .deck-label {
     font-weight: bold;
     text-align: center;
     margin-bottom: var(--margin-small);
     font-size: var(--font-size-large);
-    background-color: #f1f1f1;
+    background-color: var(--deck-label-bg, #f1f1f1);
     padding: var(--padding-small);
     border-radius: 4px;
 }
 
+/* Style for deck content if needed */
 .deck-content {
     text-align: center;
     font-size: var(--font-size-large);
