@@ -268,6 +268,7 @@ header {
     justify-content: center;
 }
 
+/*
 button {
     background-color: var(--primary-color);
     color: white;
@@ -279,6 +280,7 @@ button {
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
+*/
 
 button:hover {
     background-color: var(--primary-dark);
@@ -293,6 +295,7 @@ button:focus {
     outline: 3px solid var(--text-color);
     outline-offset: 2px;
 }
+
 
 /* Hidden class */
 .hidden {
