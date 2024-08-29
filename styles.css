@@ -428,10 +428,12 @@ button:focus {
 }
 
 /* Hover effect for all decks */
+/*
 .deck:hover {
     background-color: var(--deck-hover-bg, #f9f9f9);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+*/
 
 /* Specific styles for Stock Deck */
 .stock-deck {
@@ -443,6 +445,11 @@ button:focus {
 .discard-deck {
     background-color: var(--discard-deck-bg, #dc3545); /* Default red for light theme */
     border-color: var(--discard-deck-border, #c82333); /* Default darker red */
+}
+
+.stock-deck:hover, .discard-deck:hover {
+    background-color: var(--deck-hover-bg, #f9f9f9);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Highlight style for clicked deck */
