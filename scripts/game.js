@@ -557,12 +557,18 @@ class Game {
             button.innerText = deck.nameDeck();
             
             if (deck === this.Stock) {
-                button.addEventListener('click', () => this.reset());
+                button.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Stop the click event from bubbling up to the deckDiv
+                    this.reset();
+                });
                 deckDiv.classList.add('stock-deck');
                 button.classList.add('stock-button');
                 
             } else {
-                button.addEventListener('click', () => this.discard());
+                button.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Stop the click event from bubbling up to the deckDiv
+                    this.discard();
+                });
                 deckDiv.classList.add('discard-deck');
                 button.classList.add('discard-button');
             }
@@ -654,10 +660,6 @@ class Game {
             this.updateBoard(); // Update board to reflect changes
         }        
     }
-
-        
-    
-
 
     handleDragOver(event) {
         event.preventDefault();
