@@ -555,13 +555,14 @@ class Game {
             const button = document.createElement('button');
             button.className = 'deck-button';
             button.innerText = deck.nameDeck();
-            button.addEventListener('click', () => this.handleDeckClick(deck));
             
             if (deck === this.Stock) {
+                button.addEventListener('click', () => this.reset());
                 deckDiv.classList.add('stock-deck');
                 button.classList.add('stock-button');
                 
             } else {
+                button.addEventListener('click', () => this.discard());
                 deckDiv.classList.add('discard-deck');
                 button.classList.add('discard-button');
             }
@@ -625,7 +626,7 @@ class Game {
             this.updateBoard();
         }else{
             if (this.selectedCards === null) {
-                if (!deck.isEmpty()) {
+                if (!deck.isEmpty() && deck !== this.Discard) {
                     this.selectedCards = new Deck("Selected");
                     if (deck.nameDeck().split(" ")[0] === "Pile") {
                         const orderedCards = [];
