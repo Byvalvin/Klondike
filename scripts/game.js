@@ -606,7 +606,7 @@ class Game {
     }
 
     handleDeckClick(deck) {
-        this.handleHighlightDeck(deck);
+        this.handleDeckHighlight(deck);
         if(deck === this.Stock && this.Stock.isEmpty() || deck === this.Discard && this.Stock.isEmpty()){
             this.reset();
             this.updateBoard();
