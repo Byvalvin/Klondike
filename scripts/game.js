@@ -621,11 +621,7 @@ class Game {
 
     handleDeckClick(deck) {
         this.handleDeckHighlight(deck);
-        if(deck === this.Stock && this.Stock.isEmpty()){
-            this.reset();
-            this.updateBoard();
-        }else{
-            if (this.selectedCards === null) {
+        if (this.selectedCards === null) {
                 if (!deck.isEmpty() && deck !== this.Discard) {
                     this.selectedCards = new Deck("Selected");
                     if (deck.nameDeck().split(" ")[0] === "Pile") {
@@ -640,26 +636,27 @@ class Game {
                     this.selectedCards.peekDeck().originalDeck = deck; // Store original deck for move back if needed
                     this.updateBoard(); // Update board to reflect changes
                 }
-            } else {
-                try {
-                    if (deck.nameDeck().split(" ")[0] === "Pile") {
-                        this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
-                    } else {
-                        this.move(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
-                    }
-                    this.selectedCards = null;
-                } catch (error) {
-                    console.error(error.message);
-                    if (this.selectedCards) {
-                        this.selectedCards.peekDeck().originalDeck.addDeck(this.selectedCards); // Add cards back to original
-                        this.selectedCards = null;
-                    }
+        } else {
+            try {
+                if (deck.nameDeck().split(" ")[0] === "Pile") {
+                    this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
+                } else {
+                    this.move(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
                 }
-                this.updateBoard(); // Update board to reflect changes
-            }        
-        }
-        
+                this.selectedCards = null;
+            } catch (error) {
+                console.error(error.message);
+                if (this.selectedCards) {
+                    this.selectedCards.peekDeck().originalDeck.addDeck(this.selectedCards); // Add cards back to original
+                    this.selectedCards = null;
+                }
+            }
+            this.updateBoard(); // Update board to reflect changes
+        }        
     }
+
+        
+    
 
 
     handleDragOver(event) {
