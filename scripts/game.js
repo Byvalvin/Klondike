@@ -548,7 +548,14 @@ class Game {
         deckDiv.className = 'deck';
         deckDiv.id = deck.nameDeck();
         deckDiv.draggable = false; // Disable default drag behavior
-    
+
+        // Add specific classes for Stock and Discard Decks
+        if (deck === this.Stock) {
+            deckDiv.classList.add('stock-deck');
+        } else if (deck === this.Discard) {
+            deckDiv.classList.add('discard-deck');
+        }
+        
         // Create and add the label
         const label = document.createElement('div');
         label.className = 'deck-label';
@@ -587,7 +594,19 @@ class Game {
         return container;
     }
 
+    handleDeckHighlight(deck){
+        // Highlight the clicked deck
+        const deckDiv = document.getElementById(deck.nameDeck());
+        deckDiv.classList.add('clicked');
+    
+        // Reset the highlighting after a short delay
+        setTimeout(() => {
+            deckDiv.classList.remove('clicked');
+        }, 300);
+    }
+
     handleDeckClick(deck) {
+        this.handleHighlightDeck(deck);
         if(deck === this.Stock && this.Stock.isEmpty() || deck === this.Discard && this.Stock.isEmpty()){
             this.reset();
             this.updateBoard();
