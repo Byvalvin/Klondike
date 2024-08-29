@@ -423,8 +423,6 @@ class Game {
         ) && this.satisfyPileOrder(card, toDeck);
     }
 
-
-
     
     startTimer() {
         // Ensure no previous timer is running
@@ -480,8 +478,6 @@ class Game {
             timerElement.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
     }
-
-
 
 
     /**
