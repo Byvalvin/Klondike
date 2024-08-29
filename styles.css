@@ -479,6 +479,36 @@ button:focus {
     height: auto;
 }
 
+/* Style for deck buttons */
+.deck-button {
+    display: block;
+    width: 100%;
+    padding: var(--padding-small);
+    font-size: var(--font-size-medium);
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.deck-button:hover {
+    background-color: var(--button-hover-bg, #ddd);
+    color: var(--button-hover-text, #333);
+}
+
+/* Style for Stock Deck button */
+.stock-button {
+    background-color: var(--stock-deck-bg, #007bff); /* Adjust background color */
+    color: white; /* Text color */
+}
+
+/* Style for Discard Deck button */
+.discard-button {
+    background-color: var(--discard-deck-bg, #dc3545); /* Adjust background color */
+    color: white; /* Text color */
+}
+
 .deck-content .card {
     display: inline-block;
     width: 28px;
