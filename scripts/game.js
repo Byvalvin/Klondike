@@ -33,7 +33,7 @@ class Game {
 
 
         // for scoring system
-        this.baseScore = 
+        this.baseScore;
         
         this.initializeGame();
     }
