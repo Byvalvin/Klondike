@@ -282,7 +282,7 @@ button {
 
 button:hover {
     background-color: var(--primary-dark);
-    transform: scale(1.05);
+    transform: translateY(-2px) scale(1.03); /* Slight lift effect */
 }
 
 button:active {
@@ -307,7 +307,7 @@ button:focus {
     padding: var(--button-padding);
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform for consistency */
 }
 
 .theme-toggle:hover {
