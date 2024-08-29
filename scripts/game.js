@@ -623,9 +623,6 @@ class Game {
         if(deck === this.Stock && this.Stock.isEmpty() || deck === this.Discard && this.Stock.isEmpty()){
             this.reset();
             this.updateBoard();
-        }else if(deck === this.Discard && !this.Stock.isEmpty()){
-            this.discard();
-            this.updateBoard();
         }else{
             if (this.selectedCards === null) {
                 if (!deck.isEmpty()) {
