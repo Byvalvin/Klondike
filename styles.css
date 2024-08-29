@@ -413,10 +413,12 @@ button:focus {
 }
 
 /* Hover effect for all decks */
+/*
 .deck:hover {
     background-color: var(--deck-hover-bg);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+*/
 
 /* Specific styles for Stock Deck */
 .stock-deck {
@@ -428,6 +430,11 @@ button:focus {
 .discard-deck {
     background-color: var(--discard-deck-bg);
     border-color: var(--discard-deck-border);
+}
+
+.stock-deck:hover, .discard-deck:hover {
+    background-color: var(--deck-hover-bg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Highlight style for clicked deck */
