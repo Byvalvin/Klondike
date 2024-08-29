@@ -290,6 +290,7 @@ button {
     padding: var(--button-padding);
     margin: var(--margin-small);
     font-size: var(--font-size-medium);
+    text-align: center;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -491,9 +492,8 @@ button:focus {
 
 /* Style for deck buttons */
 .deck-button {
+    width: 100%;
     padding: var(--padding-small);
-    font-size: var(--font-size-medium);
-    text-align: center;
 }
 
 .deck-button:hover {
