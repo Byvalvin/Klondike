@@ -565,16 +565,15 @@ class Game {
                 deckDiv.classList.add('discard-deck');
                 button.classList.add('discard-button');
             }
-
             deckDiv.appendChild(button);
+        } else{
+            // Create and add the label
+            const label = document.createElement('div');
+            label.className = 'deck-label';
+            label.innerText = deck.nameDeck();
+            deckDiv.appendChild(label);
         }
 
-        
-        // Create and add the label
-        const label = document.createElement('div');
-        label.className = 'deck-label';
-        label.innerText = deck.nameDeck();
-        deckDiv.appendChild(label);
     
         // Add the deck content
         const content = document.createElement('div');
