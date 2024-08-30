@@ -305,6 +305,7 @@ class Game {
      * @throws {Error} - Throws an error if the move is invalid.
      */
     move(fromDeckName, toDeckName, deckCards) { // Move to non-pile
+        console.log("score: ", this.score);
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
 
         if (this.canMove(fromDeck, toDeck, deckCards.peekDeck())) {
@@ -332,6 +333,7 @@ class Game {
      * @throws {Error} - Throws an error if the move is invalid.
      */
     pileMove(fromDeckName, toDeckName, deckCards) {
+        console.log("score: ", this.score);
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
 
         const reverseDeck = deckCards.getReverseDeck();
