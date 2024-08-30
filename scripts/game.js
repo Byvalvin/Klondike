@@ -51,8 +51,14 @@ class Game {
         return this.SUITS.filter(deck => deck.sizeDeck() === this.maxCardValue).length;
     }
 
-    updateGameScore(){
-        
+    updateGameScore(from, to){
+        if(this.SUITS.includes(to)){ // stock to suit, pile to suit
+            this.score += to.sizeDeck();
+            this.score *= (this.countCompleteDecks()+1);  
+        }else if(this.SUITS.includes(from)){ // suit to pile
+            this.score -= (from.sizeDeck()+1);
+            this.score /= (this.countCompleteDecks()+1);
+        }  
     }
 
 
@@ -286,6 +292,7 @@ class Game {
 
         if (this.canMove(fromDeck, toDeck, deckCards.peekDeck())) {
             toDeck.pushDeck(deckCards.popDeck());
+            this.updateGameScore(fromDeck, toDeck); // update score
         } else {
             throw new Error('Invalid move');
         }
@@ -296,6 +303,7 @@ class Game {
         } else {
             fromDeck.addDeck(deckCards);
         }
+        
         this.updateBoard();
     }
 
