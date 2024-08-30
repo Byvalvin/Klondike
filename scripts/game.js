@@ -502,7 +502,7 @@ class Game {
     updateTimerDisplay() {
         const timerElement = document.getElementById('timer');
         if (timerElement) {
-            timerElement.innerText = formatTime(this.timer);
+            timerElement.innerText = this.formatTime(this.timer);
         }
     }
 
