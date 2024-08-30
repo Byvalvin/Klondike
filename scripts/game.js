@@ -14,6 +14,7 @@ class Game {
     constructor(diff) {
         console.log("got diff", diff);
         this.gameDiff = diff.difficulty;
+        this.bonusScore = diff.score;
         
         this.pileOrder = diff.pileOrdering;
         this.Npiles = parameterScores.numberOfPiles[diff.numberOfPiles].value;
@@ -22,6 +23,7 @@ class Game {
 
         this.timer = this.timerCount * 60; // to track the time remaining if timerCount is not 0
         this.timeInterval = null;
+        this.timeUp = false;
         
         this.startMessage = 'Welcome to Klondike!';
         this.endMessage = 'Thank you for playing';
@@ -41,6 +43,7 @@ class Game {
             acc[name] = averageScore;
             return acc;
         }, {});
+        this.finishedGame = false;
         
         this.initializeGame();
     }
@@ -61,6 +64,20 @@ class Game {
         }  
     }
 
+    updateGameScoreFinal(){
+        if(this.finshedGame && !this.timeUp){
+            // full bonus
+            this.score += this.bonusScore
+            if(this.timerCount){ // there is a countdown timer
+                this.score *= (1+(this.timer/this.timerCount))
+            }else{
+                this.score = this.timer <= 600 ? this.score + this.timer/60 : this.score;
+            }
+        }else if (this.finishedGame && this.timeUp){
+            // half bonus
+            this.score += this.bonusScore/2
+        }
+    }
 
     /**
      * Initializes the game by creating and shuffling the deck, and dealing cards.
@@ -485,7 +502,10 @@ class Game {
                 clearInterval(this.timerInterval); // Stop the timer
                 this.timer = 0;
                 this.updateTimerDisplay();
+                
                 // Handle game end if needed
+                this.timeUp = true;
+                this.updateGameScoreFinal();
                 this.done('Time is up!');
             } else {
                 this.timer = Math.floor(remainingTime / 1000); // Update timer in seconds
@@ -552,7 +572,10 @@ class Game {
         
         // Check for win condition
         if (this.checkWin()) {
+            this.finishedGame = true;
+            this.updateGameScoreFinal();
             this.done('Congratulations! You won the game!');
+            console.log("final score: ",this.score);
         }
         
     }
