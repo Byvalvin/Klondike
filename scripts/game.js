@@ -644,7 +644,7 @@ class Game {
     
         // Add the deck content
         const content = document.createElement('div');
-        content.className = 'deck-content';-
+        content.className = 'deck-content';
     
         // Add card elements
         const cards = deck.getCardsList().reverse();
