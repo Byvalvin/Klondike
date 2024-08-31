@@ -602,23 +602,7 @@ class Game {
         
     }
 
-    createCardElement(card) {
-        const cardElement = document.createElement('div');
-        cardElement.className = 'card';
-        
-        if (card.isFaceup()) {
-            const rankAndSuitSymbol = card.toStringSymbol(); // Use method to get suit symbol
-            const className = `card-symbol ${card.suit}`;
-            cardElement.innerHTML = `
-                <div class="${className}">${rankAndSuitSymbol}</div>
-            `;
-        } else {
-            cardElement.classList.add('face-down');
-            cardElement.innerHTML = ''; // Face-down cards have no text
-        }
-        
-        return cardElement;
-    }
+
     createDeckDiv(deck) {
         const deckDiv = document.createElement('div');
         deckDiv.className = 'deck';
@@ -660,12 +644,12 @@ class Game {
     
         // Add the deck content
         const content = document.createElement('div');
-        content.className = 'deck-content';
+        content.className = 'deck-content';-
     
         // Add card elements
         const cards = deck.getCardsList().reverse();
         cards.forEach(card => {
-            const cardElement = this.createCardElement(card);
+            const cardElement = card.createCardElement();
             content.appendChild(cardElement);
         });
     
