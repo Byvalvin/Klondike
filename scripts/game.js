@@ -54,6 +54,16 @@ class Game {
         return this.SUITS.filter(deck => deck.sizeDeck() === this.maxCardValue).length;
     }
 
+    /**
+     * Updates the score display on the page.
+     */
+    updateScoreDisplay() {
+        const scoreElement = document.getElementById('score');
+        if (scoreElement) {
+            scoreElement.innerText = `Score: ${this.score}`;
+        }
+    }
+    
     updateGameScore(from, to){
         if(this.SUITS.includes(to)){ // stock to suit, pile to suit
             this.score += to.sizeDeck();
@@ -62,6 +72,7 @@ class Game {
             this.score -= (from.sizeDeck()+1);
             this.score /= (this.countCompleteDecks()+1);
         }  
+        this.updateScoreDisplay(); // Update the UI with the new score
     }
 
     updateGameScoreFinal(){
