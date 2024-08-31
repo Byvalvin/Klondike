@@ -136,7 +136,7 @@ class Game {
         }
 
         // start score
-        this.score = this.baseScore[this.gameDiff];
+        this.score = this.baseScore[this.gameDiff] || 0;
         this.updateScoreDisplay();
         this.updateBoard();
     }
