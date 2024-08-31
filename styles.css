@@ -173,6 +173,20 @@ header {
     margin: 0;
 }
 
+/* Score Display */
+#score {
+    font-size: var(--font-size-large);
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 20px 0; /* Adjust margin as needed */
+    padding: var(--padding-small);
+    background-color: var(--background-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+}
+
 /* Toggle Difficulty Info Button */
 #toggle-difficulty-info {
     background-color: var(--primary-color);
@@ -267,21 +281,6 @@ header {
     margin-bottom: 20px;
     justify-content: center;
 }
-
-/*
-button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: var(--button-padding);
-    margin: var(--margin-small);
-    font-size: var(--font-size-medium);
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-*/
-
 
 button {
     background-color: var(--primary-color);
