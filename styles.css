@@ -213,19 +213,6 @@ header {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
 }
 
-/* Optional: Add a gradient background */
-#score {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    color: white;
-}
-
-/* Optional: Score Text Styling */
-#score span {
-    font-size: 1.5em; /* Larger text for emphasis */
-    display: block;
-    margin: 0.2em 0; /* Spacing for text elements */
-}
-
 /* Toggle Difficulty Info Button */
 #toggle-difficulty-info {
     background-color: var(--primary-color);
