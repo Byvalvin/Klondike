@@ -137,7 +137,7 @@ class Game {
 
         // start score
         this.score = this.baseScore[this.gameDiff];
-            
+        this.updateScoreDisplay();
         this.updateBoard();
     }
 
@@ -244,7 +244,7 @@ class Game {
         this.gameOn = false;
         this.stopTimer(); // Ensure timer is stopped when game ends
         document.getElementById('status').innerText = message;
-        this.resetScoreDisplay();
+        //this.resetScoreDisplay();
         //this.initializeGame();
         console.log(message);
     }
