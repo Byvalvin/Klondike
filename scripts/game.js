@@ -69,6 +69,19 @@ class Game {
         if (scoreElement) {
             scoreElement.innerText = `Score: ${this.score}`;
         }
+
+        const classScoreStart = 'score-play';
+        const classScoreEnd = 'score-final';
+        switch(this.gameOn){
+            case(false):
+                scoreElement.classList.remove(classScoreStart);
+                scoreElement.classList.add(classScoreEnd);
+            case true:
+            default:
+                scoreElement.classList.remove(classScoreEnd);
+                scoreElement.classList.add(classScoreStart);
+            
+        }
     }
     
     updateGameScore(from, to){
