@@ -54,7 +54,7 @@ class Game {
         return this.SUITS.filter(deck => deck.sizeDeck() === this.maxCardValue).length;
     }
 
-    resestScoreDisplay(){
+    resetScoreDisplay(){
         const scoreElement = document.getElementById('score');
         if (scoreElement) {
             scoreElement.innerText = `Score: ${0}`;
