@@ -90,5 +90,23 @@ class Card {
     toJSON() {
         return `${this.rank}${this.suit}${this.visible ? '+' : '-'}`;
     }
+
+    createCardElement() {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'card';
+        
+        if (this.visible) {
+            const rankAndSuitSymbol = this.toStringSymbol(); // Use method to get suit symbol
+            const className = `card-symbol ${this.suit}`;
+            cardElement.innerHTML = `
+                <div class="${className}">${rankAndSuitSymbol}</div>
+            `;
+        } else {
+            cardElement.classList.add('face-down');
+            cardElement.innerHTML = ''; // Face-down cards have no text
+        }
+        
+        return cardElement;
+    }
 }
 
