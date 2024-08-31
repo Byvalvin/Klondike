@@ -236,6 +236,8 @@ class Game {
     done(message) {
         this.gameOn = false;
         this.stopTimer(); // Ensure timer is stopped when game ends
+        this.score = 0;
+        this.updateScoreDisplay();
         document.getElementById('status').innerText = message;
         //this.initializeGame();
         console.log(message);
