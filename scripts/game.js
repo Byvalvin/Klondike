@@ -88,6 +88,7 @@ class Game {
             // half bonus
             this.score += this.bonusScore/2
         }
+        this.updateScoreDisplay(); // Update the UI with the new score
     }
 
     /**
