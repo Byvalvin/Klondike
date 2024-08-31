@@ -54,6 +54,13 @@ class Game {
         return this.SUITS.filter(deck => deck.sizeDeck() === this.maxCardValue).length;
     }
 
+    resestScoreDisplay(){
+        const scoreElement = document.getElementById('score');
+        if (scoreElement) {
+            scoreElement.innerText = `Score: ${0}`;
+        }
+    }
+    
     /**
      * Updates the score display on the page.
      */
@@ -237,6 +244,7 @@ class Game {
         this.gameOn = false;
         this.stopTimer(); // Ensure timer is stopped when game ends
         document.getElementById('status').innerText = message;
+        this.resetScoreDisplay();
         //this.initializeGame();
         console.log(message);
     }
