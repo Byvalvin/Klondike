@@ -328,6 +328,9 @@ header {
     font-size: 1.2em;
     margin-right: 8px;
 }
+#cheat-button.hidden {
+    display: none;
+}
 
 
 button {
