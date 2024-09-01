@@ -76,6 +76,7 @@ class Game {
             case(true):
                 scoreElement.classList.remove(classScoreStart);
                 scoreElement.classList.add(classScoreEnd);
+                break;
             case false:
             default:
                 scoreElement.classList.remove(classScoreEnd);
