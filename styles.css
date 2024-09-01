@@ -435,7 +435,6 @@ button:focus {
 .deck {
     border: 1px solid var(--card-border-color);
     padding: var(--padding-medium);
-    background-color: #fff;
     margin: var(--margin-small);
     display: inline-block;
     vertical-align: top;
@@ -445,6 +444,15 @@ button:focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.deck-open {
+    background-color: #fff;
+}
+
+.deck-close {
+    background-color: #000;
+    border-color: gold;
 }
 
 /* Specific styles for Stock Deck */
