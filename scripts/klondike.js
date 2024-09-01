@@ -163,14 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateStatus(`Difficulty: ${selectedDifficulty}`);
     });
 
-    // Toggle visibility of the difficulty info section
-    /*
-    difficultyInfoButton.addEventListener('click', () => {
-        infoVisible = !infoVisible;
-        toggleDifficultySelector(infoVisible);
-        difficultyInfoButton.querySelector('.material-icons').textContent = infoVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
-    });
-    */
 
     // Toggle visibility of the game history section
     gameHistoryButton.addEventListener('click', () => {
