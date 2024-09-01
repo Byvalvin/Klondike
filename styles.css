@@ -12,8 +12,8 @@
     --stock-deck-border: #2980B9;
     --discard-deck-bg: #E74C3C;
     --discard-deck-border: #C0392B;
-    --deck-hover-bg: #2C3E50;
-    --deck-label-bg: #34495E;
+    --deck-hover-bg: #34495E;
+    --deck-label-bg: #1C2833;
 }
 
 /* Light Theme */
@@ -28,8 +28,8 @@
     --stock-deck-border: #0056b3;
     --discard-deck-bg: #dc3545;
     --discard-deck-border: #c82333;
-    --deck-hover-bg: #f9f9f9;
-    --deck-label-bg: #f1f1f1;
+    --deck-hover-bg: #E9ECEF;
+    --deck-label-bg: #F1F1F1;
 }
 
 /* Root Variables */
@@ -301,31 +301,32 @@ header {
     justify-content: center;
 }
 
-button {
+#game-controls button, #state-controls button {
     background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: var(--button-padding);
-    margin: var(--margin-small);
+    padding: var(--padding-small) var(--padding-medium);
     font-size: var(--font-size-medium);
-    text-align: center;
-    cursor: pointer;
     border-radius: 5px;
+    cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    margin: 5px;
 }
 
-button:hover {
+#game-controls button:hover, #state-controls button:hover {
     background-color: var(--primary-dark);
-    transform: translateY(-2px) scale(1.03); /* Slight lift effect */
+    transform: scale(1.05);
 }
 
-button:active {
-    transform: scale(0.97);
+#game-controls button:active, #state-controls button:active {
+    transform: scale(0.95);
 }
 
-button:focus {
-    outline: 3px solid var(--text-color);
-    outline-offset: 2px;
+#game-controls button .material-icons, #state-controls button .material-icons {
+    font-size: 1.2em;
+    margin-right: 8px;
 }
 
 
