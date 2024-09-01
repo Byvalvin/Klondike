@@ -51,6 +51,10 @@ class Card {
         return Card.suits[this.suit] || 'Unknown Suit';
     }
 
+    symbolCard() {
+        return Card.symbols[this.suit] || 'No Symbol';
+    }
+
     /**
      * Sets the card to face up or face down.
      * @param {boolean} visible - True if the card should be face up, false if face down.
