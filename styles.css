@@ -147,7 +147,7 @@ header {
     max-width: 90%;
     margin: var(--margin-medium) auto;
     display: block; /* Ensure it’s block level to handle spacing */
-    font-size: 0.9em;
+    font-size: 0.7em;
 }
 
 #difficulty-info h2 {
