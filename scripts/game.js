@@ -285,14 +285,14 @@ class Game {
         try {
             const lines = data.split('\n').filter(line => line.trim() !== '');
             const Decks = lines.map(line => {
-                const [deckName, ...cardStrings] = line.split(' ');
+                const [deckNameFirst, ...cardStrings] = line.split(' ');
+                let deckName = deckNameFirst;
                 if(deckName==='Pile'){
                     const pileNumber = cardStrings.shift();
-                    const deck = new Deck(`${deckName} ${pileNumer}`)
-                }else{
-                    const deck = new Deck(deckName);
+                    deckName = `${deckNameFirst} ${pileNumer}`;
                 }
-                console.log(deck.nameDeck());
+                const deck = new Deck(deckName);
+                console.log(deckName);
                 cardStrings.forEach(cardString => {
                     if(cardString){
                         const cardRank = cardString[0];
