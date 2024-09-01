@@ -657,6 +657,7 @@ class Game {
         deckDiv.draggable = false; // Disable default drag behavior
 
         const isSuit = ['Spades', 'Hearts', 'Diamonds', 'Clubs'].includes(deck.nameDeck());
+        const isPile = deck.nameDeck().split(" ")[0] === "Pile";
         
         // Add button and specific classes for Stock and Discard Decks
         if(deck === this.Stock || deck === this.Discard){
@@ -713,6 +714,11 @@ class Game {
                 content.classList.remove('hidden');
             }
         }
+
+        if(isPile){
+            deckDiv.classList.add('deck-pile');
+        }
+        
         
         // Add card elements
         const cards = deck.getCardsList().reverse();
