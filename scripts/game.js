@@ -72,12 +72,12 @@ class Game {
 
         const classScoreStart = 'score-play';
         const classScoreEnd = 'score-final';
-        switch(this.finishedGame){
-            case(true):
+        switch(this.gameOn){
+            case false:
                 scoreElement.classList.remove(classScoreStart);
                 scoreElement.classList.add(classScoreEnd);
                 break;
-            case false:
+            case true:
                 scoreElement.classList.remove(classScoreEnd);
                 scoreElement.classList.add(classScoreStart);
                 break;
