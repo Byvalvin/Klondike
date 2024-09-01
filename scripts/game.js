@@ -746,8 +746,6 @@ class Game {
         const deckName = deck.nameDeck();
         if(['Spades', 'Hearts', 'Diamonds', 'Clubs'].includes(deckName) && this.deckStatus[deckName]){
             this.deckStatus[deckName] = false;
-            this.updateBoard(); // Update board to reflect changes
-            return;
         }
         this.handleDeckHighlight(deck);
         if (this.selectedCards === null) {
