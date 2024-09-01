@@ -451,7 +451,7 @@ button:focus {
 }
 
 .deck-close {
-    background-color: #000;
+    background-color: var(--background-color);
     border-color: gold;
 }
 
@@ -494,6 +494,7 @@ button:focus {
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     text-align: center; /* Center text inside */
+    font-size: 4rem; /* Adjust as needed for larger text */
 }
 
 /* Style for deck content if needed */
