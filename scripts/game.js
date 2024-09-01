@@ -97,10 +97,10 @@ class Game {
     updateGameScore(from, to){
         if(this.SUITS.includes(to)){ // stock to suit, pile to suit
             this.score += to.sizeDeck();
-            this.score *= (this.countCompleteDecks()+1);  
+            this.score += (this.countCompleteDecks()+1);  
         }else if(this.SUITS.includes(from)){ // suit to pile
             this.score -= (from.sizeDeck()+1);
-            this.score /= (this.countCompleteDecks());
+            this.score -= (this.countCompleteDecks());
         }  
         this.updateScoreDisplay(); // Update the UI with the new score
     }
