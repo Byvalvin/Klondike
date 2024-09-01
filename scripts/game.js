@@ -290,6 +290,7 @@ class Game {
                 console.log(deckName);
                 cardStrings.forEach(cardString => {
                     if(cardString){
+                        console.log(cardString);
                         const cardRank = cardString[0];
                         const cardSuit = cardString[1];
                         const cardState = cardString[2];
