@@ -498,6 +498,58 @@ header {
     font-size: 4rem; /* Adjust as needed for larger text */
 }
 
+/* Deck Piles */
+.deck-pile {
+    display: inline-block;
+    width: 120px;
+    height: 150px;
+    background-color: var(--stock-deck-bg);
+    border: 3px solid var(--stock-deck-border);
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.deck-pile:hover {
+    background-color: var(--deck-hover-bg);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.deck-pile .deck-label {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--deck-label-bg);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+}
+
+/* "Deck-Close" Class Styling */
+.deck-close {
+    background-color: var(--discard-deck-bg);
+    border: 3px solid var(--discard-deck-border);
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 1.1em;
+    border-radius: 10px;
+    padding: var(--padding-small);
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.deck-close:hover {
+    background-color: var(--discard-deck-border);
+    color: var(--background-color);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 /* Style for deck content if needed */
 .deck-content {
     text-align: center;
