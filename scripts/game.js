@@ -289,7 +289,7 @@ class Game {
                 let deckName = deckNameFirst;
                 if(deckName==='Pile'){
                     const pileNumber = cardStrings.shift();
-                    deckName = `${deckNameFirst} ${pileNumer}`;
+                    deckName = `${deckNameFirst} ${pileNumber}`;
                 }
                 const deck = new Deck(deckName);
                 console.log(deckName);
