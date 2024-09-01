@@ -287,7 +287,9 @@ class Game {
             const Decks = lines.map(line => {
                 const [deckName, ...cardStrings] = line.split(' ');
                 const deck = new Deck(deckName);
+                console.log(deckName);
                 cardStrings.forEach(cardString => {
+                    console.log(cardString);
                     const cardRank = cardString[0];
                     const cardSuit = cardString[1];
                     const cardState = cardString[2];
