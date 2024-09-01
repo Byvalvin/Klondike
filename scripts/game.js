@@ -289,13 +289,15 @@ class Game {
                 const deck = new Deck(deckName);
                 console.log(deckName);
                 cardStrings.forEach(cardString => {
-                    console.log(cardString);
-                    const cardRank = cardString[0];
-                    const cardSuit = cardString[1];
-                    const cardState = cardString[2];
-                    const card = new Card(cardSuit, cardRank);
-                    card.faceupCard(cardState === '+');
-                    deck.pushDeck(card);
+                    if(cardString){
+                        const cardRank = cardString[0];
+                        const cardSuit = cardString[1];
+                        const cardState = cardString[2];
+                        const card = new Card(cardSuit, cardRank);
+                        card.faceupCard(cardState === '+');
+                        deck.pushDeck(card);
+                    }
+
                 });
                 return deck;
             });
