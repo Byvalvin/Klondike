@@ -301,7 +301,7 @@ header {
     justify-content: center;
 }
 
-#game-controls button, #state-controls button {
+#game-controls button{
     background-color: var(--primary-color);
     color: white;
     border: none;
