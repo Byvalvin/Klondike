@@ -176,6 +176,7 @@ header {
 */
 
 /* Difficulty Info Section */
+/* Difficulty Info Section */
 #difficulty-info {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -186,32 +187,22 @@ header {
     max-width: 600px; /* Adjust max-width to control horizontal width */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
     font-size: 0.9em;
-    text-align: left; /* Align text to the left for better readability */
+    display: flex; /* Flexbox layout */
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: var(--margin-small); /* Space between items */
 }
 
 #difficulty-info h2 {
+    width: 100%; /* Make header span the full width */
     margin-top: 0;
     font-size: 1.3em; /* Slightly larger for emphasis */
     margin-bottom: var(--margin-small);
 }
 
 #difficulty-info p {
-    margin: var(--margin-small) 0; /* Adjust vertical spacing between paragraphs */
+    flex: 1 1 calc(50% - var(--margin-small)); /* Two items per row */
+    margin: 0; /* Remove default margins */
     line-height: 1.6; /* Improved line height for readability */
-}
-
-/* Difficulty Info Header Container */
-#difficulty-info-header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: var(--margin-medium);
-}
-
-#difficulty-info-details {
-    display: flex;
-    flex-direction: column;
-    gap: var(--margin-small);
 }
 
 /* Add a hover effect for better interactivity */
