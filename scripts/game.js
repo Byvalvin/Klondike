@@ -686,8 +686,13 @@ class Game {
         const isSuit = ['Spades', 'Hearts', 'Diamonds', 'Clubs'].includes(deck.nameDeck());
         if(isSuit){
             deckDiv.classList.add(this.deckStatus[deck.nameDeck()] ? 'deck-close':'deck-open');
+            if(this.deckStatus[deck.nameDeck()]){
+                content.classList.add('hidden');
+            }else{
+                content.classList.remove('hidden');
+            }
         }
-
+        
         // Add card elements
         const cards = deck.getCardsList().reverse();
         cards.forEach(card => {
