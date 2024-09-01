@@ -645,7 +645,9 @@ class Game {
         deckDiv.className = 'deck';
         deckDiv.id = deck.nameDeck();
         deckDiv.draggable = false; // Disable default drag behavior
-    
+
+        const isSuit = ['Spades', 'Hearts', 'Diamonds', 'Clubs'].includes(deck.nameDeck());
+        
         // Add button and specific classes for Stock and Discard Decks
         if(deck === this.Stock || deck === this.Discard){
             // Create a button for Stock and Discard decks
@@ -671,11 +673,20 @@ class Game {
             }
             deckDiv.appendChild(button);
         } else{
-            // Create and add the label
-            const label = document.createElement('div');
-            label.className = 'deck-label';
-            label.innerText = deck.nameDeck();
-            deckDiv.appendChild(label);
+            if(isSuit && this.deckStatus[deck.nameDeck()]){
+                //Create and add deck symbol
+                const suitDeckBack = document.createElement('div');
+                suitDeckBack.className = 'deck-symbol';
+                const deckSymbol = deck.peekDeck().symbolCard();
+                suitDeckBack.innerText = `${deckSymbol}`;
+                deckDiv.appendChild(suitDeckBack);
+            }else{
+                // Create and add the label
+                const label = document.createElement('div');
+                label.className = 'deck-label';
+                label.innerText = deck.nameDeck();
+                deckDiv.appendChild(label);
+            }
         }
 
         
@@ -683,9 +694,9 @@ class Game {
         // Add the deck content
         const content = document.createElement('div');
         content.className = 'deck-content';
-        const isSuit = ['Spades', 'Hearts', 'Diamonds', 'Clubs'].includes(deck.nameDeck());
         if(isSuit){
             deckDiv.classList.add(this.deckStatus[deck.nameDeck()] ? 'deck-close':'deck-open');
+            deckDiv.classList.remove(this.deckStatus[deck.nameDeck()] ? 'deck-open':'deck-close');
             if(this.deckStatus[deck.nameDeck()]){
                 content.classList.add('hidden');
             }else{
