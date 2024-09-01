@@ -489,6 +489,13 @@ button:focus {
     border-radius: 4px;
 }
 
+.deck-label-close {
+    display: flex; /* Use Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center; /* Center text inside */
+}
+
 /* Style for deck content if needed */
 .deck-content {
     text-align: center;
