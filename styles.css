@@ -447,16 +447,6 @@ button:focus {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-
-
-/* Hover effect for all decks */
-/*
-.deck:hover {
-    background-color: var(--deck-hover-bg);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-*/
-
 /* Specific styles for Stock Deck */
 .stock-deck {
     background-color: var(--stock-deck-bg);
