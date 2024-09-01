@@ -259,6 +259,7 @@ class Game {
         document.getElementById('status').innerText = message;
         //this.resetScoreDisplay();
         //this.initializeGame();
+        this.updateScoreDisplay()
         console.log(message);
     }
 
