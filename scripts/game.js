@@ -44,6 +44,12 @@ class Game {
             return acc;
         }, {});
         this.finishedGame = false;
+
+        // extra
+        this.deckStatus = ['Spades', 'Hearts', 'Diamonds', 'Clubs'].reduce((acc, key) => {
+            acc[key] = false;
+            return acc;
+        }, {});
         
         this.initializeGame();
     }
@@ -582,6 +588,15 @@ class Game {
     checkWin() {
         return this.SUITS.every(deck => deck.sizeDeck() === this.maxCardValue);
     }
+
+    // deck finality
+    updateDeckStatus(){
+        this.SUITS.forEach((suitDeck)=>{
+            if(suitDeck.sizeDeck()===this.maxCardValue){
+                this.deckStatus[suitDeck.nameDeck()] = true;
+            }
+        });      
+    }
     /**
      * Updates the game board's display.
      */
@@ -593,6 +608,9 @@ class Game {
         const topContainer = this.createContainer('top-container');
         const suitContainer = this.createContainer('suit-container');
         const pileContainer = this.createContainer('pile-container');
+
+        // update deck extra
+        this.updateDeckStatus();
 
         // Append decks to containers
         topContainer.appendChild(this.createDeckDiv(this.Stock));
@@ -671,6 +689,11 @@ class Game {
             const cardElement = card.createCardElement();
             content.appendChild(cardElement);
         });
+
+        // extra
+        if(['Spades', 'Hearts', 'Diamonds', 'Clubs'].includes(deck.nameDeck())){
+            deckDiv.classList.add(this.deckStatus[deck.nameDeck()] ? 'deck-close':'deck-open');
+        }
     
         deckDiv.appendChild(content);
     
@@ -705,6 +728,12 @@ class Game {
     }
 
     handleDeckClick(deck) {
+        const deckName = deck.nameDeck();
+        if(['Spades', 'Hearts', 'Diamonds', 'Clubs'].includes(deckName) && this.deckStatus[deckName]){
+            this.deckStatus[deckName] = false;
+            this.updateBoard(); // Update board to reflect changes
+            return;
+        }
         this.handleDeckHighlight(deck);
         if (this.selectedCards === null) {
                 if (!deck.isEmpty() && deck !== this.Discard) {
