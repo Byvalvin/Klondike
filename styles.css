@@ -138,44 +138,6 @@ header {
 
 
 /* Difficulty Info Section */
-/*
-#difficulty-info {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    border: 1px solid var(--card-border-color);
-    border-radius: 5px;
-    padding: var(--padding-small);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 90%;
-    margin: var(--margin-medium) auto;
-    display: block; 
-    font-size: 0.7em;
-}
-
-#difficulty-info h2 {
-    margin-top: 0;
-}
-
-#difficulty-info-header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: var(--margin-medium);
-}
-
-#difficulty-info-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--margin-small);
-    font-size: 0.9em;
-}
-
-#difficulty-info p {
-    margin: 0;
-}
-*/
-
-/* Difficulty Info Section */
 #difficulty-info {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -210,23 +172,6 @@ header {
     background-color: var(--deck-hover-bg); /* Light hover effect */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
 }
-
-/* Score Display */
-/*
-#score {
-    font-size: var(--font-size-large);
-    font-weight: bold;
-    color: var(--text-color);
-    margin: 20px 0; 
-    padding: var(--padding-small);
-    background-color: var(--background-color);
-    border: 1px solid var(--card-border-color);
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: inline-block;
-}
-*/
-
 
 /* Score Display */
 #score {
