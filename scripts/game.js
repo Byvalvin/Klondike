@@ -683,26 +683,17 @@ class Game {
         // Add the deck content
         const content = document.createElement('div');
         content.className = 'deck-content';
-        
         const isSuit = ['Spades', 'Hearts', 'Diamonds', 'Clubs'].includes(deck.nameDeck());
-
         if(isSuit){
             deckDiv.classList.add(this.deckStatus[deck.nameDeck()] ? 'deck-close':'deck-open');
         }
-        if(isSuit && this.deckStatus[deck.nameDeck()]){
-            // back of deck
-            const deckSuit = "spade";
-            const suitElement = `<p>${deckSuit}</p>`
-            content.appendChild(suitElement);
-            deckDiv.appendChild(content);
-        }else{
-            // Add card elements
-            const cards = deck.getCardsList().reverse();
-            cards.forEach(card => {
-                const cardElement = card.createCardElement();
-                content.appendChild(cardElement);
-            });   
-        }
+
+        // Add card elements
+        const cards = deck.getCardsList().reverse();
+        cards.forEach(card => {
+            const cardElement = card.createCardElement();
+            content.appendChild(cardElement);
+        });   
         deckDiv.appendChild(content);
         
         // Add event listeners
