@@ -315,16 +315,16 @@ header {
     margin: 5px;
 }
 
-#game-controls button:hover, #state-controls button:hover {
+#game-controls button:hover {
     background-color: var(--primary-dark);
     transform: scale(1.05);
 }
 
-#game-controls button:active, #state-controls button:active {
+#game-controls button:active,{
     transform: scale(0.95);
 }
 
-#game-controls button .material-icons, #state-controls button .material-icons {
+#game-controls button .material-icons {
     font-size: 1.2em;
     margin-right: 8px;
 }
