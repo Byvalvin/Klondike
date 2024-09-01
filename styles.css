@@ -136,7 +136,9 @@ header {
     display: none;
 }
 
+
 /* Difficulty Info Section */
+/*
 #difficulty-info {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -146,7 +148,7 @@ header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 90%;
     margin: var(--margin-medium) auto;
-    display: block; /* Ensure it’s block level to handle spacing */
+    display: block; 
     font-size: 0.7em;
 }
 
@@ -154,7 +156,6 @@ header {
     margin-top: 0;
 }
 
-/* Header and Toggle Button Container */
 #difficulty-info-header-container {
     display: flex;
     align-items: center;
@@ -171,6 +172,52 @@ header {
 
 #difficulty-info p {
     margin: 0;
+}
+*/
+
+/* Difficulty Info Section */
+#difficulty-info {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 8px; /* Rounded corners for a smoother look */
+    padding: var(--padding-medium);
+    margin: var(--margin-medium) auto;
+    max-width: 600px; /* Adjust max-width to control horizontal width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+    font-size: 0.9em;
+    text-align: left; /* Align text to the left for better readability */
+}
+
+#difficulty-info h2 {
+    margin-top: 0;
+    font-size: 1.3em; /* Slightly larger for emphasis */
+    margin-bottom: var(--margin-small);
+}
+
+#difficulty-info p {
+    margin: var(--margin-small) 0; /* Adjust vertical spacing between paragraphs */
+    line-height: 1.6; /* Improved line height for readability */
+}
+
+/* Difficulty Info Header Container */
+#difficulty-info-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--margin-medium);
+}
+
+#difficulty-info-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-small);
+}
+
+/* Add a hover effect for better interactivity */
+#difficulty-info:hover {
+    background-color: var(--deck-hover-bg); /* Light hover effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
 }
 
 /* Score Display */
