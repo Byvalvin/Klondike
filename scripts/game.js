@@ -299,7 +299,9 @@ class Game {
             });
             // Assign decks to game properties
             this.Stock = Decks.find(deck => deck.nameDeck() === 'Stock');
+            console.log(this.Stock);
             this.Discard = Decks.find(deck => deck.nameDeck() === 'Discard');
+            console.log(this.Discard);
             this.SUITS = Decks.filter(deck => ['Spades', 'Hearts', 'Diamonds', 'Clubs'].includes(deck.nameDeck()));
             this.PILES = Decks.filter(deck => !['Stock', 'Discard', 'Spades', 'Hearts', 'Diamonds', 'Clubs'].includes(deck.nameDeck()));
         } catch (err) {
