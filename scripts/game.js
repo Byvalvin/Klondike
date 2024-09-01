@@ -613,6 +613,7 @@ class Game {
         // Check for win condition
         if (this.checkWin()) {
             this.finishedGame = true;
+            this.gameOn = false;
             this.updateGameScoreFinal();
             this.done('Congratulations! You won the game!');
             console.log("final score: ",this.score);
