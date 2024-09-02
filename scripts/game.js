@@ -95,6 +95,7 @@ class Game {
     }
     
     updateGameScore(from, to){
+        console.log("uGS",from,to);
         if(this.SUITS.includes(to)){ // stock to suit, pile to suit
             this.score += to.sizeDeck();
             if(to.sizeDeck()===this.maxCardValue){
@@ -376,6 +377,7 @@ class Game {
 
         if (this.canMove(fromDeck, toDeck, deckCards.peekDeck())) {
             toDeck.pushDeck(deckCards.popDeck());
+            console.log("From1",fromDeck);
             this.updateGameScore(fromDeck, toDeck); // update score
         } else {
             throw new Error('Invalid move');
