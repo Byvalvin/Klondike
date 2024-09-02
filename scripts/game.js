@@ -106,7 +106,7 @@ class Game {
                 }
                 
             }
-        }else if(this.SUITS.includes(to)){ // suit to pile
+        }else if(this.SUITS.includes(from)){ // suit to pile
             console.log("score loss");
             this.score -= (from.sizeDeck()+1);
             if(from.sizeDeck()+1 === this.maxCardValue){
