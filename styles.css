@@ -464,7 +464,6 @@ button:focus {
 
 /* Deck Base Styles */
 .deck {
-    border: 1px solid var(--card-border-color);
     padding: var(--padding-medium);
     margin: var(--margin-small);
     display: inline-block;
@@ -479,6 +478,7 @@ button:focus {
 
 .deck-open {
     background-color: #fff;
+    border: 1px solid var(--card-border-color);
 }
 
 .deck-close {
