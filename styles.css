@@ -481,9 +481,24 @@ button:focus {
     border: 1px solid var(--card-border-color);
 }
 
+/* "Deck-Close" Class Styling */
 .deck-close {
     background-color: var(--background-color);
-    border-color: gold;
+    border: 3px solid gold;
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 1.1em;
+    border-radius: 10px;
+    padding: var(--padding-small);
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.deck-close:hover {
+    background-color: var(--discard-deck-border);
+    color: var(--background-color);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Specific styles for Stock Deck */
@@ -561,26 +576,7 @@ button:focus {
     font-size: 0.8em;
 }
 
-/* "Deck-Close" Class Styling */
-.deck-close {
-    background-color: var(--discard-deck-bg);
-    border: 3px solid var(--discard-deck-border);
-    color: var(--text-color);
-    font-weight: bold;
-    font-size: 1.1em;
-    border-radius: 10px;
-    padding: var(--padding-small);
-    margin: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
 
-.deck-close:hover {
-    background-color: var(--discard-deck-border);
-    color: var(--background-color);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
 /* Style for deck content if needed */
 .deck-content {
     text-align: center;
