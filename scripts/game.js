@@ -795,12 +795,13 @@ class Game {
                     this.updateBoard(); // Update board to reflect changes
                 }
         } else {
-            console.log("OG",this.selectedCards.peekDeck().originalDeck.nameDeck());
+            const originalDeckName = this.selectedCards.peekDeck().originalDeck.nameDeck();
+            console.log("OG",originalDeckName);
             try {
-                if (deck.nameDeck().split(" ")[0] === "Pile") {
-                    this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
+                if (deck.nameDeck().split(" ")[0] === "Pile" && originalDeckName.split(" ")[0] === "Pile") {
+                    this.pileMove(originalDeckName, deck.nameDeck(), this.selectedCards);
                 } else {
-                    this.move(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
+                    this.move(originalDeckName, deck.nameDeck(), this.selectedCards);
                 }
                 this.selectedCards = null;
             } catch (error) {
