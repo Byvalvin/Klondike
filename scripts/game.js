@@ -98,12 +98,22 @@ class Game {
         if(this.SUITS.includes(to)){ // stock to suit, pile to suit
             this.score += to.sizeDeck();
             if(to.sizeDeck()===this.maxCardValue){
-                this.score *= (this.countCompleteDecks()+1);  
+                if(!this.timeUp){
+                    this.score *= (this.countCompleteDecks()+1);  
+                }else{
+                    this.score += (this.countCompleteDecks()+1);  
+                }
+                
             }
         }else if(this.SUITS.includes(from)){ // suit to pile
+            console.log("score loss");
             this.score -= (from.sizeDeck()+1);
             if(from.sizeDeck()+1 === this.maxCardValue){
-                this.score /= (this.countCompleteDecks()+1);
+                if(!this.timeUp){
+                    this.score /= (this.countCompleteDecks()+1);
+                }else{
+                    this.score -= (this.countCompleteDecks()+1);
+                }
             }
         }  
         this.updateScoreDisplay(); // Update the UI with the new score
