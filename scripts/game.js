@@ -373,6 +373,7 @@ class Game {
      */
     move(fromDeckName, toDeckName, deckCards) { // Move to non-pile
         console.log("score: ", this.score);
+        console.log("moving", fromDeckName, toDeckName);
         const [fromDeck, toDeck] = this.moveCheck(fromDeckName, toDeckName, deckCards);
 
         if (this.canMove(fromDeck, toDeck, deckCards.peekDeck())) {
