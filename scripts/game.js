@@ -795,6 +795,7 @@ class Game {
                     this.updateBoard(); // Update board to reflect changes
                 }
         } else {
+            console.log("OG",this.selectedCards.peekDeck().originalDeck.nameDeck());
             try {
                 if (deck.nameDeck().split(" ")[0] === "Pile") {
                     this.pileMove(this.selectedCards.peekDeck().originalDeck.nameDeck(), deck.nameDeck(), this.selectedCards);
