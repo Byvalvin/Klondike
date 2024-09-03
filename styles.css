@@ -62,7 +62,7 @@
 
 /* General Styles */
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
