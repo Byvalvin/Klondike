@@ -127,7 +127,8 @@ class Game {
             if(this.timerCount){ // there is a countdown timer
                 this.score *= (1+(this.timer/this.timerCount))
             }else{
-                this.score = this.timer <= 600 ? this.score * this.timer/60 : this.score;
+                const maxSeconds = 600; // 10 mins allowed for bonus time points
+                this.score = this.timer <= maxSeconds ? this.score * (maxSeconds - this.timer)/60 : this.score;
             }
         }else if (this.finishedGame && this.timeUp){
             // half bonus
