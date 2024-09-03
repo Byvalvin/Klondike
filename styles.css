@@ -14,6 +14,11 @@
     --discard-deck-border: #C0392B;
     --deck-hover-bg: #34495E;
     --deck-label-bg: #1C2833;
+    --selector-bg: #34495E; /* Background color for the selector */
+    --selector-border: #1C2833; /* Border color for the selector */
+    --selector-text-color: #ECF0F1; /* Text color for options */
+    --selector-hover-bg: #2C3E50; /* Background color for option hover */
+    --selector-active-bg: #E74C3C; /* Background color for selected option */
 }
 
 /* Light Theme */
@@ -30,6 +35,11 @@
     --discard-deck-border: #c82333;
     --deck-hover-bg: #E9ECEF;
     --deck-label-bg: #F1F1F1;
+    --selector-bg: #FFFFFF; /* Background color for the selector */
+    --selector-border: #BDC3C7; /* Border color for the selector */
+    --selector-text-color: #2C3E50; /* Text color for options */
+    --selector-hover-bg: #E9ECEF; /* Background color for option hover */
+    --selector-active-bg: #3498DB; /* Background color for selected option */
 }
 
 /* Root Variables */
@@ -125,6 +135,44 @@ header {
 }
 
 /* Difficulty Selector */
+#difficulty-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: var(--selector-bg);
+    border: 2px solid var(--selector-border);
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#difficulty-selector select {
+    background-color: var(--selector-bg);
+    border: 1px solid var(--selector-border);
+    color: var(--selector-text-color);
+    padding: var(--padding-small);
+    font-size: var(--font-size-medium);
+    border-radius: 4px;
+    width: 100%;
+    max-width: 100%;
+}
+
+#difficulty-selector select option {
+    padding: var(--padding-small);
+}
+
+#difficulty-selector select option:hover {
+    background-color: var(--selector-hover-bg);
+}
+
+#difficulty-selector select option:checked {
+    background-color: var(--selector-active-bg);
+    color: var(--selector-text-color);
+}
+
 #difficulty-selector, #difficulty-info {
     display: flex;
     flex-direction: column;
